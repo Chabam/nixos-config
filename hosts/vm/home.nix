@@ -18,7 +18,28 @@ in {
 
   # The home.packages option allows you to install Nix packages into your
   # environment.
-  home.packages = [
+  home.packages = with pkgs; [
+      # CLI
+      fish
+      git
+      tmux
+      neovim
+      wget
+      tree
+      fzf
+      ripgrep
+      lazygit
+
+      # GUI
+      ptyxis
+
+      gnomeExtensions.appindicator
+      gnomeExtensions.blur-my-shell
+      gnomeExtensions.caffeine
+      gnomeExtensions.clipboard-indicator
+      gnomeExtensions.fullscreen-avoider
+      gnomeExtensions.legacy-gtk3-theme-scheme-auto-switcher
+      gnomeExtensions.pip-on-top
     # # Adds the 'hello' command to your environment. It prints a friendly
     # # "Hello, world!" when run.
     # pkgs.hello
@@ -37,16 +58,25 @@ in {
     # '')
   ];
 
-  programs.fzf = {
-    enableFishIntegration = false;
-  };
-
   programs.fish = {
     enable = true;
     interactiveShellInit = ''
       set fish_greeting # Disable greeting
+      # Required
       source $HOME/.config/fish/functions/notify_vte_preexec.fish
       source $HOME/.config/fish/functions/notify_vte_precmd.fish
+
+      # Disable fzf...
+      bind --erase \cr
+      bind -M insert --erase \cr
+
+      bind --erase \ec
+      bind -M insert --erase \ec
+      bind \ec __fzf_cd
+
+      bind --erase \eO
+      bind -M insert --erase \eO
+      bind \\f __fzf_open
     '';
     functions = {
       fish_prompt = {
@@ -124,7 +154,7 @@ in {
     ];
 
     extraConfig = ''
-      set-option -g default-command $SHELL
+      set-option -g default-command fish
 
       # Vim style bindings
       bind-key v split-window -h
@@ -154,6 +184,19 @@ in {
   dconf = {
     enable = true;
     settings = {
+      "org/gnome/shell" = {
+        disable-user-extensions = false;
+        enabled-extensions = with pkgs.gnomeExtensions; [
+          appindicator.extensionUuid
+          blur-my-shell.extensionUuid
+          caffeine.extensionUuid
+          clipboard-indicator.extensionUuid
+          fullscreen-avoider.extensionUuid
+          legacy-gtk3-theme-scheme-auto-switcher.extensionUuid
+          pip-on-top.extensionUuid
+        ];
+      };
+
       "org/gnome/Ptyxis" = {
         audible-bell = false;
         default-profile-uuid = "778c8e65cdfbb9562393693c677c200c";
@@ -190,6 +233,12 @@ in {
     };
   };
 
+  programs.git = {
+      enable = true;
+      userName = "Chabam";
+      userEmail = "fchabot1337@gmail.com";
+  };
+
   # Home Manager is pretty good at managing dotfiles. The primary way to manage
   # plain files is through 'home.file'.
   home.file = {
@@ -205,12 +254,6 @@ in {
     #   org.gradle.console=verbose
     #   org.gradle.daemon.idletimeout=3600000
     # '';
-  };
-
-  programs.git = {
-      enable = true;
-      userName = "Chabam";
-      userEmail = "fchabot1337@gmail.com";
   };
 
   # Home Manager can also manage your environment variables through
@@ -238,7 +281,6 @@ in {
     RUST_BIN="$HOME/.cargo/bin";
     LOCAL_BIN="$HOME/.local/bin/";
     PATH="$PATH:$SCRIPTS:$SCRIPTS_PRIVATE:$RUST_BIN:$LOCAL_BIN";
-
   };
 
 
