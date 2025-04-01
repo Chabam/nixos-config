@@ -2,7 +2,7 @@
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 
-{ config, pkgs, ... }:
+{ config, pkgs, inputs, ... }:
 
 {
   imports =
@@ -40,6 +40,21 @@
   services.xserver.displayManager.gdm.enable = true;
   services.xserver.desktopManager.gnome.enable = true;
 
+  environment.gnome.excludePackages = with pkgs; [
+    atomix # puzzle game
+    epiphany # web browser
+    geary # email reader
+    gnome-characters
+    gnome-music
+    gnome-photos
+    gnome-terminal
+    gnome-console
+    hitori # sudoku game
+    iagno # go game
+    tali # poker game
+    totem # video player
+  ];
+
   # Configure keymap in X11
   services.xserver.xkb = {
     layout = "us";
@@ -50,7 +65,7 @@
   services.printing.enable = true;
 
   # Enable sound with pipewire.
-  hardware.pulseaudio.enable = false;
+  services.pulseaudio.enable = false;
   security.rtkit.enable = true;
   services.pipewire = {
     enable = true;
@@ -87,10 +102,38 @@
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   environment.systemPackages = with pkgs; [
-      wget
+      # CLI
+      fish
       git
+      tmux
       neovim
+      wget
+      tree
+      fzf
+      ripgrep
+      lazygit
+
+      # GUI
+      ptyxis
   ];
+
+  fonts = {
+     packages = with pkgs; [
+         nerd-fonts.iosevka-term
+     ];
+     fontconfig = {
+         defaultFonts = {
+            monospace = [ "IosevkaTerm Nerd Font" ];
+         };
+     };
+  };
+
+  home-manager = {
+    extraSpecialArgs = { inherit inputs; };
+    users = {
+       "chabam" = import ./home.nix;
+    };
+  };
 
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.

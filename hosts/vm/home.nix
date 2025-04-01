@@ -1,6 +1,6 @@
-{ config, pkgs, ... }:
-
-{
+{ config, pkgs, dotfiles, ... }:
+let dotfiles = ../../dotfiles;
+in {
   # Home Manager needs a bit of information about you and the paths it should
   # manage.
   home.username = "chabam";
@@ -26,7 +26,7 @@
     # # overrides. You can do that directly here, just don't forget the
     # # parentheses. Maybe you want to install Nerd Fonts with a limited number of
     # # fonts?
-    # (pkgs.nerdfonts.override { fonts = [ "FantasqueSansMono" ]; })
+    # (pkgs.nerdfonts.override { fonts = [ "IosevkaTerm" ]; })
 
     # # You can also create simple shell scripts directly inside your
     # # configuration. For example, this adds a command 'my-hello' to your
@@ -36,9 +36,12 @@
     # '')
   ];
 
+  programs.fish.enable = true;
+
   # Home Manager is pretty good at managing dotfiles. The primary way to manage
   # plain files is through 'home.file'.
   home.file = {
+    ".config/fish".source = "${dotfiles}/fish";
     # # Building this configuration will create a copy of 'dotfiles/screenrc' in
     # # the Nix store. Activating the configuration will then make '~/.screenrc' a
     # # symlink to the Nix store copy.
@@ -49,6 +52,12 @@
     #   org.gradle.console=verbose
     #   org.gradle.daemon.idletimeout=3600000
     # '';
+  };
+
+  programs.git = {
+      enable = true;
+      userName = "Chabam";
+      userEmail = "fchabot1337@gmail.com";
   };
 
   # Home Manager can also manage your environment variables through
@@ -68,8 +77,9 @@
   #  /etc/profiles/per-user/chabam/etc/profile.d/hm-session-vars.sh
   #
   home.sessionVariables = {
-    # EDITOR = "emacs";
+    EDITOR = "nvim";
   };
+
 
   # Let Home Manager install and manage itself.
   programs.home-manager.enable = true;

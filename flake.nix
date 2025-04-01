@@ -13,7 +13,9 @@
   outputs = { self, nixpkgs, ... }@inputs: {
     nixosConfigurations = {
       vm = nixpkgs.lib.nixosSystem {
-          specialArgs = {inherit inputs;};
+          specialArgs = {
+            inherit inputs;
+	  };
           modules = [
             ./hosts/vm/configuration.nix
             inputs.home-manager.nixosModules.default
