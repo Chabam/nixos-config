@@ -29,9 +29,13 @@ in {
       fzf
       ripgrep
       lazygit
+      unzip
 
       # GUI
       ptyxis
+
+      # Langs
+      nodejs_23
 
       gnomeExtensions.appindicator
       gnomeExtensions.blur-my-shell
@@ -115,19 +119,19 @@ in {
           end
 
           echo -s (prompt_login) $container_part ' ' $cwd_color (prompt_pwd) $normal (fish_vcs_prompt) $normal ' ' $prompt_status
-          echo -n -s $status_color $suffix ' ' $normal  
+          echo -n -s $status_color $suffix ' ' $normal
     '';
       };
 
       send_vte_termprop_signal = {
         body = "printf \\e\\]666\\;%s!\\e\\\\ $argv";
       };
-  
+
       notify_vte_preexec = {
         body = "send_vte_termprop_signal vte.shell.preexec";
         onEvent = "fish_preexec";
       };
-      
+
       notify_vte_precmd = {
         body = "send_vte_termprop_signal vte.shell.precmd";
         onEvent = "fish_postexec";
@@ -243,6 +247,11 @@ in {
   # plain files is through 'home.file'.
   home.file = {
     ".local/share/org.gnome.Ptyxis/palettes/chabam.palette".source = "${resources}/ptyxis/chabam.palette";
+
+    ".config/nvim" = {
+      source = "${resources}/neovim";
+      recursive = true;
+    };
 
     # # Building this configuration will create a copy of 'dotfiles/screenrc' in
     # # the Nix store. Activating the configuration will then make '~/.screenrc' a
