@@ -93,6 +93,8 @@
     ];
   };
 
+  programs.fish.enable = true;
+
   # Install firefox.
   programs.firefox.enable = true;
 
@@ -121,11 +123,6 @@
      packages = with pkgs; [
          nerd-fonts.iosevka-term
      ];
-     fontconfig = {
-         defaultFonts = {
-            monospace = [ "IosevkaTerm Nerd Font" ];
-         };
-     };
   };
 
   home-manager = {

@@ -1,6 +1,7 @@
 { config, pkgs, inputs, ... }:
 
-{
+let resources = ../../resources;
+in {
   # Home Manager needs a bit of information about you and the paths it should
   # manage.
   home.username = "chabam";
@@ -106,18 +107,94 @@
 
   programs.tmux = {
     enable = true;
-    prefix = "C-q";
+    baseIndex = 1;
+    keyMode = "vi";
+    mouse = true;
+    shortcut = "q";
+    terminal = "xterm-256color";
     plugins = with pkgs; [
       tmuxPlugins.yank
-      { plugin = inputs.minimal-tmux.packages.${pkgs.system}.default; }
+      {
+        plugin = inputs.minimal-tmux.packages.${pkgs.system}.default;
+	extraConfig = ''
+	  set -g @minimal-tmux-fg "#161616"
+	  set -g @minimal-tmux-bg "#2ec27e"
+	'';
+      }
     ];
+
+    extraConfig = ''
+      set-option -g default-command $SHELL
+
+      # Vim style bindings
+      bind-key v split-window -h
+      bind-key s split-window -v
+      bind-key h select-pane -L
+      bind-key j select-pane -D
+      bind-key k select-pane -U
+      bind-key l select-pane -R
+
+      bind-key a last-pane
+      bind-key q display-panes
+      bind-key c new-window
+      bind-key t next-window
+      bind-key T previous-window
+
+      bind-key [ copy-mode
+      bind-key ] paste-buffer
+
+      # Undercurl support
+      set -as terminal-overrides ',*:Smulx=\E[4::%p1%dm'
+      set -as terminal-overrides ',*:Setulc=\E[58::2::%p1%{65536}%/%d::%p1%{256}%/%{255}%&%d::%p1%{255}%&%d%;m'
+
+      set-option -g repeat-time 0
+    '';
   };
 
+  dconf = {
+    enable = true;
+    settings = {
+      "org/gnome/Ptyxis" = {
+        audible-bell = false;
+        default-profile-uuid = "778c8e65cdfbb9562393693c677c200c";
+        font-name = "IosevkaTerm Nerd Font 12";
+        interface-style = "system";
+        profile-uuids = [ "778c8e65cdfbb9562393693c677c200c" ];
+        use-system-font = false;
+      };
 
+      "org/gnome/Ptyxis/Profiles/778c8e65cdfbb9562393693c677c200c" = {
+        bold-is-bright = true;
+        label = "Chabam";
+        limit-scrollback = false;
+	use-custom-command = true;
+	custom-command ="fish";
+        palette = "chabam";
+      };
+
+      "org/gnome/Ptyxis/Shortcuts" = {
+        focus-tab-1 = "";
+        focus-tab-10 = "";
+        focus-tab-2 = "";
+        focus-tab-3 = "";
+        focus-tab-4 = "";
+        focus-tab-5 = "";
+        focus-tab-6 = "";
+        focus-tab-7 = "";
+        focus-tab-8 = "";
+        focus-tab-9 = "";
+        preferences = "";
+        primary-menu = "";
+        toggle-fullscreen = "";
+      };
+    };
+  };
 
   # Home Manager is pretty good at managing dotfiles. The primary way to manage
   # plain files is through 'home.file'.
   home.file = {
+    ".local/share/org.gnome.Ptyxis/palettes/chabam.palette".source = "${resources}/ptyxis/chabam.palette";
+
     # # Building this configuration will create a copy of 'dotfiles/screenrc' in
     # # the Nix store. Activating the configuration will then make '~/.screenrc' a
     # # symlink to the Nix store copy.
@@ -153,7 +230,15 @@
   #  /etc/profiles/per-user/chabam/etc/profile.d/hm-session-vars.sh
   #
   home.sessionVariables = {
-    EDITOR = "nvim";
+    BROWSER="firefox";
+    EDITOR="nvim";
+    PAGER="less --use-color";
+    SCRIPTS="$HOME/.scripts";
+    SCRIPTS_PRIVATE="$HOME/.scripts/private";
+    RUST_BIN="$HOME/.cargo/bin";
+    LOCAL_BIN="$HOME/.local/bin/";
+    PATH="$PATH:$SCRIPTS:$SCRIPTS_PRIVATE:$RUST_BIN:$LOCAL_BIN";
+
   };
 
 
