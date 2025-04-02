@@ -33,23 +33,31 @@
           # Color the prompt differently when we're root
           set -l suffix '$'
           if functions -q fish_is_root_user; and fish_is_root_user
-          if set -q fish_color_cwd_root
-              set cwd_color (set_color $fish_color_cwd_root)
-          end
-          set suffix '#'
+
+            if set -q fish_color_cwd_root
+                set cwd_color (set_color $fish_color_cwd_root)
+            end
+
+            set suffix '#'
           end
 
           if string length --quiet $CONTAINER_ID
-          set container_part "$container_color.$CONTAINER_ID"
+            set container_part "$container_color.$CONTAINER_ID"
           end
 
           # Color the prompt in red on error
           if test $last_status -ne 0
-          set status_color (set_color $fish_color_error)
-          set prompt_status $status_color "[" $last_status "]" $normal
+            set status_color (set_color $fish_color_error)
+            set prompt_status $status_color "[" $last_status "]" $normal
           end
 
-          echo -s (prompt_login) $container_part ' ' $cwd_color (prompt_pwd) $normal (fish_vcs_prompt) $normal ' ' $prompt_status
+          set -l nix_shell_info (
+            if test -n "$IN_NIX_SHELL"
+              echo -n "$container_color<nix-shell>$normal "
+            end
+          )
+
+          echo -s $nix_shell_info (prompt_login) $container_part ' ' $cwd_color (prompt_pwd) $normal (fish_vcs_prompt) $normal ' ' $prompt_status
           echo -n -s $status_color $suffix ' ' $normal
     '';
       };
@@ -68,12 +76,6 @@
         onEvent = "fish_postexec";
       };
     };
-  };
-
-  programs.nix-index =
-  {
-    enable = true;
-    enableFishIntegration = true;
   };
 
   home.file = {
