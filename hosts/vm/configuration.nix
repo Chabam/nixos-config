@@ -1,13 +1,14 @@
-# Edit this configuration file to define what should be installed on
-# your system.  Help is available in the configuration.nix(5) man page
-# and in the NixOS manual (accessible by running ‘nixos-help’).
-
 { config, pkgs, inputs, ... }:
 
-{
+let root = ../..;
+    modules = "${root}/modules/system";
+in {
   imports =
     [ # Include the results of the hardware scan.
       ./hardware-configuration.nix
+      "${modules}/auto-upgrade.nix"
+      "${modules}/gc.nix"
+      "${modules}/gnome.nix"
     ];
 
   # Bootloader.
@@ -35,25 +36,6 @@
 
   # Enable the X11 windowing system.
   services.xserver.enable = true;
-
-  # Enable the GNOME Desktop Environment.
-  services.xserver.displayManager.gdm.enable = true;
-  services.xserver.desktopManager.gnome.enable = true;
-
-  environment.gnome.excludePackages = with pkgs; [
-    atomix # puzzle game
-    epiphany # web browser
-    geary # email reader
-    gnome-characters
-    gnome-music
-    gnome-photos
-    gnome-terminal
-    gnome-console
-    hitori # sudoku game
-    iagno # go game
-    tali # poker game
-    totem # video player
-  ];
 
   # Configure keymap in X11
   services.xserver.xkb = {
@@ -140,5 +122,4 @@
   # Before changing this value read the documentation for this option
   # (e.g. man configuration.nix or on https://nixos.org/nixos/options.html).
   system.stateVersion = "24.11"; # Did you read the comment?
-
 }
