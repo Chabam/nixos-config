@@ -4,6 +4,7 @@
   home.packages = with pkgs; [
     fish
   ];
+
   programs.fish = {
     enable = true;
     interactiveShellInit = ''
@@ -67,6 +68,12 @@
         onEvent = "fish_postexec";
       };
     };
+  };
+
+  programs.nix-index =
+  {
+    enable = true;
+    enableFishIntegration = true;
   };
 
   home.file = {

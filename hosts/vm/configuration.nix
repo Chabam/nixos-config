@@ -70,6 +70,7 @@ in {
     isNormalUser = true;
     description = "Chabam";
     extraGroups = [ "networkmanager" "wheel" ];
+    packages = [ inputs.home-manager.packages.${pkgs.system}.default ];
   };
 
   programs.fish.enable = true;
@@ -87,14 +88,6 @@ in {
          nerd-fonts.iosevka-term
      ];
   };
-
-  home-manager = {
-    extraSpecialArgs = { inherit inputs; };
-    users = {
-       "chabam" = import ./home.nix;
-    };
-  };
-
 
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.

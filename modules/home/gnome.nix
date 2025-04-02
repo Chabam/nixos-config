@@ -70,6 +70,10 @@
         show-thousands = true;
       };
 
+      "org/gnome/gnome-system-monitor" = {
+        cpu-stacked-area-chart = true;
+      };
+
       # Extensions settings
       "org/gnome/shell/extensions/pip-on-top" = {
         stick=true;

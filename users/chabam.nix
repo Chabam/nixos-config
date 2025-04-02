@@ -1,6 +1,6 @@
 { config, pkgs, inputs, ... }:
 
-let root = ../..;
+let root = ../.;
     modules = "${root}/modules/home";
 in {
 

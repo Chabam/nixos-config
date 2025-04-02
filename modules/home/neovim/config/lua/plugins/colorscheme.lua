@@ -134,6 +134,8 @@ return {
             vim.g.terminal_color_13 = "#c061cb"
             vim.g.terminal_color_14 = "#4fd2fd"
             vim.g.terminal_color_15 = "#f6f5f4"
+
+            vim.cmd.colorscheme("carbonfox")
         end,
     },
 }

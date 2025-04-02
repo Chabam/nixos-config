@@ -8,14 +8,21 @@
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    
+
     minimal-tmux = {
       url = "github:niksingh710/minimal-tmux-status";
       inputs.nixpkgs.follows = "nixpkgs";
     };
   };
 
-  outputs = { self, nixpkgs, ... }@inputs: {
+  outputs = {
+    self,
+    nixpkgs,
+    home-manager,
+    ...
+  } @ inputs: let
+      inherit (self) outputs;
+  in {
     nixosConfigurations = {
       vm = nixpkgs.lib.nixosSystem {
         specialArgs = {
@@ -23,8 +30,15 @@
         };
         modules = [
           ./hosts/vm/configuration.nix
-          inputs.home-manager.nixosModules.default
         ];
+      };
+    };
+
+    homeConfigurations = {
+      chabam = home-manager.lib.homeManagerConfiguration {
+        pkgs = nixpkgs.legacyPackages.x86_64-linux;
+        extraSpecialArgs = { inherit inputs outputs; };
+        modules = [./users/chabam.nix];
       };
     };
   };
