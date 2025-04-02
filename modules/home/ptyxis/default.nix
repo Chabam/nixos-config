@@ -46,5 +46,8 @@
 
   home.file = {
     ".local/share/org.gnome.Ptyxis/palettes/chabam.palette".source = ./chabam.palette;
+    ".local/share/applications".source = ./org.gnome.Ptyxis.desktop;
+    ".local/share/icons/hicolor/scalable/apps/".source = ./org.gnome.Ptyxis.svg;
+    ".local/share/icons/hicolor/symbolic/apps/".source = ./org.gnome.Ptyxis-symbolic.svg;
   };
 }
