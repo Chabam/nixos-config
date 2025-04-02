@@ -1,6 +1,10 @@
 { pkgs, inputs, ... }:
 
 {
+  home.packages = with pkgs; [
+    tmux
+  ];
+
   programs.tmux = {
     enable = true;
     baseIndex = 1;

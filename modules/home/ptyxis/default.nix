@@ -1,6 +1,10 @@
 { config, pkgs, inputs, ... }:
 
 {
+  home.packages = with pkgs; [
+    ptyxis
+  ];
+
   dconf = {
     enable = true;
     settings = {

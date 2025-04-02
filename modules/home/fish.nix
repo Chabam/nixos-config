@@ -1,6 +1,9 @@
-{ ... }:
+{ inputs, pkgs, ... }:
 
 {
+  home.packages = with pkgs; [
+    fish
+  ];
   programs.fish = {
     enable = true;
     interactiveShellInit = ''
@@ -8,18 +11,6 @@
       # Required
       source $HOME/.config/fish/functions/notify_vte_preexec.fish
       source $HOME/.config/fish/functions/notify_vte_precmd.fish
-
-      # Disable fzf...
-      bind --erase \cr
-      bind -M insert --erase \cr
-
-      bind --erase \ec
-      bind -M insert --erase \ec
-      bind \ec __fzf_cd
-
-      bind --erase \eO
-      bind -M insert --erase \eO
-      bind \\f __fzf_open
     '';
     functions = {
       fish_prompt = {
@@ -76,5 +67,9 @@
         onEvent = "fish_postexec";
       };
     };
+  };
+
+  home.file = {
+    ".config/fish/conf.d/load-fzf-key-bindings.fish".text = "";
   };
 }
