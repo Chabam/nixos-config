@@ -29,6 +29,52 @@
           pip-on-top.extensionUuid
         ];
       };
+
+      # Shell settings
+      "org/gnome/desktop/interface" = {
+        enable-hot-corner = false;
+      };
+
+      "org/gnome/desktop/wm/keybindings" = {
+        show-desktop = [ "<Super>d" ];
+        switch-applications = [ "<Alt>Tab" ];
+        switch-applications-backward = [ "<Shift><Alt>Tab" ];
+        switch-group = [ "<Super>Tab" ];
+        switch-group-backward = [ "<Shift><Super>Tab" ];
+      };
+
+      "org/gnome/settings-daemon/plugins/media-keys" = {
+        custom-keybindings = [ "/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0/" ];
+        next = [ "<Super>bracketright" ];
+        play = [ "Pause" ];
+        previous = [ "<Super>bracketleft" ];
+      };
+
+      "org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0" = {
+        binding = "<Shift><Control>Escape";
+        command = "gnome-system-monitor";
+        name = "taskman";
+      };
+
+      "org/gnome/desktop/wm/preferences" = {
+        button-layout = "appmenu:minimize,maximize,close";
+        resize-with-right-button = true;
+      };
+
+      # Various Gnome apps settings
+      "org/gnome/TextEditor" = {
+        restore-session = false;
+      };
+
+      "org/gnome/calculator" = {
+        show-thousands = true;
+      };
+
+      # Extensions settings
+      "org/gnome/shell/extensions/pip-on-top" = {
+        stick=true;
+      };
+
     };
   };
 }
