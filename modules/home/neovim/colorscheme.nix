@@ -279,7 +279,7 @@
       {
         mode = "n";
         key = "<leader>cl";
-        action = "<CMD>colorscheme carbonfox<CR>";
+        action = "<CMD>colorscheme dawnfox<CR>";
         options = {
           desc = "Toggle light mode";
         };

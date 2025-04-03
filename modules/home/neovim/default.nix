@@ -4,17 +4,17 @@
 
   imports = [
     inputs.nixvim.homeManagerModules.nixvim
-    ./config/autocomplete.nix
-    ./config/autoformat.nix
-    ./config/colorscheme.nix
-    ./config/fzf.nix
-    ./config/gitsigns.nix
-    ./config/lsp.nix
-    ./config/lualine.nix
-    ./config/oil.nix
-    ./config/snippets.nix
-    ./config/treesitter.nix
-    ./config/which-key.nix
+    ./autocomplete.nix
+    ./autoformat.nix
+    ./colorscheme.nix
+    ./fzf.nix
+    ./gitsigns.nix
+    ./lsp.nix
+    ./lualine.nix
+    ./oil.nix
+    ./snippets.nix
+    ./treesitter.nix
+    ./which-key.nix
   ];
 
   programs.nixvim = {
@@ -124,7 +124,6 @@
     ];
 
     plugins = {
-
       # WARNING: experimental
       lz-n.enable = true;
       sleuth.enable = true;
@@ -135,6 +134,7 @@
       indent-blankline.enable = true;
       web-devicons.enable = true;
       nvim-autopairs.enable = true;
+      vimtex.enable = true;
 
       diffview = {
         enable = true;
@@ -150,8 +150,26 @@
 
     extraConfigLuaPost = ''
       require('nvim-autopairs').get_rules("'")[1].not_filetypes = { "scheme", "lisp", "racket" }
+
       require('fzf-lua').register_ui_select()
+
       require("luasnip.loaders.from_vscode").lazy_load()
+
+      vim.g.vimtex_compiler_method = "latexmk"
+      vim.g.vimtex_compiler_latexmk = {
+        out_dir = "ignore",
+        aux_dir = "ignore",
+      }
+      vim.g.vimtex_log_ignore = {
+        "Underfull",
+        "Overfull",
+      }
+
+      local signs = { Error = "󰅚 ", Warn = "󰀪 ", Hint = "󰌶 ", Info = " " }
+      for type, icon in pairs(signs) do
+        local hl = "DiagnosticSign" .. type
+        vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = hl })
+      end
     '';
   };
 }

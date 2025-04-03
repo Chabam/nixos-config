@@ -25,7 +25,6 @@
           ltex.enable = true;
           pyright.enable = true;
           neocmake.enable = true;
-          lua_ls.enable = true;
           nixd.enable = true;
           racket_langserver = {
             enable = true;
