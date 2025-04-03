@@ -15,4 +15,8 @@
     source = ./config;
     recursive = true;
   };
+
+  programs.nixvim = {
+    enable = true;
+  }
 }

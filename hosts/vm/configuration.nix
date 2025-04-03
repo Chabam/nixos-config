@@ -9,6 +9,7 @@ in {
       "${modules}/auto-upgrade.nix"
       "${modules}/gc.nix"
       "${modules}/gnome.nix"
+      "${modules}/plymouth.nix"
     ];
 
   # Bootloader.
