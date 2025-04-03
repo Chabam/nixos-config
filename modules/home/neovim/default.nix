@@ -4,12 +4,15 @@
 
   imports = [
     inputs.nixvim.homeManagerModules.nixvim
+    ./config/autocomplete.nix
     ./config/autoformat.nix
     ./config/colorscheme.nix
     ./config/fzf.nix
     ./config/gitsigns.nix
     ./config/lsp.nix
+    ./config/lualine.nix
     ./config/oil.nix
+    ./config/snippets.nix
     ./config/treesitter.nix
     ./config/which-key.nix
   ];
@@ -140,6 +143,7 @@
     extraConfigLuaPost = ''
       require('nvim-autopairs').get_rules("'")[1].not_filetypes = { "scheme", "lisp", "racket" }
       require('fzf-lua').register_ui_select()
+      require("luasnip.loaders.from_vscode").lazy_load()
     '';
   };
 }

@@ -1,4 +1,4 @@
-{ config, pkgs, inputs, ... }:
+{ pkgs, ... }:
 
 {
   home.packages = with pkgs; [
@@ -22,7 +22,7 @@
         label = "Chabam";
         limit-scrollback = false;
         use-custom-command = true;
-        custom-command ="fish";
+        custom-command = "fish";
         palette = "chabam";
       };
 
@@ -48,6 +48,7 @@
     ".local/share/org.gnome.Ptyxis/palettes/chabam.palette".source = ./chabam.palette;
     ".local/share/applications/org.gnome.Ptyxis.desktop".source = ./org.gnome.Ptyxis.desktop;
     ".local/share/icons/hicolor/scalable/apps/org.gnome.Ptyxis.svg".source = ./org.gnome.Ptyxis.svg;
-    ".local/share/icons/hicolor/symbolic/apps/org.gnome.Ptyxis-symbolic.svg".source = ./org.gnome.Ptyxis-symbolic.svg;
+    ".local/share/icons/hicolor/symbolic/apps/org.gnome.Ptyxis-symbolic.svg".source =
+      ./org.gnome.Ptyxis-symbolic.svg;
   };
 }

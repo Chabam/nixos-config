@@ -1,9 +1,9 @@
-{ inputs, ... }:
+{ ... }:
 
 {
   programs.nixvim = {
     plugins.blink-cmp = {
-      enable = false;
+      enable = true;
       setupLspCapabilities = true;
       settings = {
         keymap = {

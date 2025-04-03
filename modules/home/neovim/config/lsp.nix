@@ -3,21 +3,34 @@
 {
   programs.nixvim = {
 
-    plugins.lsp = {
-      enable = true;
+    plugins = {
+      fidget = {
+        enable = true;
+        settings = {
+          notification = {
+            window = {
+              winblend = 0;
+            };
+          };
+        };
+      };
 
-      inlayHints = true;
+      lsp = {
+        enable = true;
 
-      servers = {
-        clangd.enable = true;
-        ltex.enable = true;
-        pyright.enable = true;
-        neocmake.enable = true;
-        lua_ls.enable = true;
-        nixd.enable = true;
-        racket_langserver = {
-          enable = true;
-          package = null;
+        inlayHints = true;
+
+        servers = {
+          clangd.enable = true;
+          ltex.enable = true;
+          pyright.enable = true;
+          neocmake.enable = true;
+          lua_ls.enable = true;
+          nixd.enable = true;
+          racket_langserver = {
+            enable = true;
+            package = null;
+          };
         };
       };
     };
@@ -134,6 +147,13 @@
         '';
         options = {
           desc = "[T]oggle Inlay [H]ints";
+        };
+      }
+      {
+        key = "<leader>q";
+        action = "vim.lsp.setloclist";
+        options = {
+          desc = "Open diagnostic [Q]uickfix list";
         };
       }
     ];
