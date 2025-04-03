@@ -19,11 +19,16 @@
 
   programs.nixvim = {
     enable = true;
-    # performance.byteCompileLua = {
-    #   enable = true;
-    #   configs = true;
-    #   init = true;
-    # };
+
+    performance = {
+      byteCompileLua = {
+        enable = true;
+        plugins = true;
+        nvimRuntime = true;
+        initLua = true;
+        configs = true;
+      };
+    };
 
     globals = {
       mapleader = " ";
@@ -119,6 +124,9 @@
     ];
 
     plugins = {
+
+      # WARNING: experimental
+      lz-n.enable = true;
       sleuth.enable = true;
       sandwich.enable = true;
       quicker.enable = true;
