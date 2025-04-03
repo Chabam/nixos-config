@@ -25,6 +25,7 @@
 
     extraConfig = ''
       set-option -g default-command fish
+      set -ga terminal-overrides ",xterm-256color:Tc"
 
       # Vim style bindings
       bind-key v split-window -h
