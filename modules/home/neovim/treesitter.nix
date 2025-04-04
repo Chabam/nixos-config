@@ -1,37 +1,23 @@
-{ pkgs, ... }:
-
+{ pkgs }:
+with pkgs.vimPlugins; ''
 {
-  programs.nixvim = {
-    plugins = {
-      treesitter = {
-        enable = true;
-
-        settings = {
-          highlight.enable = true;
-          indent.enable = true;
-        };
-
-        grammarPackages = with pkgs.vimPlugins.nvim-treesitter.builtGrammars; [
-          bash
-          fish
-          markdown
-          make
-          lua
-          c
-          cpp
-          python
-          racket
-          nix
-        ];
-      };
-
-      treesitter-context = {
-        enable = true;
-        settings = {
-          max_lines = 1;
-          mode = "topline";
-        };
-      };
-    };
-  };
+    dir = "${nvim-treesitter}",
+    config = function()
+      require("nvim-treesitter").setup({
+        highlight = {
+            enable = true,
+        },
+        indent = { enable = true },
+    })
+    end
+},
+{
+    dir = "${nvim-treesitter-context}",
+    config = function()
+      require("treesitter-context").setup({
+        max_lines = 1,
+        mode = "topline",
+    })
+    end
 }
+''
