@@ -12,6 +12,7 @@
     mouse = true;
     shortcut = "q";
     terminal = "xterm-256color";
+    escapeTime = 0;
     plugins = with pkgs; [
       tmuxPlugins.yank
       {
