@@ -37,6 +37,14 @@
           ./hosts/vm/configuration.nix
         ];
       };
+      chungus = nixpkgs.lib.nixosSystem {
+        specialArgs = {
+            inherit inputs;
+        };
+        modules = [
+          ./hosts/chungus/configuration.nix
+        ];
+      };
     };
 
     homeConfigurations = {
