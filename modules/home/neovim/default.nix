@@ -1,7 +1,6 @@
 { inputs, ... }:
 
 {
-
   imports = [
     inputs.nixvim.homeManagerModules.nixvim
     ./autocomplete.nix
@@ -134,7 +133,21 @@
       indent-blankline.enable = true;
       web-devicons.enable = true;
       nvim-autopairs.enable = true;
-      vimtex.enable = true;
+
+      vimtex = {
+        enable = true;
+        settings = {
+          vimtex_compiler_method = "latexmk";
+          vimtex_compiler_latexmk = {
+            out_dir = "ignore";
+            aux_dir = "ignore";
+          };
+          vimtex_log_ignore = [
+            "Underfull"
+            "Overfull"
+          ];
+        };
+      };
 
       diffview = {
         enable = true;
@@ -155,15 +168,6 @@
 
       require("luasnip.loaders.from_vscode").lazy_load()
 
-      vim.g.vimtex_compiler_method = "latexmk"
-      vim.g.vimtex_compiler_latexmk = {
-        out_dir = "ignore",
-        aux_dir = "ignore",
-      }
-      vim.g.vimtex_log_ignore = {
-        "Underfull",
-        "Overfull",
-      }
 
       local signs = { Error = "󰅚 ", Warn = "󰀪 ", Hint = "󰌶 ", Info = " " }
       for type, icon in pairs(signs) do
