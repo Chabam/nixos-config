@@ -1,24 +1,35 @@
-{ config, pkgs, inputs, ... }:
+{
+  pkgs,
+  inputs,
+  ...
+}:
 
-let root = ../..;
-    modules = "${root}/modules/system";
-in {
-  imports =
-    [ # Include the results of the hardware scan.
-      ./hardware-configuration.nix
-      "${modules}/auto-upgrade.nix"
-      "${modules}/gc.nix"
-      "${modules}/gnome.nix"
-      "${modules}/plymouth.nix"
-    ];
+let
+  root = ../..;
+  modules = "${root}/modules/system";
+in
+{
+  imports = [
+    # Include the results of the hardware scan.
+    ./hardware-configuration.nix
+    "${modules}/auto-upgrade.nix"
+    "${modules}/gc.nix"
+    "${modules}/gnome.nix"
+    "${modules}/plymouth.nix"
+  ];
 
   # Bootloader.
-  boot.loader.grub.enable = true;
-  boot.loader.grub.device = "nodev";
-  boot.loader.grub.useOSProber = true;
-  boot.loader.grub.efiSupport = true;
+  boot.loader.grub = {
+    enable = true;
+    device = "nodev";
+    useOSProber = true;
+    efiSupport = true;
+  };
 
-  nix.settings.experimental-features = [ "nix-command" "flakes" ];
+  nix.settings.experimental-features = [
+    "nix-command"
+    "flakes"
+  ];
 
   networking.hostName = "chungus"; # Define your hostname.
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
@@ -49,7 +60,7 @@ in {
   services.printing.enable = true;
 
   # Enable sound with pipewire.
-  hardware.pulseaudio.enable = false;
+  services.pulseaudio.enable = false;
   security.rtkit.enable = true;
   services.pipewire = {
     enable = true;
@@ -71,7 +82,11 @@ in {
   users.users.chabam = {
     isNormalUser = true;
     description = "Chabam";
-    extraGroups = [ "networkmanager" "wheel" "docker" ];
+    extraGroups = [
+      "networkmanager"
+      "wheel"
+      "docker"
+    ];
     packages = [ inputs.home-manager.packages.${pkgs.system}.default ];
   };
 
@@ -81,11 +96,10 @@ in {
   nixpkgs.config.allowUnfree = true;
 
   fonts = {
-     packages = with pkgs; [
-         nerd-fonts.iosevka-term
-     ];
+    packages = with pkgs; [
+      nerd-fonts.iosevka-term
+    ];
   };
-
 
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.
