@@ -19,11 +19,17 @@ in
   ];
 
   # Bootloader.
-  boot.loader.grub = {
-    enable = true;
-    device = "nodev";
-    useOSProber = true;
-    efiSupport = true;
+  boot.loader = {
+    efi = {
+      efiSysMountPoint = "/boot";
+      canTouchEfiVariables = true;
+    };
+    grub = {
+      enable = true;
+      device = "nodev";
+      useOSProber = true;
+      efiSupport = true;
+    };
   };
 
   nix.settings.experimental-features = [

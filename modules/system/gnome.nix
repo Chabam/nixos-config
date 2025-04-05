@@ -13,11 +13,11 @@
     gnome-music
     gnome-photos
     gnome-terminal
-    gnome-console
     hitori # sudoku game
     iagno # go game
     tali # poker game
     totem # video player
+    xterm
   ];
 
   nixpkgs.overlays = [

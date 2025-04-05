@@ -1,4 +1,4 @@
-{ config, pkgs, inputs, ... }:
+{ pkgs, ... }:
 
 {
   home.packages = with pkgs; [
@@ -44,7 +44,9 @@
       };
 
       "org/gnome/settings-daemon/plugins/media-keys" = {
-        custom-keybindings = [ "/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0/" ];
+        custom-keybindings = [
+          "/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0/"
+        ];
         next = [ "<Super>bracketright" ];
         play = [ "Pause" ];
         previous = [ "<Super>bracketleft" ];
@@ -76,7 +78,7 @@
 
       # Extensions settings
       "org/gnome/shell/extensions/pip-on-top" = {
-        stick=true;
+        stick = true;
       };
 
     };

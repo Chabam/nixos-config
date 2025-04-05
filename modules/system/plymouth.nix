@@ -3,7 +3,10 @@
 {
   boot = {
 
-    plymouth.enable = true;
+    plymouth = {
+      enable = true;
+      theme = "spinner";
+    };
 
     # Enable "Silent boot"
     consoleLogLevel = 3;

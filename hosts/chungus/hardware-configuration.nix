@@ -36,6 +36,8 @@
 
   swapDevices = [ ];
 
+  services.xserver.videoDrivers = [ "nvidia" ];
+
   hardware.graphics = {
     enable = true;
   };
@@ -43,9 +45,9 @@
   hardware.nvidia = {
     modesetting.enable = true;
     powerManagement.finegrained = false;
-    open = false;
+    open = true;
     nvidiaSettings = true;
-    package = config.boot.kernelPackages.stable;
+    package = config.boot.kernelPackages.nvidiaPackages.stable;
   };
 
   # Enables DHCP on each ethernet and wireless interface. In case of scripted networking

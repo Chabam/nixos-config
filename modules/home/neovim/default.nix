@@ -105,12 +105,6 @@ in
         })
         ${(import ./autogroups.nix) { }}
         ${(import ./keymaps.nix) { }}
-
-        -- Minor adjustments to the colorscheme
-        vim.schedule(function()
-            vim.api.nvim_set_hl(0, 'ModeMsg', { link = "Structure" })
-            vim.api.nvim_set_hl(0, 'OilDir', { link = "Structure" })
-        end)
       '';
   };
 }
