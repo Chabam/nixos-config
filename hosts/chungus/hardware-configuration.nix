@@ -23,16 +23,19 @@
   boot.kernelModules = [ "kvm-intel" ];
   boot.extraModulePackages = [ ];
 
-  fileSystems."/" =
-    { device = "/dev/disk/by-uuid/6e1cc245-9478-4e81-9cbb-70c4f2e10158";
-      fsType = "ext4";
-    };
+  fileSystems."/" = {
+    device = "/dev/disk/by-uuid/6e1cc245-9478-4e81-9cbb-70c4f2e10158";
+    fsType = "ext4";
+  };
 
-  fileSystems."/boot" =
-    { device = "/dev/disk/by-uuid/D997-7FAE";
-      fsType = "vfat";
-      options = [ "fmask=0077" "dmask=0077" ];
-    };
+  fileSystems."/boot" = {
+    device = "/dev/disk/by-uuid/D997-7FAE";
+    fsType = "vfat";
+    options = [
+      "fmask=0077"
+      "dmask=0077"
+    ];
+  };
 
   swapDevices = [ ];
 
@@ -44,10 +47,13 @@
 
   hardware.nvidia = {
     modesetting.enable = true;
-    powerManagement.finegrained = false;
+    powerManagement = {
+      enable = true;
+      finegrained = false;
+    };
+    nvidiaPersistenced = true;
     open = true;
-    nvidiaSettings = true;
-    package = config.boot.kernelPackages.nvidiaPackages.stable;
+    package = config.boot.kernelPackages.nvidiaPackages.latest;
   };
 
   # Enables DHCP on each ethernet and wireless interface. In case of scripted networking
