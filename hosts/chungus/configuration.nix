@@ -15,22 +15,12 @@ in
     "${modules}/auto-upgrade.nix"
     "${modules}/gc.nix"
     "${modules}/gnome.nix"
+    "${modules}/grub.nix"
+    "${modules}/nvidia.nix"
     "${modules}/plymouth.nix"
   ];
 
   # Bootloader.
-  boot.loader = {
-    efi = {
-      efiSysMountPoint = "/boot";
-      canTouchEfiVariables = true;
-    };
-    grub = {
-      enable = true;
-      device = "nodev";
-      useOSProber = true;
-      efiSupport = true;
-    };
-  };
 
   nix.settings.experimental-features = [
     "nix-command"

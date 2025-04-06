@@ -37,45 +37,31 @@
     ];
   };
 
-  fileSystems."/mnt/data" = {
+  fileSystems."/run/media/chabam/Data" = {
     device = "/dev/disk/by-uuid/9848266f-f628-4f66-9cd3-d78bdddb9705";
     fsType = "ext4";
   };
 
-  fileSystems."/mnt/backups" = {
+  fileSystems."/run/media/chabam/Backups" = {
     device = "/dev/disk/by-uuid/6e9a5fca-8e48-40e9-8bbf-22af30c738f5";
     fsType = "ext4";
   };
 
-  fileSystems."/mnt/servers" = {
+  fileSystems."/run/media/chabam/Servers" = {
     device = "/dev/disk/by-uuid/160efb82-85ff-4c07-8542-f72f18b2bcd5";
     fsType = "ext4";
   };
 
-  fileSystems."/mnt/games" = {
+  fileSystems."/run/media/chabam/Games" = {
     device = "/dev/disk/by-uuid/69737F0A08903A87";
     fsType = "ntfs-3g";
-    options = [ "rw" "uid=1000"];
+    options = [
+      "rw"
+      "uid=1000"
+    ];
   };
 
   swapDevices = [ ];
-
-  services.xserver.videoDrivers = [ "nvidia" ];
-
-  hardware.graphics = {
-    enable = true;
-  };
-
-  hardware.nvidia = {
-    modesetting.enable = true;
-    powerManagement = {
-      enable = true;
-      finegrained = false;
-    };
-    nvidiaPersistenced = true;
-    open = true;
-    package = config.boot.kernelPackages.nvidiaPackages.latest;
-  };
 
   # Enables DHCP on each ethernet and wireless interface. In case of scripted networking
   # (the default) this is the recommended approach. When using systemd-networkd it's
