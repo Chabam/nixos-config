@@ -3,6 +3,62 @@ with pkgs.vimPlugins;
 ''
   {
   dir = "${fzf-lua}",
+  keys = {
+    {
+      "<leader>sh",
+      require("fzf-lua").helptags,
+      "n",
+      desc = "[S]earch [H]elp"
+    },
+    {
+      "<leader>sk",
+      require("fzf-lua").keymaps,
+      "n",
+      desc = "[S]earch [K]eymaps"
+    },
+    {
+      "<leader>sf",
+      require("fzf-lua").files,
+      "n",
+      desc = "[S]earch [F]iles"
+    },
+    {
+      "<leader>ss",
+      require("fzf-lua").builtin,
+      "n",
+      desc = "[S]earch [S]elect fzf"
+    },
+    {
+      "<leader>sw",
+      require("fzf-lua").grep_cword,
+      "n",
+      desc = "[S]earch current [W]ord"
+    },
+    {
+      "<leader>sg",
+      require("fzf-lua").live_grep_native,
+      "n",
+      desc = "[S]earch by [G]rep"
+    },
+    {
+      "<leader>sd",
+      require("fzf-lua").diagnostics_document,
+      "n",
+      desc = "[S]earch [D]iagnostics"
+    },
+    {
+      "<leader>sr",
+      require("fzf-lua").resume,
+      "n",
+      desc = "[S]earch [R]esume"
+    },
+    {
+      "<leader>sb",
+      require("fzf-lua").buffers,
+      "n",
+      desc = "[S]earch existing [B]uffers"
+    },
+  },
   config = function()
     local fzf = require("fzf-lua")
     fzf.setup({

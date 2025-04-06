@@ -1,13 +1,26 @@
-return {
-    {
-        "sindrets/diffview.nvim",
-        opts = {
-            view = {
-                merge_tool = {
-                    layout = "diff3_mixed"
-                }
-            }
-
+{ pkgs }:
+with pkgs.vimPlugins;
+''
+  {
+    dir = "${diffview-nvim}",
+    keys = {
+      {
+        "<leader>do",
+        "<CMD>DiffviewOpen<CR>",
+        desc = "[D]iffview [O]pen"
+      },
+      {
+        "<leader>do",
+        "<CMD>DiffviewClose<CR>",
+        desc = "[D]iffview [C]lose"
+      }
+    },
+    opts = {
+      view = {
+        merge_tool = {
+          layout = "diff3_mixed"
         }
+      }
     }
-}
+  }
+''

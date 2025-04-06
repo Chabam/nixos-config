@@ -38,10 +38,18 @@ vim.opt.listchars = { tab = "» ", trail = "·", space = "·", nbsp = "␣" }
 vim.opt.inccommand = "split"
 vim.opt.scrolloff = 2
 
+-- Diagnostic stuff
 vim.diagnostic.config({
-  virtual_lines = {
-    current_line = true
-  },
+  virtual_text = true,
   signs = true,
 })
+
+local signs = { Error = "󰅚 ", Warn = "󰀪 ", Hint = "󰌶 ", Info = " " }
+for type, icon in pairs(signs) do
+  local hl = "DiagnosticSign" .. type
+  vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = hl })
+end
+
+vim.api.nvim_set_hl(0, "Error", { cterm=undercurl })
+vim.api.nvim_set_hl(0, "DiagnosticUnderlineError", { link="Error" })
 ''

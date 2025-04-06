@@ -81,18 +81,6 @@ in
               dir = "${todo-comments-nvim}",
               event = "VimEnter",
             },
-            {
-              {
-                dir = "${diffview-nvim}",
-                opts = {
-                  view = {
-                    merge_tool = {
-                      layout = "diff3_mixed"
-                    }
-                  }
-                }
-              }
-            },
             ${pkgs.callPackage ./autocomplete.nix { }},
             ${pkgs.callPackage ./autoformat.nix { }},
             ${pkgs.callPackage ./treesitter.nix { }},
@@ -101,9 +89,11 @@ in
             ${pkgs.callPackage ./lsp.nix { }},
             ${pkgs.callPackage ./colorscheme.nix { }},
             ${pkgs.callPackage ./gitsigns.nix { }},
+            ${pkgs.callPackage ./diffview.nix { }},
           },
         })
         ${(import ./autogroups.nix) { }}
+        ${(import ./functions.nix) { }}
         ${(import ./keymaps.nix) { }}
       '';
   };

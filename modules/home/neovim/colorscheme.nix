@@ -32,6 +32,11 @@ with pkgs.vimPlugins;
         vim.schedule(function()
             vim.api.nvim_set_hl(0, 'ModeMsg', { link = "Structure" })
             vim.api.nvim_set_hl(0, 'OilDir', { link = "Structure" })
+            vim.api.nvim_set_hl(0, 'StatusLine', { link = "WildMenu" })
+            vim.api.nvim_set_hl(0, 'StatusLineNC', { fg = "#deddda", bg="#303030" })
+
+            vim.api.nvim_set_hl(0, "Error", { undercurl = true, fg="#e01b24", bg="#1d1d1d" })
+            vim.api.nvim_set_hl(0, "DiagnosticUnderlineError", { link = "Error" })
         end)
       end,
     }
