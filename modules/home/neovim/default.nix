@@ -36,7 +36,6 @@ let
     oil-nvim
     plenary-nvim
     quicker-nvim
-    rainbow-delimiters-nvim
     todo-comments-nvim
     vim-sandwich
     vim-sleuth
@@ -70,17 +69,24 @@ in
           spec = {
             { dir = "${vim-sleuth}" },
             { dir = "${vim-sandwich}" },
-            { dir = "${rainbow-delimiters-nvim}" },
-            { dir = "${oil-nvim}" },
             {
               dir = "${indent-blankline-nvim}",
-              main = "ibl",
+              event = "VimEnter",
+              config = function()
+                require("ibl").setup()
+              end
+            },
+            {
+              dir = "${quicker-nvim}",
+              event = "FileType qf",
               opts = {}
             },
-            { dir = "${quicker-nvim}" },
             {
               dir = "${todo-comments-nvim}",
               event = "VimEnter",
+              config = function()
+                require("todo-comments").setup({})
+              end
             },
             ${pkgs.callPackage ./autocomplete.nix { }},
             ${pkgs.callPackage ./autoformat.nix { }},
