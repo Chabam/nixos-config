@@ -4,9 +4,11 @@ with pkgs.vimPlugins; ''
   dir = "${oil-nvim}",
   cmd = "Oil",
   keys = {
-    "<leader>-",
-    "<CMD>Oil<CR>",
-    desc = "Open parent directory"
+    {
+      "<leader>-",
+      "<CMD>Oil<CR>",
+      desc = "Open parent directory"
+    }
   },
   config = function()
     local oil = require("oil")

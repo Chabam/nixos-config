@@ -27,6 +27,7 @@ let
     fzf-lua
     gitsigns-nvim
     indent-blankline-nvim
+    iron-nvim
     lazy-nvim
     nvim-lspconfig
     nvim-treesitter
@@ -83,13 +84,14 @@ in
             },
             ${pkgs.callPackage ./autocomplete.nix { }},
             ${pkgs.callPackage ./autoformat.nix { }},
-            ${pkgs.callPackage ./treesitter.nix { }},
-            ${pkgs.callPackage ./fzf.nix { }},
-            ${pkgs.callPackage ./oil.nix { }},
-            ${pkgs.callPackage ./lsp.nix { }},
             ${pkgs.callPackage ./colorscheme.nix { }},
-            ${pkgs.callPackage ./gitsigns.nix { }},
             ${pkgs.callPackage ./diffview.nix { }},
+            ${pkgs.callPackage ./fzf.nix { }},
+            ${pkgs.callPackage ./gitsigns.nix { }},
+            ${pkgs.callPackage ./iron.nix { }},
+            ${pkgs.callPackage ./lsp.nix { }},
+            ${pkgs.callPackage ./oil.nix { }},
+            ${pkgs.callPackage ./treesitter.nix { }},
           },
         })
         ${(import ./autogroups.nix) { }}
