@@ -1,4 +1,4 @@
-{ config, pkgs, inputs, ... }:
+{ pkgs, ... }:
 
 let root = ../.;
     modules = "${root}/modules/home";
@@ -24,6 +24,12 @@ in {
       lazygit
       wget
       tree
+      ripgrep
+      ranger
+      nnn
+      # TODO: Change when gimp3 is merged
+      # gimp
+      blender
       firefox
       discord
       teams-for-linux

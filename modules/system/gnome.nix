@@ -10,6 +10,7 @@
     epiphany # web browser
     geary # email reader
     gnome-characters
+    gnome-console
     gnome-music
     gnome-photos
     gnome-terminal
@@ -17,7 +18,6 @@
     iagno # go game
     tali # poker game
     totem # video player
-    xterm
   ];
 
   nixpkgs.overlays = [

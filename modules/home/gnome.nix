@@ -4,6 +4,8 @@
   home.packages = with pkgs; [
     # Emoji typing
     ibus-with-plugins
+    gnome-software
+    gnome-themes-extra
 
     gnomeExtensions.appindicator
     gnomeExtensions.blur-my-shell

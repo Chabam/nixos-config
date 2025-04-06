@@ -52,6 +52,11 @@ in
     variant = "altgr-intl";
   };
 
+  services.xserver.excludePackages = [ pkgs.xterm ];
+
+  virtualisation.docker.enable = true;
+  services.flatpak.enable = true;
+
   # Enable CUPS to print documents.
   services.printing.enable = true;
 
@@ -83,7 +88,10 @@ in
       "wheel"
       "docker"
     ];
-    packages = [ inputs.home-manager.packages.${pkgs.system}.default ];
+    packages = [
+      inputs.home-manager.packages.${pkgs.system}.default
+      pkgs.flatpak
+    ];
   };
 
   programs.fish.enable = true;
