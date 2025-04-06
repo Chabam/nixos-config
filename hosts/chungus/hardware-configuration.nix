@@ -37,6 +37,27 @@
     ];
   };
 
+  fileSystems."/mnt/data" = {
+    device = "/dev/disk/by-uuid/9848266f-f628-4f66-9cd3-d78bdddb9705";
+    fsType = "ext4";
+  };
+
+  fileSystems."/mnt/backups" = {
+    device = "/dev/disk/by-uuid/6e9a5fca-8e48-40e9-8bbf-22af30c738f5";
+    fsType = "ext4";
+  };
+
+  fileSystems."/mnt/servers" = {
+    device = "/dev/disk/by-uuid/160efb82-85ff-4c07-8542-f72f18b2bcd5";
+    fsType = "ext4";
+  };
+
+  fileSystems."/mnt/games" = {
+    device = "/dev/disk/by-uuid/69737F0A08903A87";
+    fsType = "ntfs-3g";
+    options = [ "rw" "uid=1000"];
+  };
+
   swapDevices = [ ];
 
   services.xserver.videoDrivers = [ "nvidia" ];
