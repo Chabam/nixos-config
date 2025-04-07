@@ -24,6 +24,13 @@
       options = [ "fmask=0077" "dmask=0077" ];
     };
 
+
+  fileSystems."/run/media/chabam/data" =
+    { device = "/dev/disk/by-uuid/86c134d2-0105-4929-89f7-768353a279f6";
+      fsType = "ext4";
+    };
+
+
   swapDevices = [ ];
 
   # Enables DHCP on each ethernet and wireless interface. In case of scripted networking
