@@ -40,6 +40,15 @@
           ./hosts/chungus/configuration.nix
         ];
       };
+
+      gamer = nixpkgs.lib.nixosSystem {
+        specialArgs = {
+            inherit inputs;
+        };
+        modules = [
+          ./hosts/gamer/configuration.nix
+        ];
+      };
     };
 
     homeConfigurations = {
