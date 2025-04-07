@@ -9,9 +9,6 @@
     enable = true;
     interactiveShellInit = ''
       set fish_greeting # Disable greeting
-      # Required
-      source $HOME/.config/fish/functions/notify_vte_preexec.fish
-      source $HOME/.config/fish/functions/notify_vte_precmd.fish
     '';
     functions = {
       fish_prompt = {
@@ -55,21 +52,7 @@
 
           echo -s $nix_shell_info (prompt_login) ' ' $cwd_color (prompt_pwd) $normal (fish_vcs_prompt) $normal ' ' $prompt_status
           echo -n -s $status_color $suffix ' ' $normal
-    '';
-      };
-
-      send_vte_termprop_signal = {
-        body = "printf \\e\\]666\\;%s!\\e\\\\ $argv";
-      };
-
-      notify_vte_preexec = {
-        body = "send_vte_termprop_signal vte.shell.preexec";
-        onEvent = "fish_preexec";
-      };
-
-      notify_vte_precmd = {
-        body = "send_vte_termprop_signal vte.shell.precmd";
-        onEvent = "fish_postexec";
+        '';
       };
     };
   };
