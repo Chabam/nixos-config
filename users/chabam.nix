@@ -58,6 +58,7 @@ in {
   home.sessionVariables = {
     BROWSER="firefox";
     EDITOR="nvim";
+    SHELL="fish";
     PAGER="less --use-color";
     SCRIPTS="$HOME/.scripts";
     SCRIPTS_PRIVATE="$HOME/.scripts/private";

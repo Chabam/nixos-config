@@ -21,7 +21,7 @@
           set -l status_color (set_color brgreen)
           set -l cwd_color (set_color brblue)
           set -l prompt_status ""
-          set -l container_color (set_color brmagenta)
+          set -l shell_color (set_color brcyan)
           set -g __fish_git_prompt_show_informative_status true
           set -g __fish_git_prompt_showcolorhints true
           set -g __fish_git_prompt_showuntrackedfiles true
@@ -41,10 +41,6 @@
             set suffix '#'
           end
 
-          if string length --quiet $CONTAINER_ID
-            set container_part "$container_color.$CONTAINER_ID"
-          end
-
           # Color the prompt in red on error
           if test $last_status -ne 0
             set status_color (set_color $fish_color_error)
@@ -53,11 +49,11 @@
 
           set -l nix_shell_info (
             if test -n "$IN_NIX_SHELL"
-              echo -n "$container_color<nix-shell>$normal "
+              echo -n "$shell_color<nix-shell>$normal "
             end
           )
 
-          echo -s $nix_shell_info (prompt_login) $container_part ' ' $cwd_color (prompt_pwd) $normal (fish_vcs_prompt) $normal ' ' $prompt_status
+          echo -s $nix_shell_info (prompt_login) ' ' $cwd_color (prompt_pwd) $normal (fish_vcs_prompt) $normal ' ' $prompt_status
           echo -n -s $status_color $suffix ' ' $normal
     '';
       };
