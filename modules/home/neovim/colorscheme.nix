@@ -30,7 +30,7 @@ with pkgs.vimPlugins;
             vim.g.terminal_color_14 = "#4fd2fd"
             vim.g.terminal_color_15 = "#f6f5f4"
 
-            vim.api.nvim_set_hl(0, "MatchParen", { link = "Structure", bold = true })
+            vim.api.nvim_set_hl(0, "MatchParen", { link = "Conditional", bold = true })
             vim.api.nvim_set_hl(0, "ModeMsg", { link = "Structure" })
             vim.api.nvim_set_hl(0, "OilDir", { link = "Structure" })
             vim.api.nvim_set_hl(0, "StatusLine", { link = "WildMenu" })

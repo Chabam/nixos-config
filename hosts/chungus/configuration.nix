@@ -13,6 +13,7 @@ in
     # Include the results of the hardware scan.
     ./hardware-configuration.nix
     "${modules}/auto-upgrade.nix"
+    "${modules}/flatpak.nix"
     "${modules}/gc.nix"
     "${modules}/gnome.nix"
     "${modules}/grub.nix"
@@ -55,7 +56,6 @@ in
   services.xserver.excludePackages = [ pkgs.xterm ];
 
   virtualisation.docker.enable = true;
-  services.flatpak.enable = true;
 
   # Enable CUPS to print documents.
   services.printing.enable = true;
