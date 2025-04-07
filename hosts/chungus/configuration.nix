@@ -19,6 +19,7 @@ in
     "${modules}/grub.nix"
     "${modules}/nvidia.nix"
     "${modules}/plymouth.nix"
+    "${modules}/syncthing.nix"
   ];
 
   # Bootloader.

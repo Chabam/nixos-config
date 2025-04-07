@@ -1,5 +1,4 @@
 { pkgs, ... }:
-
 {
   home.packages = with pkgs; [
     # Emoji typing
@@ -14,6 +13,7 @@
     gnomeExtensions.fullscreen-avoider
     gnomeExtensions.legacy-gtk3-theme-scheme-auto-switcher
     gnomeExtensions.pip-on-top
+    gnomeExtensions.syncthing-indicator
   ];
 
   dconf = {
@@ -29,12 +29,13 @@
           fullscreen-avoider.extensionUuid
           legacy-gtk3-theme-scheme-auto-switcher.extensionUuid
           pip-on-top.extensionUuid
+          syncthing-indicator.extensionUuid
         ];
       };
 
       # Shell settings
       "org/gnome/desktop/interface" = {
-        enable-hot-corner = false;
+        enable-hot-corners = false;
       };
 
       "org/gnome/desktop/wm/keybindings" = {
@@ -63,6 +64,10 @@
       "org/gnome/desktop/wm/preferences" = {
         button-layout = "appmenu:minimize,maximize,close";
         resize-with-right-button = true;
+      };
+
+      "org/gnome/shell/app-switcher" = {
+        current-workspace-only = true;
       };
 
       # Various Gnome apps settings
