@@ -13,24 +13,13 @@ in
     # Include the results of the hardware scan.
     ./hardware-configuration.nix
     "${modules}/auto-upgrade.nix"
+    "${modules}/flatpak.nix"
     "${modules}/gc.nix"
     "${modules}/gnome.nix"
+    "${modules}/grub.nix"
     "${modules}/plymouth.nix"
+    "${modules}/syncthing.nix"
   ];
-
-  # Bootloader.
-  boot.loader = {
-    efi = {
-      efiSysMountPoint = "/boot";
-      canTouchEfiVariables = true;
-    };
-    grub = {
-      enable = true;
-      device = "nodev";
-      useOSProber = true;
-      efiSupport = true;
-    };
-  };
 
   nix.settings.experimental-features = [
     "nix-command"

@@ -33,6 +33,12 @@
         ];
       };
 
+      "org/gnome/desktop/input-sources" = {
+        xkb-options = [
+          "caps:ctrl_modifier"
+        ];
+      };
+
       # Shell settings
       "org/gnome/desktop/interface" = {
         enable-hot-corners = false;
