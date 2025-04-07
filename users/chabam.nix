@@ -8,7 +8,7 @@ in {
     "${modules}/fish.nix"
     "${modules}/gnome.nix"
     "${modules}/neovim"
-    "${modules}/ptyxis"
+    "${modules}/ghostty.nix"
     "${modules}/tmux.nix"
   ];
 
