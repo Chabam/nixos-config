@@ -10,6 +10,7 @@ in {
     "${modules}/gnome.nix"
     "${modules}/neovim"
     "${modules}/tmux.nix"
+    "${modules}/syncthing.nix"
   ];
 
   home.username = "chabam";

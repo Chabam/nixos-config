@@ -1,14 +1,12 @@
-{ pkgs, ... }:
+{ ... }:
 
 {
-  environment.systemPackages = with pkgs; [
-    syncthing
+  networking.firewall.allowedTCPPorts = [
+    8384
+    22000
   ];
-
-  services.syncthing = {
-    group = "users";
-    user = "chabam";
-    enable = true;
-    openDefaultPorts = true;
-  };
+  networking.firewall.allowedUDPPorts = [
+    22000
+    21027
+  ];
 }
