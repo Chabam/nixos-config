@@ -40,6 +40,7 @@
       # Shell settings
       "org/gnome/desktop/interface" = {
         enable-hot-corners = false;
+        show-battery-percentage = true;
       };
 
       "org/gnome/desktop/wm/keybindings" = {
