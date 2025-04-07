@@ -98,6 +98,7 @@ in
             ${pkgs.callPackage ./lsp.nix { }},
             ${pkgs.callPackage ./oil.nix { }},
             ${pkgs.callPackage ./treesitter.nix { }},
+            ${pkgs.callPackage ./vimtex.nix { }},
           },
         })
         ${(import ./autogroups.nix) { }}
