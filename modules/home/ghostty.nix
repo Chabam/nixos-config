@@ -9,14 +9,26 @@
     ".config/ghostty/config".text = ''
       font-family = "IosevkaTerm Nerd Font"
       font-size = 12
+      font-feature = -calt, -liga, -dlig
 
       theme = light:chabam-light,dark:chabam-dark
       selection-invert-fg-bg = true
 
       mouse-hide-while-typing = true
       command = fish
+      shell-integration = fish
       window-padding-x = 10
       window-padding-y = 10
+      keybind = alt+1=unbind
+      keybind = alt+2=unbind
+      keybind = alt+3=unbind
+      keybind = alt+4=unbind
+      keybind = alt+5=unbind
+      keybind = alt+6=unbind
+      keybind = alt+7=unbind
+      keybind = alt+8=unbind
+      keybind = alt+9=unbind
+      keybind = alt+0=unbind
     '';
     ".config/ghostty/themes/chabam-light".text = ''
         # So far it's just Adwaita

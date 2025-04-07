@@ -17,14 +17,14 @@ with pkgs.vimPlugins;
         dawnfox = {
           bg1 = "#ffffff",
         },
-        -- carbonfox = {
-        --   bg1 = "#1e1e1e",
-        -- },
+        carbonfox = {
+          orange = "#ff6f00"
+        }
       },
       groups = {
         carbonfox = {
-          Visual = { bg = "#2c394e" },
-          CurSearch = { bg = "#4f422c" },
+          Visual = { bg = "#03302f" },
+          CurSearch = { bg = "#7f2b11" },
         },
         dawnfox = {
           Visual = { bg = "#ddeaff" },
@@ -36,8 +36,9 @@ with pkgs.vimPlugins;
 
           Substitute = { link = "Visual" },
           FloatBorder = { fg = "palette.bg0", bg = "palette.bg0" },
+          StatusLine = { bg = "#0f62fe", fg = "palette.fg1" },
 
-          MatchParen = { fg = "palette.pink", style="bold" },
+          MatchParen = { fg = "palette.orange", style="bold" },
 
           Pmenu = { fg = "palette.comment", bg = "palette.bg2" },
           PmenuSel = { bg = "palette.bg3", style = "bold" },
@@ -115,7 +116,7 @@ with pkgs.vimPlugins;
           TreesitterContext = { bg = "palette.bg3" },
           TreesitterContextLineNumberBottom = { bg = "palette.bg1" },
 
-          IronLastSet = { link = "CurSearch" },
+          IronLastSent = { link = "CurSearch" },
         },
       },
     })

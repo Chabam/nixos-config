@@ -6,9 +6,9 @@ in {
 
   imports = [
     "${modules}/fish.nix"
+    "${modules}/ghostty.nix"
     "${modules}/gnome.nix"
     "${modules}/neovim"
-    "${modules}/ghostty.nix"
     "${modules}/tmux.nix"
   ];
 
