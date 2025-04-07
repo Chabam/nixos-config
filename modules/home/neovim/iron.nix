@@ -11,6 +11,7 @@ with pkgs.vimPlugins;
 
       iron.setup({
         config = {
+          highlight_last = "IronLastSent",
           -- Whether a repl should be discarded or not
           scratch_repl = true,
           -- Your repl definitions come here

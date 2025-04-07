@@ -96,4 +96,16 @@
       end
     end,
   })
+
+vim.api.nvim_create_autocmd("OptionSet", {
+    pattern = "background",
+    callback = function()
+        if vim.o.background == "light" then
+            vim.cmd.colorscheme("dawnfox")
+        end
+        if vim.o.background == "dark" then
+            vim.cmd.colorscheme("carbonfox")
+        end
+    end,
+})
 ''
