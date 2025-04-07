@@ -6,6 +6,8 @@
   ];
 
   services.syncthing = {
+    group = "users";
+    user = "chabam";
     enable = true;
     openDefaultPorts = true;
   };

@@ -13,7 +13,6 @@
     gnomeExtensions.fullscreen-avoider
     gnomeExtensions.legacy-gtk3-theme-scheme-auto-switcher
     gnomeExtensions.pip-on-top
-    gnomeExtensions.syncthing-indicator
   ];
 
   dconf = {
@@ -29,7 +28,6 @@
           fullscreen-avoider.extensionUuid
           legacy-gtk3-theme-scheme-auto-switcher.extensionUuid
           pip-on-top.extensionUuid
-          syncthing-indicator.extensionUuid
         ];
       };
 
