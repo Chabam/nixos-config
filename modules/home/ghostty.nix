@@ -17,6 +17,9 @@
       mouse-hide-while-typing = true
       command = fish
       shell-integration = fish
+
+      shell-integration-features = no-cursor
+
       window-padding-x = 10
       window-padding-y = 10
       keybind = alt+1=unbind
