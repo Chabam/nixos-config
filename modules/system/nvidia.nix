@@ -20,4 +20,11 @@
     open = true;
     package = config.boot.kernelPackages.nvidiaPackages.latest;
   };
+
+  # Weird fix for blank screen after suspend
+  systemd.services."systemd-suspend" = {
+    serviceConfig = {
+      Environment = ''"SYSTEMD_SLEEP_FREEZE_USER_SESSIONS=false"'';
+    };
+  };
 }
