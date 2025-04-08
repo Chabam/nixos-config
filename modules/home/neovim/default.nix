@@ -94,6 +94,7 @@ in
             {
               dir = "${todo-comments-nvim}",
               event = "BufRead",
+              dependencies = { dir = "${plenary-nvim}" },
               config = function()
                 require("todo-comments").setup({})
               end
