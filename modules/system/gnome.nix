@@ -20,6 +20,10 @@
     totem # video player
   ];
 
+  programs.nautilus-open-any-terminal = {
+    enable = true;
+  };
+
   nixpkgs.overlays = [
     (final: prev: {
       mutter = prev.mutter.overrideAttrs (oldAttrs: {
