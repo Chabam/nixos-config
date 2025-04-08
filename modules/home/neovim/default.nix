@@ -31,6 +31,7 @@ let
     luasnip
     nightfox-nvim
     nvim-lspconfig
+    nvim-surround
     nvim-treesitter
     nvim-treesitter-context
     nvim-web-devicons
@@ -38,7 +39,6 @@ let
     plenary-nvim
     quicker-nvim
     todo-comments-nvim
-    vim-sandwich
     vim-sleuth
     vimtex
   ];
@@ -75,8 +75,9 @@ in
               event = "BufRead"
             },
             {
-              dir = "${vim-sandwich}",
-              event = "InsertEnter"
+              dir = "${nvim-surround}",
+              event = "BufRead",
+              opts = {}
             },
             {
               dir = "${indent-blankline-nvim}",
