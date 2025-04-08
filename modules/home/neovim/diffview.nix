@@ -10,7 +10,7 @@ with pkgs.vimPlugins;
         desc = "[D]iffview [O]pen"
       },
       {
-        "<leader>do",
+        "<leader>dc",
         "<CMD>DiffviewClose<CR>",
         desc = "[D]iffview [C]lose"
       }

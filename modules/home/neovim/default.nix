@@ -61,9 +61,7 @@ in
 
     plugins = pluginsPkgs ++ treesitterPkgs ++ miscPkgs;
 
-    extraLuaConfig =
-      with pkgs.vimPlugins;
-      # lua
+    extraLuaConfig = with pkgs.vimPlugins;
       ''
         ${(import ./options.nix) { }}
         require("lazy").setup({
@@ -72,11 +70,17 @@ in
           install = { enabled = false };
           change_detection = { enabled = false };
           spec = {
-            { dir = "${vim-sleuth}" },
-            { dir = "${vim-sandwich}" },
+            {
+              dir = "${vim-sleuth}",
+              event = "BufRead"
+            },
+            {
+              dir = "${vim-sandwich}",
+              event = "InsertEnter"
+            },
             {
               dir = "${indent-blankline-nvim}",
-              event = "VimEnter",
+              event = "BufRead",
               config = function()
                 require("ibl").setup()
               end
@@ -88,7 +92,7 @@ in
             },
             {
               dir = "${todo-comments-nvim}",
-              event = "VimEnter",
+              event = "BufRead",
               config = function()
                 require("todo-comments").setup({})
               end

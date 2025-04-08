@@ -23,8 +23,8 @@ with pkgs.vimPlugins;
       },
       groups = {
         carbonfox = {
-          Visual = { bg = "#03302f" },
-          CurSearch = { bg = "#7f2b11" },
+          Visual = { bg = "#354c72" },
+          CurSearch = { bg = "#554272" },
         },
         dawnfox = {
           Visual = { bg = "#ddeaff" },
