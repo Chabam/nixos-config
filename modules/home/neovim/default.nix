@@ -72,16 +72,16 @@ in
           spec = {
             {
               dir = "${vim-sleuth}",
-              event = "BufRead"
+              event = {"BufReadPre", "BufNewFile"},
             },
             {
               dir = "${nvim-surround}",
-              event = "BufRead",
+              event = {"BufReadPre", "BufNewFile"},
               opts = {}
             },
             {
               dir = "${indent-blankline-nvim}",
-              event = "BufRead",
+              event = {"BufReadPre", "BufNewFile"},
               config = function()
                 require("ibl").setup()
               end
