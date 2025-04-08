@@ -49,6 +49,14 @@
           ./hosts/gamer/configuration.nix
         ];
       };
+      uni = nixpkgs.lib.nixosSystem {
+        specialArgs = {
+            inherit inputs;
+        };
+        modules = [
+          ./hosts/uni/configuration.nix
+        ];
+      };
     };
 
     homeConfigurations = {
@@ -56,6 +64,13 @@
         pkgs = nixpkgs.legacyPackages.x86_64-linux;
         extraSpecialArgs = { inherit inputs outputs; };
         modules = [./users/chabam.nix];
+      };
+
+      # Refactor this
+      chaf2717 = home-manager.lib.homeManagerConfiguration {
+        pkgs = nixpkgs.legacyPackages.x86_64-linux;
+        extraSpecialArgs = { inherit inputs outputs; };
+        modules = [./users/chaf2717.nix];
       };
     };
   };
