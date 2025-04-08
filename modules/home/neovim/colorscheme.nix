@@ -36,7 +36,7 @@ with pkgs.vimPlugins;
 
           Substitute = { link = "Visual" },
           FloatBorder = { fg = "palette.bg0", bg = "palette.bg0" },
-          StatusLine = { bg = "#0f62fe", fg = "palette.fg1" },
+          StatusLine = { bg = "#0f62fe", fg = "#f2f4f8" },
 
           MatchParen = { fg = "palette.orange", style="bold" },
 

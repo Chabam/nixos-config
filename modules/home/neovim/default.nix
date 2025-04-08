@@ -19,16 +19,17 @@ let
     racket
   ];
   pluginsPkgs = with pkgs.vimPlugins; [
-    # oil-git-status.nvim
-    adwaita-nvim
     blink-cmp
     conform-nvim
     diffview-nvim
+    friendly-snippets
     fzf-lua
     gitsigns-nvim
     indent-blankline-nvim
     iron-nvim
     lazy-nvim
+    luasnip
+    nightfox-nvim
     nvim-lspconfig
     nvim-treesitter
     nvim-treesitter-context
@@ -47,6 +48,10 @@ let
     nil # Nix
     pyright
   ];
+  miscPkgs = with pkgs; [
+    luajitPackages.jsregexp
+    tree-sitter
+  ];
 in
 {
   home.packages = lspPkgs ++ conformPkgs;
@@ -54,7 +59,7 @@ in
   programs.neovim = {
     enable = true;
 
-    plugins = pluginsPkgs ++ treesitterPkgs;
+    plugins = pluginsPkgs ++ treesitterPkgs ++ miscPkgs;
 
     extraLuaConfig =
       with pkgs.vimPlugins;
@@ -97,6 +102,7 @@ in
             ${pkgs.callPackage ./iron.nix { }},
             ${pkgs.callPackage ./lsp.nix { }},
             ${pkgs.callPackage ./oil.nix { }},
+            ${pkgs.callPackage ./snippets.nix { }},
             ${pkgs.callPackage ./treesitter.nix { }},
             ${pkgs.callPackage ./vimtex.nix { }},
           },
