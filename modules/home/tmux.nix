@@ -11,7 +11,7 @@
     keyMode = "vi";
     mouse = true;
     shortcut = "q";
-    terminal = "xterm-256color";
+    terminal = "xterm-ghostty";
     escapeTime = 0;
     plugins = with pkgs; [
       tmuxPlugins.yank
@@ -26,7 +26,6 @@
 
     extraConfig = ''
       set-option -g default-command fish
-      set -ga terminal-overrides ",xterm-256color:Tc"
 
       # Vim style bindings
       bind-key v split-window -h
