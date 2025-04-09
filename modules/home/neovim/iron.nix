@@ -6,59 +6,8 @@ with pkgs.vimPlugins;
     keys = {
       {
         "<space>ti",
-        require("iron.core").toggle_repl,
+        "<cmd>IronRepl<cr>",
         desc = "[T]oggle [I]ron"
-      },
-      {
-        "<leader>iR",
-        require("iron.core").restart_repl,
-        desc = "[I]ron [R]estart"
-      },
-      {
-        "<leader>I",
-        require("iron.core").send_motion,
-        desc = "[I]ron send motion"
-      },
-      {
-        "<leader>im",
-        require("iron.core").visual_send,
-        "v",
-        desc = "[I]ron send visual motion"
-      },
-      {
-        "<leader>if",
-        require("iron.core").send_file,
-        desc = "[I]ron send [f]ile"
-      },
-      {
-        "<leader>il",
-        require("iron.core").send_line,
-        desc = "[I]ron send [l]ine"
-      },
-      {
-        "<leader>i<cr>",
-        require("iron.core").cr,
-        desc = "[I]ron line return"
-      },
-      {
-        "<leader>i<space>",
-        require("iron.core").interrupt,
-        desc = "[I]ron interrupt"
-      },
-      {
-        "<leader>iq",
-        require("iron.core").exit,
-        desc = "[I]ron [q]uit"
-      },
-      {
-        "<leader>icl",
-        require("iron.core").clear,
-        desc = "[I]ron [cl]ear"
-      },
-      {
-        "<space>if",
-        "<cmd>IronFocus<cr>",
-        desc = "[I]ron [f]ocus"
       },
       {
         "<space>ih",
@@ -73,7 +22,6 @@ with pkgs.vimPlugins;
 
       iron.setup({
         config = {
-          highlight_last = "IronLastSent",
           -- Whether a repl should be discarded or not
           scratch_repl = true,
           -- Your repl definitions come here
@@ -94,8 +42,19 @@ with pkgs.vimPlugins;
           end,
           repl_open_cmd = view.split("40%"),
         },
+        keymaps = {
+          restart_repl = "<space>iR",
+          send_motion = "<space>is",
+          visual_send = "<space>is",
+          send_file = "<space>if",
+          send_line = "<space>il",
+          cr = "<space>i<cr>",
+          interrupt = "<space>s<space>",
+          exit = "<space>iq",
+          clear = "<space>ic",
+        },
         highlight = {
-          italic = true
+          bold = true
         },
         ignore_blank_lines = true,
     })

@@ -23,12 +23,12 @@ with pkgs.vimPlugins;
       },
       groups = {
         carbonfox = {
-          Visual = { bg = "#354c72" },
+          Visual = { bg = "#1d293f" },
           CurSearch = { bg = "#554272" },
         },
         dawnfox = {
           Visual = { bg = "#ddeaff" },
-          CurSearch = { bg = "#ffe6a3" },
+          CurSearch = { bg = "#d8bfff" },
         },
         all = {
           Search = { link = "Visual" },
@@ -115,8 +115,6 @@ with pkgs.vimPlugins;
 
           TreesitterContext = { bg = "palette.bg3" },
           TreesitterContextLineNumberBottom = { bg = "palette.bg1" },
-
-          IronLastSent = { link = "CurSearch" },
         },
       },
     })
