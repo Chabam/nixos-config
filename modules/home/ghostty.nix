@@ -32,6 +32,9 @@
       keybind = alt+8=unbind
       keybind = alt+9=unbind
       keybind = alt+0=unbind
+
+      keybind = ctrl+equal=reset_font_size
+      keybind = ctrl+shift+physical:equal=increase_font_size:1
     '';
     ".config/ghostty/themes/chabam-light".text = ''
         # So far it's just Adwaita
