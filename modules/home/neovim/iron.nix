@@ -24,23 +24,13 @@ with pkgs.vimPlugins;
         config = {
           -- Whether a repl should be discarded or not
           scratch_repl = true,
-          -- Your repl definitions come here
-          repl_definition = {
-            sh = {
-              -- Can be a table or a function that
-              -- returns a table (see below)
-              command = {"zsh"}
-            },
-            python = {
-              command = { "python3" },  -- or { "ipython", "--no-autoindent" }
-              format = common.bracketed_paste_python,
-              block_dividers = { "# %%", "#%%" },
-            }
-          },
           repl_filetype = function(bufnr, ft)
             return "iron"..ft
           end,
-          repl_open_cmd = view.split("40%"),
+          repl_open_cmd = view.split("50%", {
+            winfixwidth = false,
+            winfixheight = false
+          }),
         },
         keymaps = {
           restart_repl = "<space>iR",
