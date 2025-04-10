@@ -8,6 +8,18 @@ let
     stylua
     texlivePackages.latexindent
   ];
+  treesitterGrammars = with pkgs.vimPlugins; nvim-treesitter.withPlugins (p: [
+    p.bash
+    p.c
+    p.cpp
+    p.fish
+    p.lua
+    p.make
+    p.markdown
+    p.nix
+    p.python
+    p.racket
+  ]);
   pluginsPkgs = with pkgs.vimPlugins; [
     blink-cmp
     conform-nvim
@@ -22,7 +34,7 @@ let
     nightfox-nvim
     nvim-lspconfig
     nvim-surround
-    nvim-treesitter.withAllGrammars
+    treesitterGrammars
     nvim-treesitter-context
     nvim-web-devicons
     oil-nvim
@@ -100,7 +112,7 @@ in
           ${pkgs.callPackage ./lsp.nix { }},
           ${pkgs.callPackage ./oil.nix { }},
           ${pkgs.callPackage ./snippets.nix { }},
-          ${pkgs.callPackage ./treesitter.nix { }},
+          ${pkgs.callPackage ./treesitter.nix { grammars = treesitterGrammars; }},
           ${pkgs.callPackage ./vimtex.nix { }},
         },
       })

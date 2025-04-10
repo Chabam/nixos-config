@@ -1,7 +1,7 @@
-{ pkgs }:
-let grammarsPath = with pkgs.vimPlugins; pkgs.symlinkJoin  {
+{ pkgs, grammars, ... }:
+let grammarsPath = pkgs.symlinkJoin  {
   name = "nvim-treesitter-grammars";
-  paths = nvim-treesitter.withAllGrammars.dependencies;
+  paths = grammars.dependencies;
   }; in with pkgs.vimPlugins;
 # Lua
 ''
