@@ -1,12 +1,13 @@
 { pkgs }:
 with pkgs.vimPlugins;
+# Lua
 ''
   {
     dir = "${iron-nvim}",
     keys = {
       {
         "<space>ti",
-        "<cmd>IronRepl<cr>",
+        "<cmd>IronRepl<cr><Esc>",
         desc = "[T]oggle [I]ron"
       },
       {

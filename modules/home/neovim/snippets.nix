@@ -1,5 +1,7 @@
 { pkgs }:
-with pkgs.vimPlugins; ''
+with pkgs.vimPlugins;
+# Lua
+''
 {
     dir = "${luasnip}",
     event = "InsertEnter",

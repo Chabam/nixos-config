@@ -1,4 +1,5 @@
 { ... }:
+# Lua
 ''
 local tab_width = 4
 vim.opt.tabstop = tab_width

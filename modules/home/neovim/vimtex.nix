@@ -1,5 +1,6 @@
 { pkgs }:
 with pkgs.vimPlugins;
+# Lua
 ''
   {
     dir = "${vimtex}",

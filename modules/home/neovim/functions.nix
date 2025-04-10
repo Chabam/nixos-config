@@ -1,5 +1,6 @@
 
 { ... }:
+# Lua
 ''
 local term_clear = function()
   vim.api.nvim_command("startinsert")

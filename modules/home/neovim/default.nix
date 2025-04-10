@@ -6,18 +6,6 @@ let
     stylua
     texlivePackages.latexindent
   ];
-  treesitterPkgs = with pkgs.vimPlugins.nvim-treesitter.builtGrammars; [
-    bash
-    c
-    cpp
-    fish
-    lua
-    make
-    markdown
-    nix
-    python
-    racket
-  ];
   pluginsPkgs = with pkgs.vimPlugins; [
     blink-cmp
     conform-nvim
@@ -32,7 +20,7 @@ let
     nightfox-nvim
     nvim-lspconfig
     nvim-surround
-    nvim-treesitter
+    nvim-treesitter.withAllGrammars
     nvim-treesitter-context
     nvim-web-devicons
     oil-nvim
@@ -59,63 +47,64 @@ in
   programs.neovim = {
     enable = true;
 
-    plugins = pluginsPkgs ++ treesitterPkgs ++ miscPkgs;
+    plugins = pluginsPkgs ++ miscPkgs;
 
     extraLuaConfig = with pkgs.vimPlugins;
+      # Lua
       ''
-        ${(import ./options.nix) { }}
-        require("lazy").setup({
-          rocks = { enabled = false };
-          pkg = { enabled = false };
-          install = { enabled = false };
-          change_detection = { enabled = false };
-          spec = {
-            {
-              dir = "${vim-sleuth}",
-              event = {"BufReadPre", "BufNewFile"},
-            },
-            {
-              dir = "${nvim-surround}",
-              event = {"BufReadPre", "BufNewFile"},
-              opts = {}
-            },
-            {
-              dir = "${indent-blankline-nvim}",
-              event = {"BufReadPre", "BufNewFile"},
-              config = function()
-                require("ibl").setup()
-              end
-            },
-            {
-              dir = "${quicker-nvim}",
-              event = "FileType qf",
-              opts = {}
-            },
-            {
-              dir = "${todo-comments-nvim}",
-              event = "BufRead",
-              dependencies = { dir = "${plenary-nvim}" },
-              config = function()
-                require("todo-comments").setup({})
-              end
-            },
-            ${pkgs.callPackage ./autocomplete.nix { }},
-            ${pkgs.callPackage ./autoformat.nix { }},
-            ${pkgs.callPackage ./colorscheme.nix { }},
-            ${pkgs.callPackage ./diffview.nix { }},
-            ${pkgs.callPackage ./fzf.nix { }},
-            ${pkgs.callPackage ./gitsigns.nix { }},
-            ${pkgs.callPackage ./iron.nix { }},
-            ${pkgs.callPackage ./lsp.nix { }},
-            ${pkgs.callPackage ./oil.nix { }},
-            ${pkgs.callPackage ./snippets.nix { }},
-            ${pkgs.callPackage ./treesitter.nix { }},
-            ${pkgs.callPackage ./vimtex.nix { }},
+      ${(import ./options.nix) { }}
+      require("lazy").setup({
+        rocks = { enabled = false };
+        pkg = { enabled = false };
+        install = { enabled = false };
+        change_detection = { enabled = false };
+        spec = {
+          {
+            dir = "${vim-sleuth}",
+            event = {"BufReadPre", "BufNewFile"},
           },
-        })
-        ${(import ./autogroups.nix) { }}
-        ${(import ./functions.nix) { }}
-        ${(import ./keymaps.nix) { }}
-      '';
+          {
+            dir = "${nvim-surround}",
+            event = {"BufReadPre", "BufNewFile"},
+            opts = {}
+          },
+          {
+            dir = "${indent-blankline-nvim}",
+            event = {"BufReadPre", "BufNewFile"},
+            config = function()
+              require("ibl").setup()
+            end
+          },
+          {
+            dir = "${quicker-nvim}",
+            event = "FileType qf",
+            opts = {}
+          },
+          {
+            dir = "${todo-comments-nvim}",
+            event = "BufRead",
+            dependencies = { dir = "${plenary-nvim}" },
+            config = function()
+              require("todo-comments").setup({})
+            end
+          },
+          ${pkgs.callPackage ./autocomplete.nix { }},
+          ${pkgs.callPackage ./autoformat.nix { }},
+          ${pkgs.callPackage ./colorscheme.nix { }},
+          ${pkgs.callPackage ./diffview.nix { }},
+          ${pkgs.callPackage ./fzf.nix { }},
+          ${pkgs.callPackage ./gitsigns.nix { }},
+          ${pkgs.callPackage ./iron.nix { }},
+          ${pkgs.callPackage ./lsp.nix { }},
+          ${pkgs.callPackage ./oil.nix { }},
+          ${pkgs.callPackage ./snippets.nix { }},
+          ${pkgs.callPackage ./treesitter.nix { }},
+          ${pkgs.callPackage ./vimtex.nix { }},
+        },
+      })
+      ${(import ./autogroups.nix) { }}
+      ${(import ./functions.nix) { }}
+      ${(import ./keymaps.nix) { }}
+    '';
   };
 }
