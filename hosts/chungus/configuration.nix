@@ -20,6 +20,7 @@ in
     "${modules}/nvidia.nix"
     "${modules}/plymouth.nix"
     "${modules}/syncthing.nix"
+    "${modules}/uni-remote.nix"
   ];
 
   # Bootloader.

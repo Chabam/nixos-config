@@ -19,6 +19,7 @@ in
     "${modules}/grub.nix"
     "${modules}/plymouth.nix"
     "${modules}/syncthing.nix"
+    "${modules}/uni-remote.nix"
   ];
 
   nix.settings.experimental-features = [
