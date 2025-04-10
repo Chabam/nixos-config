@@ -20,10 +20,11 @@ with pkgs.vimPlugins;
     require("conform").setup({
       notify_on_error = false,
       formatters_by_ft = {
-        lua = { "stylua" },
-        tex = { "latexindent" },
         cpp = { "clang_format" },
+        lua = { "stylua" },
         nix = { "nixfmt" },
+        python = { "isort", "black" },
+        tex = { "latexindent" },
       },
       formatters = {
         stylua = {

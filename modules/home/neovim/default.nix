@@ -3,6 +3,8 @@ let
   conformPkgs = with pkgs; [
     clang-tools # Also for clangd
     nixfmt-rfc-style
+    black
+    isort
     stylua
     texlivePackages.latexindent
   ];
