@@ -41,6 +41,7 @@ let
     plenary-nvim
     quicker-nvim
     todo-comments-nvim
+    vim-dispatch
     vim-sleuth
     vimtex
   ];
@@ -78,6 +79,10 @@ in
             event = {"BufReadPre", "BufNewFile"},
           },
           {
+            dir = "${vim-dispatch}",
+            cmd = { "Make" },
+          },
+          {
             dir = "${nvim-surround}",
             event = {"BufReadPre", "BufNewFile"},
             opts = {}
@@ -99,7 +104,9 @@ in
             event = "BufRead",
             dependencies = { dir = "${plenary-nvim}" },
             config = function()
-              require("todo-comments").setup({})
+              require("todo-comments").setup({
+                signs = false
+              })
             end
           },
           ${pkgs.callPackage ./autocomplete.nix { }},
