@@ -40,7 +40,7 @@ with pkgs.vimPlugins;
           send_file = "<space>if",
           send_line = "<space>il",
           cr = "<space>i<cr>",
-          interrupt = "<space>s<space>",
+          interrupt = "<space>i<space>",
           exit = "<space>iq",
           clear = "<space>ic",
         },
