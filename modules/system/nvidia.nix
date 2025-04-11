@@ -22,18 +22,39 @@
   };
 
   # Weird fix for blank screen after suspend
-  systemd.services = {
-    systemd-suspend.environment.SYSTEMD_SLEEP_FREEZE_USER_SESSIONS = "false";
-    nvidia-hibernate.environment.SYSTEMD_SLEEP_FREEZE_USER_SESSIONS = "false";
-    nvidia-suspend.environment.SYSTEMD_SLEEP_FREEZE_USER_SESSIONS = "false";
-    pre-sleep.environment.SYSTEMD_SLEEP_FREEZE_USER_SESSIONS = "false";
-    post-resume.environment.SYSTEMD_SLEEP_FREEZE_USER_SESSIONS = "false";
-    systemd-hibernate-clear.environment.SYSTEMD_SLEEP_FREEZE_USER_SESSIONS = "false";
-    systemd-hibernate.environment.SYSTEMD_SLEEP_FREEZE_USER_SESSIONS = "false";
-    systemd-hybrid-sleep.environment.SYSTEMD_SLEEP_FREEZE_USER_SESSIONS = "false";
-    systemd-suspend-then-hibernate.environment.SYSTEMD_SLEEP_FREEZE_USER_SESSIONS = "false";
-    homed-hibernate.environment.SYSTEMD_SLEEP_FREEZE_USER_SESSIONS = "false";
-    homed-hybrid-sleep.environment.SYSTEMD_SLEEP_FREEZE_USER_SESSIONS = "false";
-    homed-suspend-then-hibernate.environment.SYSTEMD_SLEEP_FREEZE_USER_SESSIONS = "false";
+  systemd = {
+     services."gnome-suspend" = {
+      description = "suspend gnome shell";
+      before = [
+        "systemd-suspend.service"
+        "systemd-hibernate.service"
+        "nvidia-suspend.service"
+        "nvidia-hibernate.service"
+      ];
+      wantedBy = [
+        "systemd-suspend.service"
+        "systemd-hibernate.service"
+      ];
+      serviceConfig = {
+        Type = "oneshot";
+        ExecStart = ''${pkgs.procps}/bin/pkill -f -STOP ${pkgs.gnome-shell}/bin/gnome-shell'';
+      };
+    };
+    services."gnome-resume" = {
+      description = "resume gnome shell";
+      after = [
+        "systemd-suspend.service"
+        "systemd-hibernate.service"
+        "nvidia-resume.service"
+      ];
+      wantedBy = [
+        "systemd-suspend.service"
+        "systemd-hibernate.service"
+      ];
+      serviceConfig = {
+        Type = "oneshot";
+        ExecStart = ''${pkgs.procps}/bin/pkill -f -CONT ${pkgs.gnome-shell}/bin/gnome-shell'';
+      };
+    };
   };
 }
