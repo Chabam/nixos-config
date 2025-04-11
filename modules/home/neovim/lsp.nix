@@ -10,7 +10,18 @@ with pkgs.vimPlugins;
       local lspconfig = require("lspconfig")
 
       local servers = {
-        clangd = {},
+        clangd = {
+          cmd = {
+            "clangd",
+            "--background-index",
+            "--clang-tidy",
+            "--header-insertion=iwyu",
+            "--completion-style=detailed",
+            "--function-arg-placeholders",
+            "--fallback-style=llvm",
+            "--header-insertion=never",
+          },
+        },
         ltex_plus = {
           settings = {
             ltex = {
