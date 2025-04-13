@@ -39,7 +39,6 @@ let
     nvim-web-devicons
     oil-nvim
     plenary-nvim
-    quicker-nvim
     todo-comments-nvim
     vim-dispatch
     vim-sleuth
@@ -95,11 +94,6 @@ in
             end
           },
           {
-            dir = "${quicker-nvim}",
-            event = "FileType qf",
-            opts = {}
-          },
-          {
             dir = "${todo-comments-nvim}",
             event = "BufRead",
             dependencies = { dir = "${plenary-nvim}" },
@@ -109,8 +103,8 @@ in
               })
             end
           },
-          ${pkgs.callPackage ./autocomplete.nix { }},
           ${pkgs.callPackage ./autoformat.nix { }},
+          ${pkgs.callPackage ./blink.nix { }},
           ${pkgs.callPackage ./colorscheme.nix { }},
           ${pkgs.callPackage ./diffview.nix { }},
           ${pkgs.callPackage ./fzf.nix { }},
