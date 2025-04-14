@@ -31,12 +31,11 @@
         CYAN="\[\e[1;36m\]"
         PURPLE="\[\e[0;35m\]"
 
-
         NIX_SHELL_INFO=""
         if [[ -n "$IN_NIX_SHELL" ]]; then
           NIX_SHELL_INFO="$CYAN<nix-shell"
           if [[ $SHLVL -ge 3 ]]; then
-            NIX_SHELL_INFO+=" lvl $(expr $SHLVL - 2)"
+            NIX_SHELL_INFO+=" lvl $(( $SHLVL - 2))"
           fi
           NIX_SHELL_INFO+="> $CLEAR"
         fi
@@ -51,6 +50,8 @@
         fi
 
         PS1+="$HOST_COLOR\h $BLUE\w"
+
+        GIT_INFO=""
         if gitstatus_query && [[ "$VCS_STATUS_RESULT" == ok-sync ]]; then
           GIT_INFO+=" $CLEAR("
           if [[ -n "$VCS_STATUS_LOCAL_BRANCH" ]]; then
@@ -61,6 +62,8 @@
             if [[ $VCS_STATUS_COMMITS_BEHIND -ge 1 ]]; then
               GIT_INFO+="⇣$VCS_STATUS_COMMITS_BEHIND"
             fi
+          elif [[ $VCS_STATUS_TAG != "" ]]; then
+            GIT_INFO+="$GREEN$VCS_STATUS_TAG"
           else
             GIT_INFO+="$GREEN$VCS_STATUS_COMMIT"
           fi
@@ -84,13 +87,19 @@
               GIT_INFO+="$RED-$VCS_STATUS_NUM_STAGED_DELETED$CLEAR"
             fi
 
+            if [[ $VCS_STATUS_NUM_STAGED -ge 1 ]]; then
+              NUM_MODIFIED=$(($VCS_STATUS_NUM_STAGED - $VCS_STATUS_NUM_STAGED_NEW - $VCS_STATUS_NUM_STAGED_DELETED))
+              GIT_INFO+="$BLUE~$NUM_MODIFIED$CLEAR"
+            fi
+
             (( $VCS_STATUS_HAS_UNSTAGED  )) && GIT_INFO+="$YELLOW!$VCS_STATUS_NUM_UNSTAGED$CLEAR"
-            (( $VCS_STATUS_HAS_UNTRACKED )) && GIT_INFO+="$BLUE?$VCS_STATUS_NUM_UNTRACKED$CLEAR"
+            (( $VCS_STATUS_HAS_UNTRACKED )) && GIT_INFO+="$CYAN?$VCS_STATUS_NUM_UNTRACKED$CLEAR"
           else
             GIT_INFO+="✔"
           fi
           GIT_INFO+="$CLEAR)"
         fi
+
         PS1+=$GIT_INFO
 
         EXIT_STATUS_COLOR=""
@@ -101,7 +110,6 @@
         fi
 
         PS1+="$EXIT_STATUS_COLOR\n\$$CLEAR "
-
       }
 
       force_color_prompt=yes

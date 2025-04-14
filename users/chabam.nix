@@ -9,7 +9,6 @@ in
   imports = [
     "${modules}/common-pkgs.nix"
     "${modules}/bash.nix"
-    "${modules}/fish.nix"
     "${modules}/ghostty.nix"
     "${modules}/gnome.nix"
     "${modules}/neovim"
