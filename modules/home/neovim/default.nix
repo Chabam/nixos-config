@@ -83,7 +83,7 @@ in
           },
           {
             dir = "${nvim-surround}",
-            event = {"BufReadPre", "BufNewFile"},
+            event = {"BufRead", "BufNewFile"},
             opts = {}
           },
           {

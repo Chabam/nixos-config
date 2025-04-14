@@ -7,7 +7,6 @@ let grammarsPath = pkgs.symlinkJoin  {
 ''
 {
   dir = "${nvim-treesitter}",
-  event = "BufRead",
   config = function()
     vim.opt.runtimepath:append("${nvim-treesitter}")
     vim.opt.runtimepath:append("${grammarsPath}")
@@ -28,7 +27,6 @@ let grammarsPath = pkgs.symlinkJoin  {
 },
 {
   dir = "${nvim-treesitter-context}",
-  event = "BufRead",
   opts = {
     max_lines = 1,
     mode = "topline",

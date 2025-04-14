@@ -36,12 +36,6 @@ with pkgs.vimPlugins;
       desc = "[S]earch current [W]ord"
     },
     {
-      "<leader>sm",
-      require("fzf-lua").marks,
-      "n",
-      desc = "[S]earch [M]arks"
-    },
-    {
       "<leader>sg",
       require("fzf-lua").live_grep_native,
       "n",

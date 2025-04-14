@@ -4,8 +4,6 @@ with pkgs.vimPlugins;
 ''
   {
     dir = "${nvim-lspconfig}",
-    cmd = {'LspInfo', 'LspInstall', 'LspStart'},
-    event = {'BufReadPre', 'BufNewFile'},
     config = function()
       local lspconfig = require("lspconfig")
 
