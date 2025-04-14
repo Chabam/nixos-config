@@ -75,7 +75,8 @@ with pkgs.vimPlugins;
       },
       actions = {
         files = {
-          ["ctrl-y"] = fzf.actions.file_edit_or_qf
+          ["ctrl-y"] = fzf.actions.file_edit_or_qf,
+          ["enter"] = fzf.actions.file_edit_or_qf
         },
       },
       fzf_colors = {
