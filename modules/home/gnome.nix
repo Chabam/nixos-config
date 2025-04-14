@@ -99,4 +99,13 @@
 
     };
   };
+
+  # Setting default text editor to Gnome's text editor
+  xdg.mimeApps = {
+    enable = true;
+    defaultApplications = {
+      "text/plain" = [ "org.gnome.TextEditor.desktop" ];
+    };
+  };
+
 }
