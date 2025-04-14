@@ -22,7 +22,6 @@
         label = "Chabam";
         limit-scrollback = false;
         use-custom-command = true;
-        custom-command = "fish";
         palette = "chabam";
       };
 

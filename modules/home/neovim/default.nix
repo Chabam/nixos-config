@@ -12,7 +12,6 @@ let
     p.bash
     p.c
     p.cpp
-    p.fish
     p.lua
     p.make
     p.markdown
@@ -60,6 +59,7 @@ in
 
   programs.neovim = {
     enable = true;
+    defaultEditor = true;
 
     plugins = pluginsPkgs ++ miscPkgs;
 

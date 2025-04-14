@@ -8,6 +8,7 @@ in
 
   imports = [
     "${modules}/common-pkgs.nix"
+    "${modules}/bash.nix"
     "${modules}/fish.nix"
     "${modules}/ghostty.nix"
     "${modules}/gnome.nix"
@@ -33,17 +34,21 @@ in
     ];
   };
 
-  home.sessionVariables = {
-    BROWSER = "firefox";
-    EDITOR = "nvim";
-    SHELL = "fish";
-    PAGER = "less --use-color";
-    SCRIPTS = "$HOME/.scripts";
-    SCRIPTS_PRIVATE = "$HOME/.scripts/private";
-    RUST_BIN = "$HOME/.cargo/bin";
-    LOCAL_BIN = "$HOME/.local/bin/";
-    PATH = "$PATH:$SCRIPTS:$SCRIPTS_PRIVATE:$RUST_BIN:$LOCAL_BIN";
-  };
+  home = {
+    shell.enableShellIntegration = true;
 
+    sessionVariables = {
+      NIX_SHELL_PRESERVE_PROMPT = 1;
+      BROWSER = "firefox";
+      EDITOR = "nvim";
+      SHELL = "bash";
+      PAGER = "less --use-color";
+      SCRIPTS = "$HOME/.scripts";
+      SCRIPTS_PRIVATE = "$HOME/.scripts/private";
+      RUST_BIN = "$HOME/.cargo/bin";
+      LOCAL_BIN = "$HOME/.local/bin/";
+      PATH = "$PATH:$SCRIPTS:$SCRIPTS_PRIVATE:$RUST_BIN:$LOCAL_BIN";
+    };
+  };
   programs.home-manager.enable = true;
 }

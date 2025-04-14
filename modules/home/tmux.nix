@@ -25,7 +25,7 @@
     ];
 
     extraConfig = ''
-      set-option -g default-command fish
+      set-option -g default-command $SHELL
 
       # Vim style bindings
       bind-key v split-window -h

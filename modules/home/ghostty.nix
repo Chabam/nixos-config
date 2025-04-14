@@ -15,8 +15,8 @@
       selection-invert-fg-bg = true
 
       mouse-hide-while-typing = true
-      command = fish
-      shell-integration = fish
+      command = bash
+      shell-integration = bash
 
       shell-integration-features = no-cursor
 
