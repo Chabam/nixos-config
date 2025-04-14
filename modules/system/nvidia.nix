@@ -57,4 +57,11 @@
       };
     };
   };
+
+  # Cuda support for blender
+  nixpkgs.overlays = [
+    (final: prev: {
+      blender = prev.blender.override { cudaSupport = true; };
+    })
+  ];
 }
