@@ -51,6 +51,14 @@
         if [[ -n "$IN_NIX_SHELL" ]]; then
           NIX_SHELL_INFO="$CYAN<nix-shell"
           ACTUAL_SHELL_LVL=$(($SHLVL - $ORIG_SHLVL))
+
+          if [[ -n "$NVIM" ]]; then
+            ACTUAL_SHELL_LVL=$(( ACTUAL_SHELL_LVL - 1 ))
+          fi
+          if [[ -n "$TMUX" ]]; then
+            ACTUAL_SHELL_LVL=$(( ACTUAL_SHELL_LVL - 1 ))
+          fi
+
           if [[ $ACTUAL_SHELL_LVL -ge 1 ]]; then
             NIX_SHELL_INFO+=" +$ACTUAL_SHELL_LVL"
           fi
