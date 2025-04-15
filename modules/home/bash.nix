@@ -31,16 +31,28 @@
         CYAN="\[\e[1;36m\]"
         PURPLE="\[\e[0;35m\]"
 
+
+        PS1=""
+        NNN_INFO=""
+        if [[ $NNNLVL  -ge 1 ]]; then
+          NNN_INFO="$PURPLE(NNN"
+          if [[ $NNNLVL -ge 2 ]]; then
+            NNN_INFO+=" +$(( $NNNLVL - 1))"
+          fi
+          NNN_INFO+=") $CLEAR"
+        fi
+        PS1+=$NNN_INFO
+
         NIX_SHELL_INFO=""
         if [[ -n "$IN_NIX_SHELL" ]]; then
           NIX_SHELL_INFO="$CYAN<nix-shell"
           if [[ $SHLVL -ge 3 ]]; then
-            NIX_SHELL_INFO+=" lvl $(( $SHLVL - 2))"
+            NIX_SHELL_INFO+=" +$(( $SHLVL - 2))"
           fi
           NIX_SHELL_INFO+="> $CLEAR"
         fi
 
-        PS1="$NIX_SHELL_INFO$GREEN\u$CLEAR@"
+        PS1+="$NIX_SHELL_INFO$GREEN\u$CLEAR@"
 
         HOST_COLOR=""
         if [[ $SSH_TTY ]]; then
