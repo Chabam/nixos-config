@@ -21,6 +21,10 @@
       gitstatus_stop && gitstatus_start -s -1 -u -1 -c -1 -d -1 -m -1
       PROMPT_COMMAND=__prompt_command
 
+      if [[ -n "$IN_NIX_SHELL" ]] && [[ -z $ORIG_SHLVL ]] then
+        export ORIG_SHLVL=$SHLVL
+      fi
+
       __prompt_command() {
         EXIT_CODE=$?
         CLEAR="\[\e[0m\]"
@@ -34,7 +38,7 @@
 
         PS1=""
         NNN_INFO=""
-        if [[ $NNNLVL  -ge 1 ]]; then
+        if [[ $NNNLVL -ge 1 ]]; then
           NNN_INFO="$PURPLE(NNN"
           if [[ $NNNLVL -ge 2 ]]; then
             NNN_INFO+=" +$(( $NNNLVL - 1))"
@@ -46,8 +50,9 @@
         NIX_SHELL_INFO=""
         if [[ -n "$IN_NIX_SHELL" ]]; then
           NIX_SHELL_INFO="$CYAN<nix-shell"
-          if [[ $SHLVL -ge 3 ]]; then
-            NIX_SHELL_INFO+=" +$(( $SHLVL - 2))"
+          ACTUAL_SHELL_LVL=$(($SHLVL - $ORIG_SHLVL))
+          if [[ $ACTUAL_SHELL_LVL -ge 1 ]]; then
+            NIX_SHELL_INFO+=" +$ACTUAL_SHELL_LVL"
           fi
           NIX_SHELL_INFO+="> $CLEAR"
         fi
