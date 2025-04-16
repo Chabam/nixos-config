@@ -70,7 +70,15 @@ with pkgs.vimPlugins;
       actions = {
         files = {
           ["ctrl-y"] = fzf.actions.file_edit_or_qf,
-          ["enter"] = fzf.actions.file_edit_or_qf
+          ["enter"] = fzf.actions.file_edit_or_qf,
+          ["ctrl-s"] = fzf.actions.file_split,
+          ["ctrl-v"] = fzf.actions.file_vsplit,
+          ["ctrl-t"] = fzf.actions.file_tabedit,
+          ["alt-q"] = fzf.actions.file_sel_to_qf,
+          ["alt-Q"] = fzf.actions.file_sel_to_ll,
+          ["alt-i"] = fzf.actions.toggle_ignore,
+          ["alt-h"] = fzf.actions.toggle_hidden,
+          ["alt-f"] = fzf.actions.toggle_follow,
         },
       },
       fzf_colors = {
