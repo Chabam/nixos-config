@@ -66,7 +66,7 @@ in
     extraLuaConfig = with pkgs.vimPlugins;
       # Lua
       ''
-      ${(import ./options.nix) { }}
+      ${pkgs.callPackage ./options.nix { }}
       require("lazy").setup({
         rocks = { enabled = false };
         pkg = { enabled = false };

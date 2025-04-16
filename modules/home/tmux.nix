@@ -25,7 +25,7 @@
     ];
 
     extraConfig = ''
-      set-option -g default-command $SHELL
+      set-option -g default-command ${pkgs.bash}/bin/bash
 
       # Vim style bindings
       bind-key v split-window -h

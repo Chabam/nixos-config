@@ -1,4 +1,4 @@
-{ ... }:
+{ pkgs, ... }:
 # Lua
 ''
 local tab_width = 4
@@ -34,6 +34,8 @@ vim.opt.listchars = { tab = "» ", trail = "·", space = "·", nbsp = "␣" }
 
 vim.opt.inccommand = "split"
 vim.opt.scrolloff = 2
+
+vim.opt.shell = "${pkgs.bash}/bin/bash"
 
 -- Diagnostic stuff
 vim.diagnostic.config({
