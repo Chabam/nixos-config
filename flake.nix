@@ -24,13 +24,9 @@
     {
       self,
       nixpkgs,
-      home-manager,
       nix-flatpak,
       ...
     }@inputs:
-    let
-      inherit (self) outputs;
-    in
     {
       nixosConfigurations = {
         vm = nixpkgs.lib.nixosSystem {
@@ -41,6 +37,7 @@
             ./hosts/vm/configuration.nix
           ];
         };
+
         chungus = nixpkgs.lib.nixosSystem {
           specialArgs = {
             inherit inputs;
@@ -58,31 +55,14 @@
             ./hosts/gamer/configuration.nix
           ];
         };
+
         uni = nixpkgs.lib.nixosSystem {
           specialArgs = {
             inherit inputs;
           };
           modules = [
             ./hosts/uni/configuration.nix
-          ];
-        };
-      };
-
-      homeConfigurations = {
-        chabam = home-manager.lib.homeManagerConfiguration {
-          pkgs = nixpkgs.legacyPackages.x86_64-linux;
-          extraSpecialArgs = { inherit inputs outputs; };
-          modules = [
-            ./users/chabam.nix
-          ];
-        };
-
-        # Refactor this
-        chaf2717 = home-manager.lib.homeManagerConfiguration {
-          pkgs = nixpkgs.legacyPackages.x86_64-linux;
-          extraSpecialArgs = { inherit inputs outputs; };
-          modules = [
-            ./users/chaf2717.nix
+            inputs.home-manager.nixosModules.default
           ];
         };
       };

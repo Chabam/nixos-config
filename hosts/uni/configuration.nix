@@ -1,6 +1,8 @@
 {
+  config,
   pkgs,
   inputs,
+  lib,
   ...
 }:
 
@@ -17,9 +19,9 @@ in
     "${modules}/gc.nix"
     "${modules}/gnome.nix"
     "${modules}/grub.nix"
+    "${modules}/main-user.nix"
     "${modules}/nvidia.nix"
     "${modules}/plymouth.nix"
-    "${modules}/syncthing.nix"
     "${modules}/virt-manager.nix"
   ];
 
@@ -82,22 +84,20 @@ in
   # services.xserver.libinput.enable = true;
 
   # Define a user account. Don't forget to set a password with ‘passwd’.
-  users.users.chaf2717 = {
-    isNormalUser = true;
-    description = "Félix Chabot";
-    extraGroups = [
-      "docker"
-      "libvirtd"
-      "networkmanager"
-      "wheel"
-    ];
-    packages = [
-      inputs.home-manager.packages.${pkgs.system}.default
-      pkgs.flatpak
-    ];
+  main-user = {
+    enable = true;
+    userName = "chaf2717";
+    fullName = "Félix Chabot";
+    enableDocker = true;
+    enableVirtManager = true;
   };
 
-  programs.fish.enable = true;
+  home-manager = {
+    extraSpecialArgs = { inherit inputs; };
+    users = {
+      "${config.main-user.userName}" = import "${root}/modules/home" { inherit config lib pkgs; };
+    };
+  };
 
   # Allow unfree packages
   nixpkgs.config.allowUnfree = true;
@@ -113,6 +113,7 @@ in
     platformTheme = "gnome";
     style = "adwaita";
   };
+
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.
   # programs.mtr.enable = true;
@@ -139,6 +140,7 @@ in
       PermitRootLogin = "prohibit-password"; # "yes", "without-password", "prohibit-password", "forced-commands-only", "no"
     };
   };
+
   systemd.tmpfiles.rules = [
     "L+ /run/gdm/.config/monitors.xml - - - - ${pkgs.writeText "gdm-monitors.xml" ''
       <monitors version="2">

@@ -1,19 +1,13 @@
-{ pkgs, config, ... }:
-
-let
-  root = ../.;
-  modules = "${root}/modules/home";
-in
+{ pkgs, config, lib, ... }:
 {
-
   imports = [
-    "${modules}/common-pkgs.nix"
-    "${modules}/bash.nix"
-    "${modules}/ghostty.nix"
-    "${modules}/gnome.nix"
-    "${modules}/neovim"
-    "${modules}/syncthing.nix"
-    "${modules}/tmux.nix"
+    ./common-pkgs.nix
+    ./bash.nix
+    ./ghostty.nix
+    ./gnome.nix
+    ./neovim
+    ./syncthing.nix
+    ./tmux.nix
   ];
 
   home.username = "${config.main-user.userName}";
@@ -26,7 +20,15 @@ in
     userEmail = "fchabot1337@gmail.com";
   };
 
-  home.file = import "${modules}/autostart.nix" {
+
+  dconf.settings = lib.mkIf config.main-user.enableVirtManager {
+    "org/virt-manager/virt-manager/connections" = {
+      autoconnect = [ "qemu:///system" ];
+      uris = [ "qemu:///system" ];
+    };
+  };
+
+  home.file = import ./autostart.nix {
     apps = with pkgs; [
       teams-for-linux
       discord
