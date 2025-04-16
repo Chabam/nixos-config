@@ -14,6 +14,7 @@ let
     tree
     wget
     wl-clipboard
+    direnv
   ];
 in
 {
@@ -35,5 +36,15 @@ in
       "org.blender.Blender"
       "org.gimp.GIMP"
     ];
+  };
+
+  programs = {
+    direnv = {
+      enable = true;
+      enableBashIntegration = true; # see note on other shells below
+      nix-direnv.enable = true;
+    };
+
+    bash.enable = true; # see note on other shells below
   };
 }
