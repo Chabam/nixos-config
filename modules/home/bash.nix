@@ -22,6 +22,10 @@
       PROMPT_COMMAND=__prompt_command
 
       __prompt_command() {
+        if [[ -n "$IN_NIX_SHELL" ]] && [[ -z $ORIG_SHLVL ]] then
+          export ORIG_SHLVL=$SHLVL
+        fi
+
         EXIT_CODE=$?
         CLEAR="\[\e[0m\]"
         RED="\[\e[1;31m\]"
@@ -45,7 +49,21 @@
 
         NIX_SHELL_INFO=""
         if [[ -n "$IN_NIX_SHELL" ]]; then
-          NIX_SHELL_INFO="$CYAN<nix-shell>$CLEAR "
+          NIX_SHELL_INFO="$CYAN<nix-shell"
+          ACTUAL_SHELL_LVL=$(($SHLVL - $ORIG_SHLVL))
+
+          if [[ -n "$NVIM" ]]; then
+            ACTUAL_SHELL_LVL=$(( ACTUAL_SHELL_LVL - 1 ))
+          fi
+
+          if [[ -n "$TMUX" ]]; then
+            ACTUAL_SHELL_LVL=$(( ACTUAL_SHELL_LVL - 1 ))
+          fi
+
+          if [[ $ACTUAL_SHELL_LVL -ge 1 ]]; then
+            NIX_SHELL_INFO+=" +$ACTUAL_SHELL_LVL"
+          fi
+          NIX_SHELL_INFO+="> $CLEAR"
         fi
 
         PS1+="$NIX_SHELL_INFO$GREEN\u$CLEAR@"
