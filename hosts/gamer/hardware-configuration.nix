@@ -14,6 +14,7 @@
   boot.extraModulePackages = [ ];
 
   services.xserver.videoDrivers = [ "ampgpu" ];
+  services.supergfxd.enable = true;
 
   hardware.graphics = {
     enable = true;
