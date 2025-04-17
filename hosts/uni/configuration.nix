@@ -5,12 +5,9 @@
 
 {
   imports = [
-    # Include the results of the hardware scan.
     ./hardware-configuration.nix
     ../../modules/system
   ];
-
-  # Bootloader.
 
   nix.settings.experimental-features = [
     "nix-command"
@@ -84,7 +81,6 @@
       nerd-fonts.iosevka-term
     ];
   };
-
 
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.

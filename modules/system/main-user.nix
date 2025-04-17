@@ -17,12 +17,10 @@ in
     main-user = {
       userName = lib.mkOption {
         type = lib.types.str;
-        default = "chabam";
         description = "The user's name";
       };
       fullName = lib.mkOption {
         type = lib.types.str;
-        default = "Chabam";
         description = "The user's full name";
       };
       initialPassword = "12345";

@@ -1,29 +1,13 @@
 {
   pkgs,
-  inputs,
   ...
 }:
 
-let
-  root = ../..;
-  modules = "${root}/modules/system";
-in
 {
   imports = [
-    # Include the results of the hardware scan.
     ./hardware-configuration.nix
-    "${modules}/auto-upgrade.nix"
-    "${modules}/flatpak.nix"
-    "${modules}/gc.nix"
-    "${modules}/gnome.nix"
-    "${modules}/grub.nix"
-    "${modules}/nvidia.nix"
-    "${modules}/plymouth.nix"
-    "${modules}/syncthing.nix"
-    "${modules}/uni-remote.nix"
+    ../../modules/system
   ];
-
-  # Bootloader.
 
   nix.settings.experimental-features = [
     "nix-command"
@@ -82,19 +66,14 @@ in
   # services.xserver.libinput.enable = true;
 
   # Define a user account. Don't forget to set a password with ‘passwd’.
-  users.users.chabam = {
-    isNormalUser = true;
-    description = "Chabam";
-    extraGroups = [
-      "networkmanager"
-      "wheel"
-      "docker"
-    ];
-    packages = [
-      inputs.home-manager.packages.${pkgs.system}.default
-      pkgs.flatpak
-    ];
+  main-user = {
+    userName = "chabam";
+    fullName = "Chabam";
   };
+
+  nvidia.enable = true;
+  syncthing.openSystemPorts = true;
+  uni-remote.enable = true;
 
   # Allow unfree packages
   nixpkgs.config.allowUnfree = true;
@@ -105,38 +84,32 @@ in
     ];
   };
 
-  qt = {
-    enable = true;
-    platformTheme = "adwaita";
-    style = "adwaita";
-  };
-
   systemd.tmpfiles.rules = [
     "L+ /run/gdm/.config/monitors.xml - - - - ${pkgs.writeText "gdm-monitors.xml" ''
-<monitors version="2">
-  <configuration>
-    <layoutmode>physical</layoutmode>
-    <logicalmonitor>
-      <x>0</x>
-      <y>0</y>
-      <scale>1</scale>
-      <primary>yes</primary>
-      <monitor>
-        <monitorspec>
-          <connector>DP-1</connector>
-          <vendor>AUS</vendor>
-          <product>ROG XG279Q</product>
-          <serial>LALMQS128555</serial>
-        </monitorspec>
-        <mode>
-          <width>2560</width>
-          <height>1440</height>
-          <rate>143.972</rate>
-        </mode>
-      </monitor>
-    </logicalmonitor>
-  </configuration>
-</monitors>
+      <monitors version="2">
+        <configuration>
+          <layoutmode>physical</layoutmode>
+          <logicalmonitor>
+            <x>0</x>
+            <y>0</y>
+            <scale>1</scale>
+            <primary>yes</primary>
+            <monitor>
+              <monitorspec>
+                <connector>DP-1</connector>
+                <vendor>AUS</vendor>
+                <product>ROG XG279Q</product>
+                <serial>LALMQS128555</serial>
+              </monitorspec>
+              <mode>
+                <width>2560</width>
+                <height>1440</height>
+                <rate>143.972</rate>
+              </mode>
+            </monitor>
+          </logicalmonitor>
+        </configuration>
+      </monitors>
     ''}"
   ];
   # Some programs need SUID wrappers, can be configured further or are
