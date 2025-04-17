@@ -142,6 +142,8 @@
 
       # Disable Ctrl+S behavior
       stty -ixon
+
+      source ${pkgs.nnn}/share/quitcd/quitcd.bash_sh_zsh
     '';
   };
 
