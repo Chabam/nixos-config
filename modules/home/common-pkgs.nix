@@ -6,7 +6,6 @@ let
     teams-for-linux
   ];
   cliApps = with pkgs; [
-    fd
     git
     lazygit
     nnn
