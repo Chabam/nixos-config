@@ -107,7 +107,7 @@ in
 
   qt = {
     enable = true;
-    platformTheme = "gnome";
+    platformTheme = "adwaita";
     style = "adwaita";
   };
 

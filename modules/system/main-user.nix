@@ -1,4 +1,5 @@
 {
+  inputs,
   config,
   lib,
   pkgs,
@@ -8,9 +9,12 @@ let
   cfg = config.main-user;
 in
 {
+  imports = [
+    inputs.home-manager.nixosModules.home-manager
+  ];
+
   options = {
     main-user = {
-      enable = lib.mkEnableOption "Enable main user module";
       userName = lib.mkOption {
         type = lib.types.str;
         default = "chabam";
@@ -22,25 +26,32 @@ in
         description = "The user's full name";
       };
       initialPassword = "12345";
-      enableDocker = lib.mkEnableOption "Enable docker";
-      enableVirtManager = lib.mkEnableOption "Enable Virt-Manager";
     };
   };
 
-  config = lib.mkIf cfg.enable {
+  config = {
     users.users.${cfg.userName} = {
       isNormalUser = true;
       description = "${cfg.fullName}";
-      extraGroups =
-        [
-          "networkmanager"
-          "wheel"
-        ]
-        ++ lib.optional cfg.enableDocker "docker"
-        ++ lib.optional cfg.enableDocker "libvirtd";
+      extraGroups = [
+        "networkmanager"
+        "wheel"
+        "libvirtd"
+        "docker"
+      ];
       packages = [
+        inputs.home-manager.packages.${pkgs.system}.default
         pkgs.flatpak
       ];
+    };
+
+    home-manager = {
+      extraSpecialArgs = { inherit inputs; };
+      useGlobalPkgs = true;
+      useUserPackages = true;
+      users = {
+        "${cfg.userName}" = ../home;
+      };
     };
   };
 }

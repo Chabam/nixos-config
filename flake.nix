@@ -62,7 +62,6 @@
           };
           modules = [
             ./hosts/uni/configuration.nix
-            inputs.home-manager.nixosModules.default
           ];
         };
       };

@@ -1,17 +1,22 @@
-{ pkgs, config, lib, ... }:
+{
+  pkgs,
+  osConfig,
+  ...
+}:
 {
   imports = [
-    ./common-pkgs.nix
     ./bash.nix
+    ./common-pkgs.nix
     ./ghostty.nix
     ./gnome.nix
     ./neovim
+    ./ptyxis
     ./syncthing.nix
     ./tmux.nix
   ];
 
-  home.username = "${config.main-user.userName}";
-  home.homeDirectory = "/home/${config.main-user.userName}";
+  home.username = "${osConfig.main-user.userName}";
+  home.homeDirectory = "/home/${osConfig.main-user.userName}";
   home.stateVersion = "24.05";
 
   programs.git = {
@@ -20,8 +25,7 @@
     userEmail = "fchabot1337@gmail.com";
   };
 
-
-  dconf.settings = lib.mkIf config.main-user.enableVirtManager {
+  dconf.settings = {
     "org/virt-manager/virt-manager/connections" = {
       autoconnect = [ "qemu:///system" ];
       uris = [ "qemu:///system" ];

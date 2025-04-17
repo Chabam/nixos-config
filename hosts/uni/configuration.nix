@@ -1,28 +1,13 @@
 {
-  config,
   pkgs,
-  inputs,
-  lib,
   ...
 }:
 
-let
-  root = ../..;
-  modules = "${root}/modules/system";
-in
 {
   imports = [
     # Include the results of the hardware scan.
     ./hardware-configuration.nix
-    "${modules}/auto-upgrade.nix"
-    "${modules}/flatpak.nix"
-    "${modules}/gc.nix"
-    "${modules}/gnome.nix"
-    "${modules}/grub.nix"
-    "${modules}/main-user.nix"
-    "${modules}/nvidia.nix"
-    "${modules}/plymouth.nix"
-    "${modules}/virt-manager.nix"
+    ../../modules/system
   ];
 
   # Bootloader.
@@ -59,8 +44,6 @@ in
 
   services.xserver.excludePackages = [ pkgs.xterm ];
 
-  virtualisation.docker.enable = true;
-
   # Enable CUPS to print documents.
   services.printing.enable = true;
 
@@ -85,19 +68,13 @@ in
 
   # Define a user account. Don't forget to set a password with ‘passwd’.
   main-user = {
-    enable = true;
     userName = "chaf2717";
     fullName = "Félix Chabot";
-    enableDocker = true;
-    enableVirtManager = true;
   };
 
-  home-manager = {
-    extraSpecialArgs = { inherit inputs; };
-    users = {
-      "${config.main-user.userName}" = import "${root}/modules/home" { inherit config lib pkgs; };
-    };
-  };
+  nvidia.enable = true;
+  syncthing.openSystemPorts = true;
+  uni-remote.enable = false;
 
   # Allow unfree packages
   nixpkgs.config.allowUnfree = true;
@@ -108,11 +85,6 @@ in
     ];
   };
 
-  qt = {
-    enable = true;
-    platformTheme = "gnome";
-    style = "adwaita";
-  };
 
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.

@@ -1,7 +1,7 @@
-{ ... }:
+{ osConfig, ... }:
 
 {
   services.syncthing = {
-    enable = true;
+    enable = osConfig.syncthing.openSystemPorts;
   };
 }
