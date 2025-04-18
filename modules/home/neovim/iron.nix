@@ -28,6 +28,22 @@ with pkgs.vimPlugins;
           repl_filetype = function(bufnr, ft)
             return "iron"..ft
           end,
+          repl_definition = {
+            racket = {
+              command = { "racket", "-i" },
+              format = function(lines, extra)
+                local result = {}
+                for _, line in ipairs(lines) do
+                  if string.sub(line, 1, 1) ~= "#" then
+                    table.insert(result, line)
+                  end
+                end
+
+                table.insert(result, "\n")
+                return result
+              end
+            }
+          },
           repl_open_cmd = view.split("50%", {
             winfixwidth = false,
             winfixheight = false
