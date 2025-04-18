@@ -7,7 +7,6 @@
     gnome-themes-extra
 
     gnomeExtensions.appindicator
-    gnomeExtensions.blur-my-shell
     gnomeExtensions.caffeine
     gnomeExtensions.clipboard-indicator
     gnomeExtensions.fullscreen-avoider
@@ -22,7 +21,6 @@
         disable-user-extensions = false;
         enabled-extensions = with pkgs.gnomeExtensions; [
           appindicator.extensionUuid
-          blur-my-shell.extensionUuid
           caffeine.extensionUuid
           clipboard-indicator.extensionUuid
           fullscreen-avoider.extensionUuid
