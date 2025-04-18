@@ -59,8 +59,6 @@ in
     ];
   };
 
-  nixpkgs.config.allowUnfree = true;
-
   programs = {
     direnv = {
       enable = true;
