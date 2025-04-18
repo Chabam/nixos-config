@@ -1,18 +1,38 @@
 {
-  pkgs,
+  inputs,
   osConfig,
+  pkgs,
   ...
 }:
+
+let
+  guiApps = with pkgs; [
+    discord
+    firefox
+    teams-for-linux
+    libreoffice
+  ];
+  cliApps = with pkgs; [
+    git
+    lazygit
+    nnn
+    ripgrep
+    tree
+    wget
+    wl-clipboard
+    direnv
+  ];
+in
 {
   imports = [
     ./bash.nix
-    ./common-pkgs.nix
     ./ghostty.nix
     ./gnome.nix
     ./neovim
     ./ptyxis
     ./syncthing.nix
     ./tmux.nix
+    inputs.nix-flatpak.homeManagerModules.nix-flatpak
   ];
 
   home.username = "${osConfig.main-user.userName}";
@@ -39,8 +59,22 @@
     ];
   };
 
+  nixpkgs.config.allowUnfree = true;
+
+  programs = {
+    direnv = {
+      enable = true;
+      enableBashIntegration = true; # see note on other shells below
+      nix-direnv.enable = true;
+    };
+
+    bash.enable = true; # see note on other shells below
+  };
+
   home = {
     shell.enableShellIntegration = true;
+
+    packages = guiApps ++ cliApps;
 
     sessionVariables = {
       NIX_SHELL_PRESERVE_PROMPT = 1;
@@ -55,5 +89,16 @@
       PATH = "$PATH:$SCRIPTS:$SCRIPTS_PRIVATE:$RUST_BIN:$LOCAL_BIN";
     };
   };
-  programs.home-manager.enable = true;
+
+  services.flatpak = {
+    enable = true;
+    update.auto = {
+      enable = true;
+      onCalendar = "daily";
+    };
+    packages = [
+      "org.blender.Blender"
+      "org.gimp.GIMP"
+    ];
+  };
 }
