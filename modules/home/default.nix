@@ -8,7 +8,6 @@
 let
   guiApps = with pkgs; [
     discord
-    firefox
     teams-for-linux
     libreoffice
   ];
