@@ -25,6 +25,10 @@
     ];
   };
 
+  environment.variables = {
+    MOZ_DISABLE_RDD_SANDBOX = "1";
+  };
+
   programs.firefox = {
     enable = true;
     preferences = {
