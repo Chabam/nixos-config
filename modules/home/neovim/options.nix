@@ -43,6 +43,10 @@ vim.diagnostic.config({
   signs = true,
 })
 
+vim.schedule(function()
+  vim.opt.clipboard = "unnamedplus"
+end)
+
 vim.api.nvim_set_hl(0, "Error", { cterm=undercurl })
 vim.api.nvim_set_hl(0, "DiagnosticUnderlineError", { link="Error" })
 ''
