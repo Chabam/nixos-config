@@ -19,7 +19,9 @@
     {
       pattern = "term://*",
       callback = function(opts)
-        vim.cmd("startinsert")
+        if vim.bo.filetype == "" then
+          vim.cmd("startinsert")
+        end
         vim.cmd("setlocal nonumber")
         vim.cmd("setlocal norelativenumber")
         vim.cmd("setlocal signcolumn=no")

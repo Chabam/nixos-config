@@ -7,13 +7,18 @@ with pkgs.vimPlugins;
     keys = {
       {
         "<space>ti",
-        "<cmd>IronRepl<cr><Esc>",
+        "<cmd>IronRepl<cr>",
         desc = "[T]oggle [I]ron"
       },
       {
         "<space>ih",
         "<cmd>IronHide<cr>",
         desc = "[I]ron [h]ide"
+      },
+      {
+        "<space>iw",
+        "<cmd>IronWatch file<cr>",
+        desc = "[I]ron [w]atch"
       }
     },
     init = function()
