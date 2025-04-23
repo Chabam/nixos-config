@@ -42,6 +42,16 @@ in
     enable = true;
     userName = "Chabam";
     userEmail = "fchabot1337@gmail.com";
+    extraConfig = {
+      merge = {
+        tool = "nvim";
+      };
+      merge."nvim" = {
+        cmd = "nvim -c 'DiffviewOpen'";
+      };
+      mergetool.prompt = false;
+      push.autoSetupRemote = true;
+    };
   };
 
   dconf.settings = {
