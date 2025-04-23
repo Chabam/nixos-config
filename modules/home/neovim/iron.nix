@@ -39,7 +39,7 @@ with pkgs.vimPlugins;
               format = function(lines, extra)
                 local result = {}
                 local starts_with = function(line, val)
-                  return line:gsub("%s+", ""):sub(1, #val) == val
+                  return line:sub(1, #val) == val
                 end
                 for _, line in ipairs(lines) do
                   if not (starts_with(line, "#") or starts_with(line, ";")) then
