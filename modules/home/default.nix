@@ -10,6 +10,12 @@ let
     discord
     teams-for-linux
     libreoffice
+    (blender.override {
+      cudaSupport = osConfig.nvidia.enable;
+    })
+    (obs-studio.override {
+      cudaSupport = osConfig.nvidia.enable;
+    })
   ];
   cliApps = with pkgs; [
     git
@@ -104,7 +110,6 @@ in
       onCalendar = "daily";
     };
     packages = [
-      "org.blender.Blender"
       "org.gimp.GIMP"
     ];
   };
