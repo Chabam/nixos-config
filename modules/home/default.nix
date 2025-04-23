@@ -16,6 +16,7 @@ let
     (obs-studio.override {
       cudaSupport = osConfig.nvidia.enable;
     })
+    gimp3
   ];
   cliApps = with pkgs; [
     git
@@ -37,7 +38,6 @@ in
     ./ptyxis
     ./syncthing.nix
     ./tmux.nix
-    inputs.nix-flatpak.homeManagerModules.nix-flatpak
   ];
 
   home.username = "${osConfig.main-user.userName}";
@@ -101,16 +101,5 @@ in
       LOCAL_BIN = "$HOME/.local/bin/";
       PATH = "$PATH:$SCRIPTS:$SCRIPTS_PRIVATE:$RUST_BIN:$LOCAL_BIN";
     };
-  };
-
-  services.flatpak = {
-    enable = true;
-    update.auto = {
-      enable = true;
-      onCalendar = "daily";
-    };
-    packages = [
-      "org.gimp.GIMP"
-    ];
   };
 }
