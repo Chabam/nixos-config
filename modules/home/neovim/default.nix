@@ -26,7 +26,6 @@ let
     friendly-snippets
     fzf-lua
     gitsigns-nvim
-    indent-blankline-nvim
     iron-nvim
     lazy-nvim
     luasnip
@@ -37,8 +36,6 @@ let
     nvim-treesitter-context
     nvim-web-devicons
     oil-nvim
-    plenary-nvim
-    todo-comments-nvim
     vim-dispatch
     vim-sleuth
     vimtex
@@ -85,23 +82,6 @@ in
             dir = "${nvim-surround}",
             event = {"BufRead", "BufNewFile"},
             opts = {}
-          },
-          {
-            dir = "${indent-blankline-nvim}",
-            event = {"BufReadPre", "BufNewFile"},
-            config = function()
-              require("ibl").setup()
-            end
-          },
-          {
-            dir = "${todo-comments-nvim}",
-            event = {"BufRead", "BufNewFile"},
-            dependencies = { dir = "${plenary-nvim}" },
-            config = function()
-              require("todo-comments").setup({
-                signs = false
-              })
-            end
           },
           ${pkgs.callPackage ./autoformat.nix { }},
           ${pkgs.callPackage ./blink.nix { }},

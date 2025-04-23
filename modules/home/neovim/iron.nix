@@ -33,8 +33,11 @@ with pkgs.vimPlugins;
               command = { "racket", "-i" },
               format = function(lines, extra)
                 local result = {}
+                local starts_with = function(line, val)
+                  return line:gsub("%s+", ""):sub(1, #val) == val
+                end
                 for _, line in ipairs(lines) do
-                  if string.sub(line, 1, 1) ~= "#" then
+                  if not (starts_with(line, "#") or starts_with(line, ";")) then
                     table.insert(result, line)
                   end
                 end
@@ -50,15 +53,15 @@ with pkgs.vimPlugins;
           }),
         },
         keymaps = {
-          restart_repl = "<space>iR",
-          send_motion = "<space>is",
-          visual_send = "<space>is",
-          send_file = "<space>if",
-          send_line = "<space>il",
-          cr = "<space>i<cr>",
-          interrupt = "<space>i<space>",
-          exit = "<space>iq",
-          clear = "<space>ic",
+          restart_repl = "<leader>ir",
+          send_motion = "<leader>is",
+          visual_send = "<leader>is",
+          send_file = "<leader>if",
+          send_line = "<leader>il",
+          cr = "<leader>i<cr>",
+          interrupt = "<leader>i<leader>",
+          exit = "<leader>iq",
+          clear = "<leader>ic",
         },
         highlight = {
           bold = true
