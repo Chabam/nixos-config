@@ -18,7 +18,7 @@
   };
 
   nvidia.enable = true;
-  syncthing.openSystemPorts = true;
+  syncthing.openSystemPorts = false;
   uni-remote.enable = false;
 
   systemd.targets.sleep.enable = false;
