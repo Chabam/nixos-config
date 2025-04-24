@@ -14,6 +14,7 @@ in
   };
 
   config = lib.mkIf cfg.enable {
+    nixpkgs.config.cudaSupport = true;
     services.xserver.videoDrivers = [ "nvidia" ];
 
     hardware.graphics = {

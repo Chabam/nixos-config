@@ -10,12 +10,8 @@ let
     discord
     teams-for-linux
     libreoffice
-    (blender.override {
-      cudaSupport = osConfig.nvidia.enable;
-    })
-    (obs-studio.override {
-      cudaSupport = osConfig.nvidia.enable;
-    })
+    blender
+    obs-studio
     gimp3
   ];
   cliApps = with pkgs; [
