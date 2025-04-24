@@ -45,6 +45,7 @@ let
     ltex-ls-plus
     nil # Nix
     pyright
+    rPackages.languageserver
   ];
   miscPkgs = with pkgs; [
     luajitPackages.jsregexp

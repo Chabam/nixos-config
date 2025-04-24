@@ -32,6 +32,7 @@ with pkgs.vimPlugins;
         cmake = {},
         nil_ls = {},
         racket_langserver = {},
+        r_language_server = {},
       }
       local blink_cmp = require("blink-cmp")
       for server_name, server_config in pairs(servers) do
