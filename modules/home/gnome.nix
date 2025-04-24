@@ -102,7 +102,7 @@
   xdg.mimeApps = {
     enable = true;
     defaultApplications = {
-      "text/plain" = [ "org.gnome.texteditor.desktop" ];
+      "text/plain" = [ "org.gnome.TextEditor.desktop" ];
 
       "application/pdf" = [ "org.gnome.Evince.desktop" ];
     };
