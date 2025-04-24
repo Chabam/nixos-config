@@ -19,6 +19,7 @@
   nvidia.enable = true;
   syncthing.openSystemPorts = true;
   uni-remote.enable = true;
+  gaming.enable = true;
 
   systemd.tmpfiles.rules = [
     "L+ /run/gdm/.config/monitors.xml - - - - ${pkgs.writeText "gdm-monitors.xml" ''

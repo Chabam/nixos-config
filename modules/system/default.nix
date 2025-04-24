@@ -3,6 +3,7 @@
   imports = [
     ./auto-upgrade.nix
     ./flatpak.nix
+    ./gaming.nix
     ./gc.nix
     ./gnome.nix
     ./grub.nix

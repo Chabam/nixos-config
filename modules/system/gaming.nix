@@ -1,0 +1,23 @@
+{
+  lib,
+  config,
+  ...
+}:
+let
+  cfg = config.gaming;
+in
+{
+  options = {
+    gaming.enable = lib.mkEnableOption "Enable GAMING";
+  };
+
+  config = lib.mkIf cfg.enable {
+
+    programs.steam = {
+      enable = true;
+      remotePlay.openFirewall = true;
+      dedicatedServer.openFirewall = true;
+      localNetworkGameTransfers.openFirewall = true;
+    };
+  };
+}
