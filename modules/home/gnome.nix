@@ -108,6 +108,13 @@
     };
   };
 
+  home.pointerCursor = {
+    package = pkgs.adwaita-icon-theme;
+    name = "Adwaita";
+    size = 24;
+    x11.enable = true;
+  };
+
   qt = {
     enable = true;
     platformTheme.name = "adwaita";
