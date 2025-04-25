@@ -10,7 +10,10 @@ in
 {
 
   options = {
-    nvidia.enable = lib.mkEnableOption "Enable Nvidia GPU";
+    nvidia.enable = lib.mkEnableOption {
+      description = "Enable Nvidia GPU";
+      default = false;
+    };
   };
 
   config = lib.mkIf cfg.enable {
