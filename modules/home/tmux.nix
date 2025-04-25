@@ -13,6 +13,7 @@
     shortcut = "q";
     terminal = "xterm-ghostty";
     escapeTime = 0;
+    shell = "${pkgs.bash}/bin/bash";
     plugins = with pkgs; [
       tmuxPlugins.yank
       {
@@ -25,8 +26,6 @@
     ];
 
     extraConfig = ''
-      set-option -g default-command ${pkgs.bash}/bin/bash
-
       # Vim style bindings
       bind-key v split-window -h
       bind-key s split-window -v
