@@ -14,6 +14,10 @@ in
 
   config = lib.mkIf cfg.enable {
     programs = {
+      gamemode = {
+        enable = true;
+        enableRenice = true;
+      };
       steam = {
         enable = true;
         remotePlay.openFirewall = true;

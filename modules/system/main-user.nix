@@ -36,7 +36,7 @@ in
         "wheel"
         "libvirtd"
         "docker"
-      ];
+      ] ++ lib.optionals config.gaming.enable [ "gamemode" ];
       packages = [
         inputs.home-manager.packages.${pkgs.system}.default
         pkgs.flatpak

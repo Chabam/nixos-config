@@ -31,6 +31,7 @@ in
         enable = true;
       };
       open = true;
+      package = config.boot.kernelPackages.nvidiaPackages.latest;
     };
 
     environment = {
@@ -38,6 +39,8 @@ in
       variables = {
         NVD_BACKEND = "direct";
         LIBVA_DRIVER_NAME = "nvidia";
+        __GLX_VENDOR_LIBRARY_NAME = "nvidia";
+        GBM_BACKEND = "nvidia-drm";
       };
     };
 
