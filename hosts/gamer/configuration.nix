@@ -13,7 +13,7 @@
     fullName = "Chabam";
   };
 
-  nvidia.enable = true;
+  nvidia.enable = false;
   syncthing.openSystemPorts = true;
   uni-remote.enable = true;
   gaming.enable = true;
