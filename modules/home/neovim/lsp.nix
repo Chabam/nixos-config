@@ -30,7 +30,7 @@ with pkgs.vimPlugins;
         },
         pyright = {},
         cmake = {},
-        nil_ls = {},
+        nixd = {},
         racket_langserver = {},
         r_language_server = {},
       }

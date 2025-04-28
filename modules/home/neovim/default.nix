@@ -18,6 +18,7 @@ let
     p.nix
     p.python
     p.racket
+    p.r
   ]);
   pluginsPkgs = with pkgs.vimPlugins; [
     blink-cmp
@@ -43,9 +44,12 @@ let
   lspPkgs = with pkgs; [
     cmake-language-server
     ltex-ls-plus
-    nil # Nix
+    nixd
     pyright
-    rPackages.languageserver
+    # For some reason the R lsp doesn't work without R
+    (rWrapper.override {
+      packages = with rPackages; [ languageserver ];
+    })
   ];
   miscPkgs = with pkgs; [
     luajitPackages.jsregexp
