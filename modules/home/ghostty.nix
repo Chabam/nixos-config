@@ -1,42 +1,54 @@
-{ pkgs, ... }:
-
 {
-  home.packages = with pkgs; [
-    ghostty
-  ];
+  lib,
+  config,
+  pkgs,
+  ...
+}:
+let
+  cfg = config.ghostty;
+in
+{
+  options = {
+    ghostty.enable = lib.mkEnableOption "Enable Ghostty";
+  };
 
-  home.file = {
-    ".config/ghostty/config".text = ''
-      font-family = "IosevkaTerm Nerd Font"
-      font-size = 12
-      font-feature = -calt, -liga, -dlig
+  config = lib.mkIf cfg.enable {
+    home.packages = with pkgs; [
+      ghostty
+    ];
 
-      theme = light:chabam-light,dark:chabam-dark
-      selection-invert-fg-bg = true
+    home.file = {
+      ".config/ghostty/config".text = ''
+        font-family = "IosevkaTerm Nerd Font"
+        font-size = 12
+        font-feature = -calt, -liga, -dlig
 
-      mouse-hide-while-typing = true
-      command = bash
-      shell-integration = bash
+        theme = light:chabam-light,dark:chabam-dark
+        selection-invert-fg-bg = true
 
-      shell-integration-features = no-cursor
+        mouse-hide-while-typing = true
+        command = bash
+        shell-integration = bash
 
-      window-padding-x = 10
-      window-padding-y = 10
-      keybind = alt+1=unbind
-      keybind = alt+2=unbind
-      keybind = alt+3=unbind
-      keybind = alt+4=unbind
-      keybind = alt+5=unbind
-      keybind = alt+6=unbind
-      keybind = alt+7=unbind
-      keybind = alt+8=unbind
-      keybind = alt+9=unbind
-      keybind = alt+0=unbind
+        shell-integration-features = no-cursor
 
-      keybind = ctrl+equal=reset_font_size
-      keybind = ctrl+shift+physical:equal=increase_font_size:1
-    '';
-    ".config/ghostty/themes/chabam-light".text = ''
+        window-padding-x = 10
+        window-padding-y = 10
+        keybind = alt+1=unbind
+        keybind = alt+2=unbind
+        keybind = alt+3=unbind
+        keybind = alt+4=unbind
+        keybind = alt+5=unbind
+        keybind = alt+6=unbind
+        keybind = alt+7=unbind
+        keybind = alt+8=unbind
+        keybind = alt+9=unbind
+        keybind = alt+0=unbind
+
+        keybind = ctrl+equal=reset_font_size
+        keybind = ctrl+shift+physical:equal=increase_font_size:1
+      '';
+      ".config/ghostty/themes/chabam-light".text = ''
         # So far it's just Adwaita
         palette = 0=#241f31
         palette = 1=#c01c28
@@ -59,8 +71,8 @@
         cursor-color = #000000
         selection-background = #c0bfbc
         selection-foreground = #000000
-    '';
-    ".config/ghostty/themes/chabam-dark".text = ''
+      '';
+      ".config/ghostty/themes/chabam-dark".text = ''
         palette = 0=#241f31
         palette = 1=#c01c28
         palette = 2=#2ec27e
@@ -82,6 +94,7 @@
         cursor-color = #ffffff
         selection-background = #ffffff
         selection-foreground = #5e5c64
-    '';
+      '';
+    };
   };
 }

@@ -4,11 +4,11 @@ Primary=true
 UseSystemAccent=true
 
 [Light]
-Foreground=#1e1e1e
+Foreground=#161616
 Background=#ffffff
 TitlebarBackground=#ffffff
 TitlebarForeground=#333333
-Cursor=#1e1e1e
+Cursor=#161616
 Color0=#241f31
 Color1=#c01c28
 Color2=#2ec27e
@@ -28,7 +28,7 @@ Color15=#f6f5f4
 
 [Dark]
 Foreground=#ffffff
-Background=#1e1e1e
+Background=#161616
 TitlebarBackground=#303030
 TitlebarForeground=#f2f2f2
 Cursor=#ffffff

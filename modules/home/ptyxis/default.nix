@@ -34,7 +34,6 @@ in
           bold-is-bright = true;
           label = "Chabam";
           limit-scrollback = false;
-          use-custom-command = true;
           palette = "chabam";
         };
 

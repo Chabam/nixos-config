@@ -40,6 +40,7 @@ in
   home.homeDirectory = "/home/${osConfig.main-user.userName}";
   home.stateVersion = "24.05";
 
+  ptyxis.enable = true;
   programs.git = {
     enable = true;
     userName = "Chabam";
@@ -77,7 +78,10 @@ in
       nix-direnv.enable = true;
     };
 
-    bash.enable = true; # see note on other shells below
+    bash = {
+      enable = true; # see note on other shells below
+      enableVteIntegration = true;
+    };
   };
 
   home = {

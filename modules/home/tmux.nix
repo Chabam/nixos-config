@@ -11,7 +11,7 @@
     keyMode = "vi";
     mouse = true;
     shortcut = "q";
-    terminal = "xterm-ghostty";
+    terminal = "xterm-256colors";
     escapeTime = 0;
     shell = "${pkgs.bash}/bin/bash";
     plugins = with pkgs; [
