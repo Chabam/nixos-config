@@ -1,4 +1,4 @@
-{ ... }:
+{ pkgs, ... }:
 
 {
   imports = [
@@ -12,6 +12,12 @@
     userName = "chabam";
     fullName = "Chabam";
   };
+
+  services.printing.drivers = with pkgs; [
+    brlaser
+    brgenml1lpr
+    brgenml1cupswrapper
+  ];
 
   nvidia.enable = false;
   syncthing.openSystemPorts = true;
