@@ -47,9 +47,9 @@ let
     nixd
     pyright
     # For some reason the R lsp doesn't work without R
-    (rWrapper.override {
-      packages = with rPackages; [ languageserver ];
-    })
+    # (rWrapper.override {
+    #   packages = with rPackages; [ languageserver ];
+    # })
   ];
   miscPkgs = with pkgs; [
     luajitPackages.jsregexp
