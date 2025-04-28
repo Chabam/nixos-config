@@ -11,7 +11,7 @@
     keyMode = "vi";
     mouse = true;
     shortcut = "q";
-    terminal = "xterm-256colors";
+    terminal = "xterm-256color";
     escapeTime = 0;
     shell = "${pkgs.bash}/bin/bash";
     plugins = with pkgs; [
@@ -46,6 +46,7 @@
       bind-key -T copy-mode-vi v send -X begin-selection
 
       # Undercurl support
+      set-option -ga terminal-overrides ",xterm-256color:Tc"
       set -as terminal-overrides ',*:Smulx=\E[4::%p1%dm'
       set -as terminal-overrides ',*:Setulc=\E[58::2::%p1%{65536}%/%d::%p1%{256}%/%{255}%&%d::%p1%{255}%&%d%;m'
 
