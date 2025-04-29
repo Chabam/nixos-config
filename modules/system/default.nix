@@ -1,4 +1,9 @@
-{ pkgs, ... }:
+{
+  pkgs,
+  lib,
+  config,
+  ...
+}:
 {
   imports = [
     ./auto-upgrade.nix
@@ -32,7 +37,7 @@
 
   programs.firefox = {
     enable = true;
-    preferences = {
+    preferences = lib.mkIf config.nvidia.enable {
       "media.ffmpeg.vaapi.enabled" = true;
       "media.hardware-video-decoding.force-enabled" = true;
       "media.rdd-ffmpeg.enabled" = true;
