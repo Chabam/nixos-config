@@ -7,12 +7,14 @@
 
 let
   guiApps = with pkgs; [
-    discord
-    teams-for-linux
-    libreoffice
+    blanket
     blender
-    obs-studio
+    discord
     gimp3
+    gnome-frog
+    libreoffice
+    obs-studio
+    teams-for-linux
   ];
   cliApps = with pkgs; [
     git
