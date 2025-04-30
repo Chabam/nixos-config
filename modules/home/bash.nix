@@ -39,47 +39,24 @@
         PS1=""
         NNN_INFO=""
         if [[ $NNNLVL -ge 1 ]]; then
-          NNN_INFO="$PURPLE(NNN"
+          NNN_INFO="$PURPLE#N³"
           if [[ $NNNLVL -ge 2 ]]; then
             NNN_INFO+=" +$(( $NNNLVL - 1))"
           fi
-          NNN_INFO+=") $CLEAR"
+          NNN_INFO+=" $CLEAR"
         fi
         PS1+=$NNN_INFO
 
-        NIX_SHELL_INFO=""
-        if [[ -n "$IN_NIX_SHELL" ]]; then
-          NIX_SHELL_INFO="$CYAN<nix-shell"
-          ACTUAL_SHELL_LVL=$(($SHLVL - $ORIG_SHLVL))
-
-          if [[ -n "$NVIM" ]]; then
-            ACTUAL_SHELL_LVL=$(( ACTUAL_SHELL_LVL - 1 ))
-          fi
-
-          if [[ -n "$TMUX" ]]; then
-            ACTUAL_SHELL_LVL=$(( ACTUAL_SHELL_LVL - 1 ))
-          fi
-
-          if [[ $ACTUAL_SHELL_LVL -ge 1 ]]; then
-            NIX_SHELL_INFO+=" +$ACTUAL_SHELL_LVL"
-          fi
-          NIX_SHELL_INFO+="> $CLEAR"
-        fi
-
-        PS1+="$NIX_SHELL_INFO$GREEN\u$CLEAR@"
-
-        HOST_COLOR=""
+        HOST_INFO=""
         if [[ $SSH_TTY ]]; then
-          HOST_COLOR=$YELLOW
-        else
-          HOST_COLOR=$CLEAR
+          HOST_INFO="$CLEAR at $YELLOW\h$CLEAR"
         fi
 
-        PS1+="$HOST_COLOR\h $BLUE\w"
+        PS1+="$BLUE\w$CLEAR$HOST_INFO"
 
         GIT_INFO=""
         if gitstatus_query && [[ "$VCS_STATUS_RESULT" == ok-sync ]]; then
-          GIT_INFO+=" $CLEAR("
+          GIT_INFO+=" on $CLEAR"
           if [[ -n "$VCS_STATUS_LOCAL_BRANCH" ]]; then
             GIT_INFO+="$GREEN$VCS_STATUS_LOCAL_BRANCH"
             if [[ $VCS_STATUS_COMMITS_AHEAD -ge 1 ]]; then
@@ -94,7 +71,7 @@
             GIT_INFO+="$GREEN$VCS_STATUS_COMMIT"
           fi
 
-          GIT_INFO+="$CLEAR|"
+          GIT_INFO+="$CLEAR"
 
           if [[ $VCS_STATUS_HAS_STAGED -eq 1 ]] ||
              [[ $VCS_STATUS_HAS_UNSTAGED -eq 1 ]] ||
@@ -102,28 +79,26 @@
              [[ $VCS_STATUS_HAS_UNTRACKED -eq 1 ]]; then
 
             if [[ $VCS_STATUS_NUM_CONFLICTED -ge 1 ]]; then
-              GIT_INFO+="$PURPLE$VCS_STATUS_ACTION~$VCS_STATUS_NUM_STAGED_NEW$CLEAR"
+              GIT_INFO+=" $PURPLE$VCS_STATUS_ACTION~$VCS_STATUS_NUM_STAGED_NEW$CLEAR"
             fi
 
             if [[ $VCS_STATUS_NUM_STAGED_NEW -ge 1 ]]; then
-              GIT_INFO+="$GREEN+$VCS_STATUS_NUM_STAGED_NEW$CLEAR"
+              GIT_INFO+=" $GREEN+$VCS_STATUS_NUM_STAGED_NEW$CLEAR"
             fi
 
             if [[ $VCS_STATUS_NUM_STAGED_DELETED -ge 1 ]]; then
-              GIT_INFO+="$RED-$VCS_STATUS_NUM_STAGED_DELETED$CLEAR"
+              GIT_INFO+=" $RED-$VCS_STATUS_NUM_STAGED_DELETED$CLEAR"
             fi
 
             if [[ $VCS_STATUS_NUM_STAGED -ge 1 ]]; then
               NUM_MODIFIED=$(($VCS_STATUS_NUM_STAGED - $VCS_STATUS_NUM_STAGED_NEW - $VCS_STATUS_NUM_STAGED_DELETED))
-              GIT_INFO+="$BLUE~$NUM_MODIFIED$CLEAR"
+              GIT_INFO+=" $BLUE~$NUM_MODIFIED$CLEAR"
             fi
 
-            (( $VCS_STATUS_HAS_UNSTAGED  )) && GIT_INFO+="$YELLOW!$VCS_STATUS_NUM_UNSTAGED$CLEAR"
-            (( $VCS_STATUS_HAS_UNTRACKED )) && GIT_INFO+="$CYAN?$VCS_STATUS_NUM_UNTRACKED$CLEAR"
-          else
-            GIT_INFO+="✔"
+            (( $VCS_STATUS_HAS_UNSTAGED  )) && GIT_INFO+=" $YELLOW!$VCS_STATUS_NUM_UNSTAGED$CLEAR"
+            (( $VCS_STATUS_HAS_UNTRACKED )) && GIT_INFO+=" $CYAN?$VCS_STATUS_NUM_UNTRACKED$CLEAR"
           fi
-          GIT_INFO+="$CLEAR)"
+          GIT_INFO+="$CLEAR"
         fi
 
         PS1+=$GIT_INFO
@@ -139,6 +114,7 @@
       }
 
       force_color_prompt=yes
+      PROMPT_DIRTRIM=3
 
       # Disable Ctrl+S behavior
       stty -ixon
