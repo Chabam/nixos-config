@@ -18,6 +18,13 @@ with pkgs.vimPlugins;
       fuzzy = { implementation = "prefer_rust_with_warning" },
       signature = { enabled = true },
       completion = {
+        accept = {
+          auto_brackets = {
+            enabled = false;
+          },
+        },
+      },
+      completion = {
         documentation = {
           auto_show = true
         },

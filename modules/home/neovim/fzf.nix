@@ -60,9 +60,19 @@ with pkgs.vimPlugins;
       desc = "[S]earch existing [B]uffers"
     },
   },
+  cmd = "FzfLua",
+  event = "VeryLazy",
+  init = function()
+    vim.ui.select = function(...)
+      require("lazy").load({ plugins = { "fzf-lua" } })
+      local opts = LazyVim.opts("fzf-lua") or {}
+      require("fzf-lua").register_ui_select(opts.ui_select or nil)
+      return vim.ui.select(...)
+    end
+  end,
   config = function()
     local fzf = require("fzf-lua")
-    fzf.setup({
+    require("fzf-lua").setup({
       fzf_opts = {
         ["--pointer"] = " ",
         ["--separator"] = " ",
@@ -104,7 +114,6 @@ with pkgs.vimPlugins;
         },
       },
     })
-    fzf.register_ui_select()
   end,
   }
 ''

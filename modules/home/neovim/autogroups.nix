@@ -41,30 +41,9 @@
         jump1 = true,
       }
 
-      map("gd", function()
-        fzf.lsp_definitions(lsp_fzf_opts)
-      end, "[G]oto [D]efinition")
-
-      map("gr", function()
-        fzf.lsp_references(lsp_fzf_opts)
-      end, "[G]oto [R]eferences")
-
-      map("gI", function()
-        fzf.lsp_implementations(lsp_fzf_opts)
-      end, "[G]oto [I]mplementation")
-
-      map("<leader>D", function()
-        fzf.lsp_typedefs(lsp_fzf_opts)
-      end, "Type [D]efinition")
-
       map("<leader>ds", fzf.lsp_document_symbols, "[D]ocument [S]ymbols")
       map("<leader>ws", fzf.lsp_workspace_symbols, "[W]orkspace [S]ymbols")
 
-      map("<leader>rn", vim.lsp.buf.rename, "[R]e[n]ame")
-
-      map("<leader>ca", require("fzf-lua").lsp_code_actions, "[C]ode [A]ction", { "n", "x" })
-
-      map("gD", vim.lsp.buf.declaration, "[G]oto [D]eclaration")
       map("gH", "<CMD>ClangdSwitchSourceHeader<CR>", "[G]oto [H]eader", { "n", "x" })
 
       local client = vim.lsp.get_client_by_id(event.data.client_id)
