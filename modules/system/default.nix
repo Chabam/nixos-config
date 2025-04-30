@@ -20,10 +20,13 @@
     ./virt-manager.nix
   ];
 
-  nix.settings.experimental-features = [
-    "nix-command"
-    "flakes"
-  ];
+  nix.settings = {
+    experimental-features = [
+      "nix-command"
+      "flakes"
+    ];
+  };
+  nix.channel.enable = false;
 
   fonts = {
     packages = with pkgs; [
@@ -31,8 +34,13 @@
     ];
   };
 
-  environment.variables = {
-    MOZ_DISABLE_RDD_SANDBOX = "1";
+  environment = {
+    systemPackages = with pkgs; [
+      git
+    ];
+    variables = lib.mkIf config.nvidia.enable {
+      MOZ_DISABLE_RDD_SANDBOX = "1";
+    };
   };
 
   programs.firefox = {

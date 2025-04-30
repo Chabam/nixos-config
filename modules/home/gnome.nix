@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{ pkgs, lib, osConfig, ... }:
 {
   home.packages = with pkgs; [
     # Emoji typing
@@ -125,7 +125,7 @@
   };
 
   # Fix for slow startup
-  home.sessionVariables = {
+  home.sessionVariables = lib.mkIf (!osConfig.nvidia.enable) {
     GSK_RENDERER = "gl";
     GDK_DEBUG = "gl-no-fractional";
   };

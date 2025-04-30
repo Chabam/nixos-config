@@ -17,7 +17,6 @@ let
     teams-for-linux
   ];
   cliApps = with pkgs; [
-    git
     lazygit
     nnn
     ripgrep
@@ -84,6 +83,10 @@ in
       enable = true; # see note on other shells below
       enableVteIntegration = true;
     };
+  };
+
+  nix.registry = {
+    self.flake = inputs.self;
   };
 
   home = {

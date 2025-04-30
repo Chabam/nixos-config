@@ -20,8 +20,16 @@
       self,
       nixpkgs,
       ...
-    }@inputs:
+    } @ inputs :
     {
+      templates = {
+        generic = {
+          path = ./templates/generic;
+          description = "Basic extensible flake config";
+        };
+        default = self.templates.generic;
+      };
+
       nixosConfigurations = {
         vm = nixpkgs.lib.nixosSystem {
           specialArgs = {
