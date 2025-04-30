@@ -85,10 +85,6 @@ in
     };
   };
 
-  nix.registry = {
-    self.flake = inputs.self;
-  };
-
   home = {
     shell.enableShellIntegration = true;
 
