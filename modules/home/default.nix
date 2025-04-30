@@ -65,13 +65,6 @@ in
     };
   };
 
-  home.file = import ./autostart.nix {
-    apps = with pkgs; [
-      teams-for-linux
-      discord
-    ];
-  };
-
   programs = {
     direnv = {
       enable = true;
@@ -86,21 +79,26 @@ in
   };
 
   home = {
-    shell.enableShellIntegration = true;
+    shell.enableBashIntegration = true;
+
+    file = import ./autostart.nix {
+      apps = with pkgs; [
+        teams-for-linux
+        discord
+      ];
+    };
 
     packages = guiApps ++ cliApps;
 
     sessionVariables = {
       NIX_SHELL_PRESERVE_PROMPT = 1;
       BROWSER = "firefox";
-      EDITOR = "nvim";
-      SHELL = "bash";
       PAGER = "less --use-color";
       SCRIPTS = "$HOME/.scripts";
       SCRIPTS_PRIVATE = "$HOME/.scripts/private";
-      RUST_BIN = "$HOME/.cargo/bin";
       LOCAL_BIN = "$HOME/.local/bin/";
-      PATH = "$PATH:$SCRIPTS:$SCRIPTS_PRIVATE:$RUST_BIN:$LOCAL_BIN";
+      PATH = "$PATH:$SCRIPTS:$SCRIPTS_PRIVATE";
+      NIXCONF = "${../../.}";
     };
   };
 }
