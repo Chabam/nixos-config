@@ -37,15 +37,6 @@
 
 
         PS1=""
-        NNN_INFO=""
-        if [[ $NNNLVL -ge 1 ]]; then
-          NNN_INFO="$PURPLE#N³"
-          if [[ $NNNLVL -ge 2 ]]; then
-            NNN_INFO+=" +$(( $NNNLVL - 1))"
-          fi
-          NNN_INFO+=" $CLEAR"
-        fi
-        PS1+=$NNN_INFO
 
         HOST_INFO=""
         if [[ $SSH_TTY ]]; then
