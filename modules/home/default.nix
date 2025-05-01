@@ -2,6 +2,8 @@
   inputs,
   osConfig,
   pkgs,
+  config,
+  lib,
   ...
 }:
 
@@ -75,6 +77,15 @@ in
     bash = {
       enable = true; # see note on other shells below
       enableVteIntegration = true;
+    };
+  };
+
+  nix = {
+    registry = {
+      templates.to = {
+        type = "path";
+        path = "${../../.}";
+      };
     };
   };
 
