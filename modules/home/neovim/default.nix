@@ -27,7 +27,6 @@ let
     friendly-snippets
     fzf-lua
     gitsigns-nvim
-    iron-nvim
     lazy-nvim
     luasnip
     nightfox-nvim
@@ -94,7 +93,6 @@ in
           ${pkgs.callPackage ./diffview.nix { }},
           ${pkgs.callPackage ./fzf.nix { }},
           ${pkgs.callPackage ./gitsigns.nix { }},
-          ${pkgs.callPackage ./iron.nix { }},
           ${pkgs.callPackage ./lsp.nix { }},
           ${pkgs.callPackage ./oil.nix { }},
           ${pkgs.callPackage ./snippets.nix { }},
