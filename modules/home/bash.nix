@@ -94,14 +94,12 @@
 
         PS1+=$GIT_INFO
 
-        EXIT_STATUS_COLOR=""
-        if [[ $EXIT_CODE -eq 0 ]]; then
-          EXIT_STATUS_COLOR=$GREEN
-        else
+        EXIT_STATUS_COLOR="$GREEN"
+        if [[ $EXIT_CODE -ne 0 ]]; then
           EXIT_STATUS_COLOR=" $RED[$EXIT_CODE]"
         fi
 
-        PS1+="$EXIT_STATUS_COLOR\n\$$CLEAR "
+        PS1+="\n$EXIT_STATUS_COLOR❯$CLEAR "
       }
 
       force_color_prompt=yes
