@@ -27,6 +27,14 @@
           path = ./templates/generic;
           description = "Basic extensible flake config";
         };
+        python = {
+          path = ./templates/python;
+          description = "A basic Python pip flake";
+        };
+        pandoc = {
+          path = ./templates/pandoc;
+          description = "A basic pandoc flake";
+        };
         default = self.templates.generic;
       };
 

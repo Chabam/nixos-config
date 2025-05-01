@@ -10,11 +10,17 @@
     let
       system = "x86_64-linux";
       pkgs = nixpkgs.legacyPackages.${system};
-      lib = nixpkgs.lib;
     in
     {
       devShells.x86_64-linux.default = pkgs.mkShell {
         buildInputs = with pkgs; [
+          pandoc
+          (texlive.combine {
+            inherit (pkgs.texlive)
+              scheme-small
+              pmboxdraw
+              ;
+          })
         ];
         env = { };
         shellHook = '''';
