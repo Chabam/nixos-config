@@ -82,10 +82,7 @@ in
 
   nix = {
     registry = {
-      templates.to = {
-        type = "path";
-        path = "${../../.}";
-      };
+      templates.flake = inputs.self;
     };
   };
 
@@ -109,7 +106,6 @@ in
       SCRIPTS_PRIVATE = "$HOME/.scripts/private";
       LOCAL_BIN = "$HOME/.local/bin/";
       PATH = "$PATH:$SCRIPTS:$SCRIPTS_PRIVATE";
-      NIXCONF = "${../../.}";
     };
   };
 }
