@@ -4,7 +4,6 @@ with pkgs.vimPlugins;
 ''
 {
   dir = "${oil-nvim}",
-  cmd = "Oil",
   keys = {
     {
       "<leader>-",
@@ -12,11 +11,12 @@ with pkgs.vimPlugins;
       desc = "Open parent directory"
     }
   },
-  config = function()
+  init = function()
     local oil = require("oil")
 
     local detail = true
     oil.setup({
+      default_file_explorer = true,
       watch_for_changes = true,
       keymaps = {
         ["gd"] = {
