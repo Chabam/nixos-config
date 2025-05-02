@@ -2,6 +2,7 @@
   pkgs,
   lib,
   config,
+  inputs,
   ...
 }:
 let
@@ -9,7 +10,10 @@ let
 in
 {
   options = {
-    gaming.enable = lib.mkEnableOption "Enable GAMING";
+    gaming = {
+      enable = lib.mkEnableOption "Enable GAMING";
+      morrowind = lib.mkEnableOption "Enable OpenMW";
+    };
   };
 
   config = lib.mkIf cfg.enable {
@@ -27,5 +31,13 @@ in
         extraCompatPackages = [ pkgs.proton-ge-bin ];
       };
     };
+    environment.systemPackages = with inputs.openmw-nix.packages.${pkgs.system}; lib.mkIf cfg.morrowind [
+      delta-plugin
+      openmw-dev
+      openmw-validator
+      plox
+      umo
+      pkgs.tes3cmd
+    ];
   };
 }

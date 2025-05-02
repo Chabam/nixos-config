@@ -13,6 +13,11 @@
       url = "github:niksingh710/minimal-tmux-status";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
+    openmw-nix = {
+      url = "git+https://codeberg.org/PopeRigby/openmw-nix.git";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs =
@@ -20,7 +25,7 @@
       self,
       nixpkgs,
       ...
-    } @ inputs :
+    }@inputs:
     {
       templates = {
         generic = {
