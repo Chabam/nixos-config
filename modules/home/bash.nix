@@ -83,7 +83,10 @@
 
             if [[ $VCS_STATUS_NUM_STAGED -ge 1 ]]; then
               NUM_MODIFIED=$(($VCS_STATUS_NUM_STAGED - $VCS_STATUS_NUM_STAGED_NEW - $VCS_STATUS_NUM_STAGED_DELETED))
-              GIT_INFO+=" $BLUE~$NUM_MODIFIED$CLEAR"
+
+              if [[ $NUM_MODIFIED -gt 0 ]]; then
+                GIT_INFO+=" $BLUE~$NUM_MODIFIED$CLEAR"
+              fi
             fi
 
             (( $VCS_STATUS_HAS_UNSTAGED  )) && GIT_INFO+=" $YELLOW!$VCS_STATUS_NUM_UNSTAGED$CLEAR"
