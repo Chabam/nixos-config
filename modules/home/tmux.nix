@@ -23,6 +23,7 @@
           set -g @minimal-tmux-bg "#2ec27e"
         '';
       }
+      tmuxPlugins.vim-tmux-navigator
     ];
 
     extraConfig = ''
