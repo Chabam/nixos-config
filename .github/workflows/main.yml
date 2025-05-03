@@ -1,4 +1,4 @@
-name: Bump flake.lock
+name: Automated system update
 
 on:
   schedule:
