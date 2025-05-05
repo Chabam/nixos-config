@@ -20,6 +20,10 @@
     totem # video player
   ];
 
+  environment.systemPackages = with pkgs; [
+    decibels
+  ];
+
   programs.nautilus-open-any-terminal = {
     enable = true;
     terminal = "ptyxis";

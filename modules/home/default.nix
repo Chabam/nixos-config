@@ -19,13 +19,13 @@ let
     teams-for-linux
   ];
   cliApps = with pkgs; [
+    direnv
     lazygit
     nnn
     ripgrep
     tree
-    wget
+    p7zip-rar
     wl-clipboard
-    direnv
   ];
 in
 {
