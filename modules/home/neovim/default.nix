@@ -38,7 +38,6 @@ let
     oil-nvim
     vim-dispatch
     vim-sleuth
-    vim-tmux-navigator
     vimtex
   ];
   lspPkgs = with pkgs; [
@@ -99,7 +98,6 @@ in
           ${pkgs.callPackage ./snippets.nix { }},
           ${pkgs.callPackage ./treesitter.nix { grammars = treesitterGrammars; }},
           ${pkgs.callPackage ./vimtex.nix { }},
-          ${pkgs.callPackage ./vim-tmux.nix { }},
         },
       })
       ${(import ./autogroups.nix) { }}
