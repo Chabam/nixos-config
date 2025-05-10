@@ -8,18 +8,20 @@ let
     stylua
     texlivePackages.latexindent
   ];
-  treesitterGrammars = with pkgs.vimPlugins; nvim-treesitter.withPlugins (p: [
-    p.bash
-    p.c
-    p.cpp
-    p.lua
-    p.make
-    p.markdown
-    p.nix
-    p.python
-    p.racket
-    p.r
-  ]);
+  treesitterGrammars =
+    with pkgs.vimPlugins;
+    nvim-treesitter.withPlugins (p: [
+      p.bash
+      p.c
+      p.cpp
+      p.lua
+      p.make
+      p.markdown
+      p.nix
+      p.python
+      p.racket
+      p.r
+    ]);
   pluginsPkgs = with pkgs.vimPlugins; [
     blink-cmp
     conform-nvim
@@ -39,6 +41,7 @@ let
     vim-dispatch
     vim-sleuth
     vimtex
+    which-key-nvim
   ];
   lspPkgs = with pkgs; [
     cmake-language-server
@@ -64,45 +67,47 @@ in
 
     plugins = pluginsPkgs ++ miscPkgs;
 
-    extraLuaConfig = with pkgs.vimPlugins;
+    extraLuaConfig =
+      with pkgs.vimPlugins;
       # Lua
       ''
-      ${pkgs.callPackage ./options.nix { }}
-      require("lazy").setup({
-        rocks = { enabled = false };
-        pkg = { enabled = false };
-        install = { enabled = false };
-        change_detection = { enabled = false };
-        spec = {
-          {
-            dir = "${vim-sleuth}",
-            event = {"BufReadPre", "BufNewFile"},
+        ${pkgs.callPackage ./options.nix { }}
+        require("lazy").setup({
+          rocks = { enabled = false };
+          pkg = { enabled = false };
+          install = { enabled = false };
+          change_detection = { enabled = false };
+          spec = {
+            {
+              dir = "${vim-sleuth}",
+              event = {"BufReadPre", "BufNewFile"},
+            },
+            {
+              dir = "${vim-dispatch}",
+              cmd = { "Make" },
+            },
+            {
+              dir = "${nvim-surround}",
+              event = {"BufRead", "BufNewFile"},
+              opts = {}
+            },
+            ${pkgs.callPackage ./autoformat.nix { }},
+            ${pkgs.callPackage ./blink.nix { }},
+            ${pkgs.callPackage ./colorscheme.nix { }},
+            ${pkgs.callPackage ./diffview.nix { }},
+            ${pkgs.callPackage ./fzf.nix { }},
+            ${pkgs.callPackage ./gitsigns.nix { }},
+            ${pkgs.callPackage ./lsp.nix { }},
+            ${pkgs.callPackage ./oil.nix { }},
+            ${pkgs.callPackage ./snippets.nix { }},
+            ${pkgs.callPackage ./treesitter.nix { grammars = treesitterGrammars; }},
+            ${pkgs.callPackage ./vimtex.nix { }},
+            ${pkgs.callPackage ./which-key.nix { }},
           },
-          {
-            dir = "${vim-dispatch}",
-            cmd = { "Make" },
-          },
-          {
-            dir = "${nvim-surround}",
-            event = {"BufRead", "BufNewFile"},
-            opts = {}
-          },
-          ${pkgs.callPackage ./autoformat.nix { }},
-          ${pkgs.callPackage ./blink.nix { }},
-          ${pkgs.callPackage ./colorscheme.nix { }},
-          ${pkgs.callPackage ./diffview.nix { }},
-          ${pkgs.callPackage ./fzf.nix { }},
-          ${pkgs.callPackage ./gitsigns.nix { }},
-          ${pkgs.callPackage ./lsp.nix { }},
-          ${pkgs.callPackage ./oil.nix { }},
-          ${pkgs.callPackage ./snippets.nix { }},
-          ${pkgs.callPackage ./treesitter.nix { grammars = treesitterGrammars; }},
-          ${pkgs.callPackage ./vimtex.nix { }},
-        },
-      })
-      ${(import ./autogroups.nix) { }}
-      ${(import ./functions.nix) { }}
-      ${(import ./keymaps.nix) { }}
-    '';
+        })
+        ${(import ./autogroups.nix) { }}
+        ${(import ./functions.nix) { }}
+        ${(import ./keymaps.nix) { }}
+      '';
   };
 }

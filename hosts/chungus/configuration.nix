@@ -1,5 +1,6 @@
 {
   pkgs,
+  lib,
   ...
 }:
 
@@ -23,9 +24,166 @@
     enable = true;
     morrowind = true;
   };
+  sway.enable = true;
 
   systemd.tmpfiles.rules = [
     "L+ /run/gdm/.config/monitors.xml - - - - ${pkgs.writeText "gdm-monitors.xml" ''
+      <monitors version="2">
+        <configuration>
+          <layoutmode>physical</layoutmode>
+          <logicalmonitor>
+            <x>0</x>
+            <y>0</y>
+            <scale>1</scale>
+            <primary>yes</primary>
+            <monitor>
+              <monitorspec>
+                <connector>DP-3</connector>
+                <vendor>AUS</vendor>
+                <product>ROG XG279Q</product>
+                <serial>LALMQS128555</serial>
+              </monitorspec>
+              <mode>
+                <width>2560</width>
+                <height>1440</height>
+                <rate>143.972</rate>
+              </mode>
+            </monitor>
+          </logicalmonitor>
+        </configuration>
+        <configuration>
+          <layoutmode>physical</layoutmode>
+          <logicalmonitor>
+            <x>0</x>
+            <y>0</y>
+            <scale>1</scale>
+            <primary>yes</primary>
+            <monitor>
+              <monitorspec>
+                <connector>DP-0</connector>
+                <vendor>AUS</vendor>
+                <product>ROG XG279Q</product>
+                <serial>LALMQS128555</serial>
+              </monitorspec>
+              <mode>
+                <width>2560</width>
+                <height>1440</height>
+                <rate>143.972</rate>
+              </mode>
+            </monitor>
+          </logicalmonitor>
+        </configuration>
+        <configuration>
+          <layoutmode>physical</layoutmode>
+          <logicalmonitor>
+            <x>0</x>
+            <y>0</y>
+            <scale>1</scale>
+            <primary>yes</primary>
+            <monitor>
+              <monitorspec>
+                <connector>DP-4</connector>
+                <vendor>AUS</vendor>
+                <product>ROG XG279Q</product>
+                <serial>LALMQS128555</serial>
+              </monitorspec>
+              <mode>
+                <width>2560</width>
+                <height>1440</height>
+                <rate>143.972</rate>
+              </mode>
+            </monitor>
+          </logicalmonitor>
+        </configuration>
+        <configuration>
+          <layoutmode>physical</layoutmode>
+          <logicalmonitor>
+            <x>0</x>
+            <y>0</y>
+            <scale>1</scale>
+            <primary>yes</primary>
+            <monitor>
+              <monitorspec>
+                <connector>DP-1</connector>
+                <vendor>AUS</vendor>
+                <product>ROG XG279Q</product>
+                <serial>LALMQS128555</serial>
+              </monitorspec>
+              <mode>
+                <width>2560</width>
+                <height>1440</height>
+                <rate>143.972</rate>
+              </mode>
+            </monitor>
+          </logicalmonitor>
+        </configuration>
+        <configuration>
+          <layoutmode>physical</layoutmode>
+          <logicalmonitor>
+            <x>0</x>
+            <y>0</y>
+            <scale>1</scale>
+            <primary>yes</primary>
+            <monitor>
+              <monitorspec>
+                <connector>DP-1-1</connector>
+                <vendor>AUS</vendor>
+                <product>ROG XG279Q</product>
+                <serial>LALMQS128555</serial>
+              </monitorspec>
+              <mode>
+                <width>2560</width>
+                <height>1440</height>
+                <rate>143.972</rate>
+              </mode>
+            </monitor>
+          </logicalmonitor>
+        </configuration>
+        <configuration>
+          <layoutmode>physical</layoutmode>
+          <logicalmonitor>
+            <x>0</x>
+            <y>0</y>
+            <scale>1</scale>
+            <transform>
+              <rotation>right</rotation>
+              <flipped>no</flipped>
+            </transform>
+            <monitor>
+              <monitorspec>
+                <connector>DP-2</connector>
+                <vendor>DEL</vendor>
+                <product>DELL U2518D</product>
+                <serial>0WG2J85HAG7L</serial>
+              </monitorspec>
+              <mode>
+                <width>2560</width>
+                <height>1440</height>
+                <rate>59.951</rate>
+              </mode>
+            </monitor>
+          </logicalmonitor>
+          <logicalmonitor>
+            <x>1440</x>
+            <y>577</y>
+            <scale>1</scale>
+            <primary>yes</primary>
+            <monitor>
+              <monitorspec>
+                <connector>DP-3</connector>
+                <vendor>AUS</vendor>
+                <product>ROG XG279Q</product>
+                <serial>LALMQS128555</serial>
+              </monitorspec>
+              <mode>
+                <width>2560</width>
+                <height>1440</height>
+                <rate>143.972</rate>
+              </mode>
+            </monitor>
+          </logicalmonitor>
+        </configuration>
+      </monitors>
 <monitors version="2">
   <configuration>
     <layoutmode>physical</layoutmode>
@@ -140,6 +298,25 @@
   <configuration>
     <layoutmode>physical</layoutmode>
     <logicalmonitor>
+      <x>1440</x>
+      <y>374</y>
+      <scale>1</scale>
+      <primary>yes</primary>
+      <monitor>
+        <monitorspec>
+          <connector>DP-3</connector>
+          <vendor>AUS</vendor>
+          <product>ROG XG279Q</product>
+          <serial>LALMQS128555</serial>
+        </monitorspec>
+        <mode>
+          <width>2560</width>
+          <height>1440</height>
+          <rate>143.972</rate>
+        </mode>
+      </monitor>
+    </logicalmonitor>
+    <logicalmonitor>
       <x>0</x>
       <y>0</y>
       <scale>1</scale>
@@ -158,25 +335,6 @@
           <width>2560</width>
           <height>1440</height>
           <rate>59.951</rate>
-        </mode>
-      </monitor>
-    </logicalmonitor>
-    <logicalmonitor>
-      <x>1440</x>
-      <y>577</y>
-      <scale>1</scale>
-      <primary>yes</primary>
-      <monitor>
-        <monitorspec>
-          <connector>DP-3</connector>
-          <vendor>AUS</vendor>
-          <product>ROG XG279Q</product>
-          <serial>LALMQS128555</serial>
-        </monitorspec>
-        <mode>
-          <width>2560</width>
-          <height>1440</height>
-          <rate>143.972</rate>
         </mode>
       </monitor>
     </logicalmonitor>

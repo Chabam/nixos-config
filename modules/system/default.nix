@@ -14,6 +14,7 @@
     ./main-user.nix
     ./nvidia.nix
     ./plymouth.nix
+    ./sway.nix
     ./syncthing.nix
     ./uni-remote.nix
     ./virt-manager.nix
