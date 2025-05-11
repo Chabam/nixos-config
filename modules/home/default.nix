@@ -91,8 +91,6 @@ in
 
     file = import ./autostart.nix {
       apps = with pkgs; [
-        teams-for-linux
-        discord
       ];
     };
 
