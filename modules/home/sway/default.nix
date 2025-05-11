@@ -5,7 +5,7 @@
   ...
 }:
 let
-  cfg = config.ptyxis;
+  cfg = config.sway;
 in
 {
 
@@ -14,11 +14,17 @@ in
   };
 
   config = lib.mkIf cfg.enable {
+
+    programs.kitty = {
+      enable = true;
+      enableGitIntegration = true;
+    };
+
     wayland.windowManager.sway = {
       enable = true;
       checkConfig = true;
       config = {
-        terminal = "ptyxis";
+        terminal = "kitty";
       };
     };
   };

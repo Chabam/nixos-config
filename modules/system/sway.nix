@@ -27,8 +27,6 @@ in
           "--unsupported-gpu"
         ];
       };
-
-      waybar.enable = true;
     };
   };
 }

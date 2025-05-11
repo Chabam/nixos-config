@@ -35,6 +35,7 @@ in
     ./gnome.nix
     ./neovim
     ./ptyxis
+    ./sway
     ./syncthing.nix
     ./tmux.nix
   ];
@@ -86,6 +87,8 @@ in
     };
   };
 
+  sway.enable = true;
+
   home = {
     shell.enableBashIntegration = true;
 
@@ -101,7 +104,7 @@ in
     sessionVariables = {
       NIX_SHELL_PRESERVE_PROMPT = 1;
       BROWSER = "firefox";
-      PAGER = "less --use-color";
+      PAGER = "nvim";
       SCRIPTS = "$HOME/.scripts";
       SCRIPTS_PRIVATE = "$HOME/.scripts/private";
       LOCAL_BIN = "$HOME/.local/bin/";
