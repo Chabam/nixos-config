@@ -23,6 +23,6 @@
   syncthing.openSystemPorts = true;
   uni-remote.enable = true;
   gaming.enable = true;
-
+  services.hardware.bolt.enable = true;
   system.stateVersion = "24.11"; # Did you read the comment?
 }
