@@ -31,6 +31,7 @@ in
 {
   imports = [
     ./bash.nix
+    ./emacs
     ./ghostty.nix
     ./gnome.nix
     ./neovim
@@ -66,6 +67,8 @@ in
       uris = [ "qemu:///system" ];
     };
   };
+
+  emacs.enable = true;
 
   programs = {
     direnv = {
@@ -104,6 +107,7 @@ in
       SCRIPTS_PRIVATE = "$HOME/.scripts/private";
       LOCAL_BIN = "$HOME/.local/bin/";
       PATH = "$PATH:$SCRIPTS:$SCRIPTS_PRIVATE";
+      NIXCONF = "$HOME/Sources/nixos-config/";
     };
   };
 }
