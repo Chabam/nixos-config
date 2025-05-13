@@ -18,12 +18,13 @@ in
     programs.emacs = {
       enable = true;
       package = pkgs.emacs-gtk;
+      extraPackages = (
+        epkgs: [
+          epkgs.ef-themes
+          epkgs.evil
+        ]
+      );
     };
-
-    home.packages = with pkgs.emacsPackages; [
-      modus-themes
-      evil
-    ];
 
     xdg.configFile."emacs".source = config.lib.file.mkOutOfStoreSymlink emacsConfigDir;
   };
