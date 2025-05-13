@@ -1,6 +1,9 @@
-(setq custom-file "~/.config/emacs/custom.el")
+(setq custom-file "~/.emacs.d/custom.el")
+
 ;; Removing the bell
 (setq ring-bell-function 'ignore)
+
+(set-face-attribute 'default nil :height 110 :family "IosevkaTerm Nerd Font")
 
 ;; Basic UI config
 ;;; Scroll bars
@@ -28,5 +31,5 @@
 (setq dired-listing-switches "-aBhlv  --group-directories-first")
 
 (load-theme 'ef-dark t)
-(load-file "~/.config/emacs/oxocarbon-theme.el")
+(load-file "~/.emacs.d/chabam-theme.el")
 (load-file custom-file)

@@ -8,7 +8,8 @@ let
   cfg = config.emacs;
   emacsConfigDir = "${config.home.homeDirectory}/Sources/nixos-config/modules/home/emacs/config/";
   initEl = "${emacsConfigDir}/init.el";
-  theme = "${emacsConfigDir}/oxocarbon-theme.el";
+  theme = "${emacsConfigDir}/chabam-theme.el";
+  custom = "${emacsConfigDir}/custom.el";
 in
 {
   options = {
@@ -30,7 +31,11 @@ in
       );
     };
 
-    xdg.configFile."emacs/init.el".source = config.lib.file.mkOutOfStoreSymlink initEl;
-    xdg.configFile."emacs/chabam-theme.el".source = config.lib.file.mkOutOfStoreSymlink theme;
+    home.file = {
+
+      ".emacs.d/init.el".source = config.lib.file.mkOutOfStoreSymlink initEl;
+      ".emacs.d/chabam-theme.el".source = config.lib.file.mkOutOfStoreSymlink theme;
+      ".emacs.d/custom.el".source = config.lib.file.mkOutOfStoreSymlink custom;
+    };
   };
 }
