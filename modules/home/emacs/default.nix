@@ -6,7 +6,9 @@
 }:
 let
   cfg = config.emacs;
-  emacsConfigDir = "${config.home.homeDirectory}/Sources/nixos-config/modules/home/emacs/config";
+  emacsConfigDir = "${config.home.homeDirectory}/Sources/nixos-config/modules/home/emacs/config/";
+  initEl = "${emacsConfigDir}/init.el";
+  theme = "${emacsConfigDir}/oxocarbon-theme.el";
 in
 {
   options = {
@@ -20,12 +22,15 @@ in
       package = pkgs.emacs-gtk;
       extraPackages = (
         epkgs: [
+          epkgs.autothemer
+          epkgs.direnv
           epkgs.ef-themes
           epkgs.evil
         ]
       );
     };
 
-    xdg.configFile."emacs".source = config.lib.file.mkOutOfStoreSymlink emacsConfigDir;
+    xdg.configFile."emacs/init.el".source = config.lib.file.mkOutOfStoreSymlink initEl;
+    xdg.configFile."emacs/chabam-theme.el".source = config.lib.file.mkOutOfStoreSymlink theme;
   };
 }

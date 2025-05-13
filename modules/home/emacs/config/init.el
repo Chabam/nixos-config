@@ -1,3 +1,4 @@
+(setq custom-file "~/.config/emacs/custom.el")
 ;; Removing the bell
 (setq ring-bell-function 'ignore)
 
@@ -27,3 +28,5 @@
 (setq dired-listing-switches "-aBhlv  --group-directories-first")
 
 (load-theme 'ef-dark t)
+(load-file "~/.config/emacs/oxocarbon-theme.el")
+(load-file custom-file)
