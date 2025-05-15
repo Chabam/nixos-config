@@ -24,15 +24,16 @@ in
       package = pkgs.emacs-gtk;
       extraPackages = (
         epkgs: with epkgs; [
-	  corfu
-	  direnv
-	  git-gutter
-	  git-gutter-fringe
-	  magit
-	  orderless
-	  tree-sitter
-	  treesit-auto
-	  vertico
+    	  corfu
+    	  direnv
+    	  git-gutter
+    	  git-gutter-fringe
+    	  magit
+    	  orderless
+    	  tree-sitter
+          tree-sitter-langs
+    	  treesit-auto
+    	  vertico
           evil
         ]
       );

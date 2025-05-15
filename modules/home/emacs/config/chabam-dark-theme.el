@@ -76,6 +76,7 @@
 
    ;; 3rd party styling
    `(vertico-current                    ((t (:background ,chabam-dark-grey))))
+   `(completions-common-part            ((t (:foreground ,chabam-light-pink))))
    `(orderless-match-face-0             ((t (:foreground ,chabam-light-pink))))
    `(git-gutter:added                   ((t (:foreground ,chabam-green))))
    `(git-gutter:removed                 ((t (:foreground ,chabam-red))))

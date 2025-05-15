@@ -3,9 +3,7 @@
 
 (use-package vertico
   :custom
-   ;; (vertico-scroll-margin 0) ;; Different scroll margin
-   (vertico-count 10) ;; Show more candidates
-   (vertico-cycle t) ;; Enable cycling for `vertico-next/previous'
+  (vertico-count 10)
   :init
   (vertico-mode))
 
@@ -35,6 +33,7 @@
 
   (completion-styles '(basic substring partial-completion flex))
   (vc-follow-symlinks t)
+  :hook (prog-mode . (lambda () (setq show-trailing-whitespace t)))
   :init
   ;; Smooth scroll
   (pixel-scroll-precision-mode)
@@ -49,37 +48,32 @@
   (global-display-line-numbers-mode)
   (global-visual-line-mode)
   (set-face-attribute 'default nil :height 110 :family "IosevkaTerm Nerd Font")
-  (setq-default show-trailing-whitespace t)
+  (load-theme 'chabam-dark t)
+
+  (setq-default standard-indent 4)
+  (setq-default tab-width 4)
+  (setq-default indent-tabs-mode nil)
+  (setq indent-line-function 'insert-tab)
   )
 
 (use-package orderless
  :custom
-  ;; Configure a custom style dispatcher (see the Consult wiki)
-  ;; (orderless-style-dispatchers '(+orderless-consult-dispatch orderless-affix-dispatch))
-  ;; (orderless-component-separator #'orderless-escapable-split-on-space)
   (completion-styles '(orderless basic))
   (completion-category-defaults nil)
   (completion-category-overrides '((file (styles partial-completion)))))
-;; Put backups somewhere else
 
 (use-package dired
   :commands (dired dired-jump)
-  :bind (("-" . dired-up-directory))
+  :hook (dired-mode . (lambda () (dired-hide-details-mode 1)))
   :init
-  (setq dired-listing-switches "-aBhlv  --group-directories-first")
-  (dired-hide-details-mode)
-  )
+  (setq dired-listing-switches "-aBhlv  --group-directories-first"))
 
 (use-package treesit-auto
   :demand t
+  :hook (tree-sitter-after-on . tree-sitter-hl-mode)
   :config
   (setq treesit-auto-install 'prompt)
-
-  (global-treesit-auto-mode)
-
-  :init
-  (add-hook 'tree-sitter-after-on-hook #'tree-sitter-hl-mode)
-  )
+  (global-treesit-auto-mode))
 
 (use-package git-gutter
   :hook (prog-mode . git-gutter-mode)
@@ -91,5 +85,3 @@
   (define-fringe-bitmap 'git-gutter-fr:added [224] nil nil '(center repeated))
   (define-fringe-bitmap 'git-gutter-fr:modified [224] nil nil '(center repeated))
   (define-fringe-bitmap 'git-gutter-fr:deleted [128 192 224 240] nil nil 'bottom))
-
-(load-theme 'chabam-dark t)
