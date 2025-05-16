@@ -6,6 +6,10 @@
 }:
 let
   cfg = config.emacs;
+  emacsPackage = pkgs.emacs.override {
+    withGTK3 = true;
+    withTreeSitter = true;
+  };
   emacsConfigDir = "${config.home.homeDirectory}/Sources/nixos-config/modules/home/emacs/config/";
   initEl = "${emacsConfigDir}/init.el";
   themeDark = "${emacsConfigDir}/chabam-dark-theme.el";
@@ -21,20 +25,21 @@ in
 
     programs.emacs = {
       enable = true;
-      package = pkgs.emacs-gtk;
+      package = emacsPackage;
       extraPackages = (
         epkgs: with epkgs; [
     	  corfu
     	  direnv
+        evil
     	  git-gutter
     	  git-gutter-fringe
+        nix-mode
     	  magit
     	  orderless
-    	  tree-sitter
-          tree-sitter-langs
+        treesit-grammars.with-all-grammars
     	  treesit-auto
     	  vertico
-          evil
+        vterm
         ]
       );
     };
