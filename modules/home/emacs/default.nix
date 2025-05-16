@@ -22,30 +22,33 @@ in
   };
 
   config = lib.mkIf cfg.enable {
-
     programs.emacs = {
       enable = true;
       package = emacsPackage;
       extraPackages = (
         epkgs: with epkgs; [
-    	  corfu
-    	  direnv
-        evil
-    	  git-gutter
-    	  git-gutter-fringe
-        nix-mode
-    	  magit
-    	  orderless
-        treesit-grammars.with-all-grammars
-    	  treesit-auto
-    	  vertico
-        vterm
+          corfu
+          direnv
+          evil
+          expand-region
+          git-gutter
+          git-gutter-fringe
+          magit
+          multiple-cursors
+          nix-mode
+          orderless
+          racket-mode
+          smartparens
+          treesit-auto
+          treesit-grammars.with-all-grammars
+          vertico
+          visual-regexp
+          vterm
         ]
       );
     };
 
     home.file = {
-
       ".emacs.d/init.el".source = config.lib.file.mkOutOfStoreSymlink initEl;
       ".emacs.d/chabam-dark-theme.el".source = config.lib.file.mkOutOfStoreSymlink themeDark;
       ".emacs.d/chabam-light-theme.el".source = config.lib.file.mkOutOfStoreSymlink themeLight;
