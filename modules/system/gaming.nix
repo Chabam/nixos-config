@@ -34,9 +34,6 @@ in
     environment.systemPackages = with inputs.openmw-nix.packages.${pkgs.system}; lib.mkIf cfg.morrowind [
       delta-plugin
       openmw-dev
-      openmw-validator
-      plox
-      umo
       pkgs.tes3cmd
     ];
   };
