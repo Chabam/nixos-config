@@ -22,9 +22,10 @@ let
     direnv
     lazygit
     nnn
+    p7zip-rar
     ripgrep
     tree
-    p7zip-rar
+    unzip
     wl-clipboard
   ];
 in
