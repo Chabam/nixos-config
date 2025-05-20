@@ -65,6 +65,7 @@
                 indent-tabs-mode nil
                 display-line-numbers-type 'relative)
   (set-frame-font "Iosevka 12" nil t)
+  (set-face-attribute 'fixed-pitch nil :family "Iosevka")
   (load-theme 'chabam-dark t)
   )
 
