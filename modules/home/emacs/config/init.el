@@ -56,16 +56,16 @@
   (global-display-line-numbers-mode)
   (global-visual-line-mode)
   (column-number-mode)
-  (setq-default display-line-numbers-type 'relative)
-  (load-theme 'chabam-dark t)
-  (setq backup-directory-alist '(("." . "~/.emacs.d/backups")))
-
-  (setq-default standard-indent 4)
-  (setq-default tab-width 4)
-  (setq-default indent-tabs-mode nil)
-  (setq indent-line-function 'insert-tab)
-  (setq default-frame-alist '((font . "Iosevka-12")))
+  (setq backup-directory-alist `((".*" . ,temporary-file-directory))
+        auto-save-file-name-transforms `((".*" ,temporary-file-directory t))
+        indent-line-function 'insert-tab
+        default-frame-alist '((font . "Iosevka-12")))
+  (setq-default standard-indent 4
+                tab-width 4
+                indent-tabs-mode nil
+                display-line-numbers-type 'relative)
   (set-frame-font "Iosevka 12" nil t)
+  (load-theme 'chabam-dark t)
   )
 
 (use-package compile
