@@ -1,6 +1,9 @@
 (load-file "~/.emacs.d/chabam-light-theme.el")
 (load-file "~/.emacs.d/chabam-dark-theme.el")
 
+(defun disable-line-numbers ()
+    (display-line-numbers-mode -1))
+
 (use-package vertico
   :custom
   (vertico-count 10)
@@ -14,12 +17,13 @@
 
 ;; Emacs minibuffer configurations.
 (use-package emacs
-  :bind ("C-." . duplicate-line)
+  :bind (("C-." . duplicate-line)
+         ("C-M-i" . completion-at-point))
+
   :custom
   (custom-file "~/.emacs.d/custom.el")
   ;; Support opening new minibuffers from inside existing minibuffers.
   (enable-recursive-minibuffers t)
-  (backup-directory-alist '(("." . "~/.emacs.d/backups")))
   ;; Hide commands in M-x which do not work in the current mode.  Vertico
   ;; commands are hidden in normal buffers. This setting is useful beyond
   ;; Vertico.
@@ -54,6 +58,7 @@
   (column-number-mode)
   (setq-default display-line-numbers-type 'relative)
   (load-theme 'chabam-dark t)
+  (setq backup-directory-alist '(("." . "~/.emacs.d/backups")))
 
   (setq-default standard-indent 4)
   (setq-default tab-width 4)
@@ -64,55 +69,31 @@
   )
 
 (use-package compile
-  :hook (compilation-mode . (lambda ()
-                              (display-line-numbers-mode -1)))
+  :hook (compilation-mode . disable-line-numbers)
   :init
-  (add-hook 'compilation-filter-hook 'ansi-color-compilation-filter)
-  )
+  (add-hook 'compilation-filter-hook 'ansi-color-compilation-filter))
 
 (use-package corfu
   ;; Optional customizations
   :custom
-  (corfu-cycle t)                ;; Enable cycling for `corfu-next/previous'
-  ;; (corfu-quit-at-boundary nil)   ;; Never quit at completion boundary
-  ;; (corfu-quit-no-match nil)      ;; Never quit, even if there is no match
-  ;; (corfu-preview-current nil)    ;; Disable current candidate preview
-  ;; (corfu-preselect 'prompt)      ;; Preselect the prompt
-  ;; (corfu-on-exact-match nil)     ;; Configure handling of exact matches
-
-  ;; Enable Corfu only for certain modes. See also `global-corfu-modes'.
-  :hook ((prog-mode . corfu-mode)
-          (shell-mode . corfu-mode)
-          (eshell-mode . corfu-mode))
-
+  (corfu-cycle t)
+  (corfu-auto t)
+  (corfu-auto-delay 0.2)
+  (tab-always-indent 'complete)
+  (corfu-quit-no-match 'separator)
+  (corfu-preselect-first f)
+  :hook ((prog-mode shell-mode eshell-mode) . corfu-mode)
   :init
   (global-corfu-mode)
-  (setq corfu-auto t
-        corfu-auto-delay 0.1
-        corfu-auto-prefix 2)
-
-  ;; Enable optional extension modes:
-  ;; (corfu-history-mode)
-  ;; (corfu-popupinfo-mode)
   )
-
-(use-package dabbrev
-  ;; Swap M-/ and C-M-/
-  :bind (("M-/" . dabbrev-completion)
-         ("C-M-/" . dabbrev-expand))
-  :config
-  (add-to-list 'dabbrev-ignored-buffer-regexps "\\` ")
-  ;; Available since Emacs 29 (Use `dabbrev-ignored-buffer-regexps' on older Emacs)
-  (add-to-list 'dabbrev-ignored-buffer-modes 'authinfo-mode)
-  (add-to-list 'dabbrev-ignored-buffer-modes 'doc-view-mode)
-  (add-to-list 'dabbrev-ignored-buffer-modes 'pdf-view-mode)
-  (add-to-list 'dabbrev-ignored-buffer-modes 'tags-table-mode))
 
 (use-package orderless
  :custom
   (completion-styles '(orderless basic))
   (completion-category-defaults nil)
-  (completion-category-overrides '((file (styles partial-completion)))))
+  (completion-category-overrides '((file (styles partial-completion))))
+  (orderless-matching-styles '(orderless-initialism orderless-flex orderless-regexp))
+  )
 
 (use-package dired
   :commands (dired dired-jump)
@@ -136,8 +117,9 @@
   (define-fringe-bitmap 'git-gutter-fr:modified [224] nil nil '(center repeated))
   (define-fringe-bitmap 'git-gutter-fr:deleted [128 192 224 240] nil nil 'bottom))
 
-(use-package elgot
-  :hook (c++-mode . 'eglot-ensure))
+(use-package eglot
+  :hook ((c++-mode nix-mode racket-mode python-mode) . eglot-ensure)
+  )
 
 (use-package multiple-cursors
     :bind ("C-S-c C-S-c" . 'mc/edit-lines)
@@ -175,9 +157,11 @@
 (use-package nix-mode
   :mode "\\.nix\\'")
 
-(use-package racket-mode)
+(use-package racket-mode
+  :mode "\\.rkt\\'"
+  :hook (racket-repl-mode . disable-line-numbers)
+  )
 
 (use-package direnv
   :config
   (direnv-mode))
-
