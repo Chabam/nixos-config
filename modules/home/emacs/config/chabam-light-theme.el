@@ -90,7 +90,7 @@
 
    ;; Programming syntax styling
    `(font-lock-builtin-face             ((t (:foreground ,chabam-purple))))
-   `(font-lock-comment-face             ((t (:foreground ,chabam-light-grey))))
+   `(font-lock-comment-face             ((t (:foreground ,chabam-dark-grey))))
    `(font-lock-string-face              ((t (:foreground ,chabam-green))))
    `(font-lock-type-face                ((t (:foreground ,chabam-blue))))
    `(font-lock-function-name-face       ((t (:foreground ,chabam-light-blue))))
