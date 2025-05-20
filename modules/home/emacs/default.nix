@@ -27,6 +27,7 @@ in
       package = emacsPackage;
       extraPackages = (
         epkgs: with epkgs; [
+          auto-dark
           corfu
           direnv
           evil

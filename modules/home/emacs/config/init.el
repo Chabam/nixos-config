@@ -153,6 +153,10 @@
 (use-package vterm
     :hook (vterm-mode . (lambda () (display-line-numbers-mode 0))))
 
+(use-package auto-dark
+  :init (auto-dark-mode)
+  :custom (auto-dark-themes '((chabam-dark) (chabam-light))))
+
 ;; Various modes
 (use-package nix-mode
   :mode "\\.nix\\'")
