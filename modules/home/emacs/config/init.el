@@ -18,7 +18,8 @@
 ;; Emacs minibuffer configurations.
 (use-package emacs
   :bind (("C-." . duplicate-line)
-         ("C-M-i" . completion-at-point))
+         ("M-o" . other-window)
+         ("C-S-j" . join-line))
 
   :custom
   (custom-file "~/.emacs.d/custom.el")
@@ -56,6 +57,7 @@
   (global-display-line-numbers-mode)
   (global-visual-line-mode)
   (column-number-mode)
+  (windmove-default-keybindings)
   (setq backup-directory-alist `((".*" . ,temporary-file-directory))
         auto-save-file-name-transforms `((".*" ,temporary-file-directory t))
         indent-line-function 'insert-tab
@@ -66,7 +68,6 @@
                 display-line-numbers-type 'relative)
   (set-frame-font "Iosevka 12" nil t)
   (set-face-attribute 'fixed-pitch nil :family "Iosevka")
-  (load-theme 'chabam-dark t)
   )
 
 (use-package compile
@@ -75,15 +76,22 @@
   (add-hook 'compilation-filter-hook 'ansi-color-compilation-filter))
 
 (use-package corfu
-  ;; Optional customizations
   :custom
-  (corfu-cycle t)
+  ;; Autocomplete settings
   (corfu-auto t)
+  (corfu-auto-prefix 2)
   (corfu-auto-delay 0.2)
-  (tab-always-indent 'complete)
   (corfu-quit-no-match 'separator)
-  (corfu-preselect-first f)
-  :hook ((prog-mode shell-mode eshell-mode) . corfu-mode)
+  (corfu-quit-at-boundary t)
+  (corfu-preview-current nil)
+
+  (corfu-cycle t)
+  :bind (:map corfu-map
+              ("RET" . nil)
+              ("TAB" . nil)
+              ([remap previous-line] . nil)
+              ([remap next-line] . nil)
+              ("C-j" . corfu-insert))
   :init
   (global-corfu-mode)
   )
@@ -104,12 +112,12 @@
 
 (use-package treesit-auto
   :config
+  (treesit-auto-add-to-auto-mode-alist 'all)
   (global-treesit-auto-mode))
 
 (use-package git-gutter
   :hook (prog-mode . git-gutter-mode)
   :config
-  (treesit-auto-add-to-auto-mode-alist 'all)
   (setq git-gutter:update-interval 0.02))
 
 (use-package git-gutter-fringe

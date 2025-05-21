@@ -34,7 +34,6 @@ in
           expand-region
           git-gutter
           git-gutter-fringe
-          magit
           multiple-cursors
           nix-mode
           orderless
