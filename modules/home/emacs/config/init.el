@@ -180,9 +180,9 @@
 
 (use-package racket-mode
   :mode "\\.rkt\\'"
-  :hook ((direnv-after-update-environmentv-hook . (lambda ()
-            (when (derived-mode-p 'racket-mode)
-              (racket-xp-mode 1))))
+  :hook ((racket-mode . (lambda ()
+                          (direnv-update-environment)
+                          (racket-xp-mode)))
          (racket-repl-mode . disable-line-numbers))
   :init (require 'racket-xp)
   )

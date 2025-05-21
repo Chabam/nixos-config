@@ -49,7 +49,7 @@
    `(highlight                          ((t (:background ,chabam-purple-bg))))
    `(region                             ((t (:background ,chabam-light-grey))))
    `(match                              ((t (:background ,chabam-purple-bg))))
-   `(mode-line                          ((t (:foreground ,chabam-foreground :background ,chabam-electric-blue))))
+   `(mode-line                          ((t (:foreground ,chabam-background :background ,chabam-electric-blue))))
    `(mode-line-inactive                 ((t (:foreground ,chabam-dark-bg :background ,chabam-light-grey))))
    `(line-number                        ((t (:foreground ,chabam-grey :inherit default))))
    `(border                             ((t (:foreground ,chabam-dark-bg))))
