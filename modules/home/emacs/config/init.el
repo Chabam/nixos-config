@@ -1,3 +1,9 @@
+(require 'no-littering)
+(no-littering-theme-backups)
+(let ((dir (no-littering-expand-var-file-name "lock-files/")))
+  (make-directory dir t)
+  (setq lock-file-name-transforms `((".*" ,dir t))))
+
 (load-file "~/.emacs.d/chabam-light-theme.el")
 (load-file "~/.emacs.d/chabam-dark-theme.el")
 
@@ -20,7 +26,6 @@
   :bind (("C-." . duplicate-line)
          ("M-o" . other-window)
          ("C-S-j" . join-line))
-
   :custom
   (custom-file "~/.emacs.d/custom.el")
   ;; Support opening new minibuffers from inside existing minibuffers.
@@ -39,7 +44,6 @@
 
   (completion-styles '(basic substring partial-completion flex))
   (vc-follow-symlinks t)
-  (tab-always-indent 'complete)
   (read-extended-command-predicate #'command-completion-default-include-p)
   :hook (prog-mode . (lambda () (setq show-trailing-whitespace t)))
   :config (require 'ansi-color)
@@ -58,10 +62,10 @@
   (global-visual-line-mode)
   (column-number-mode)
   (windmove-default-keybindings)
-  (setq backup-directory-alist `((".*" . ,temporary-file-directory))
-        auto-save-file-name-transforms `((".*" ,temporary-file-directory t))
-        indent-line-function 'insert-tab
-        default-frame-alist '((font . "Iosevka-12")))
+  (setq indent-line-function 'insert-tab
+        default-frame-alist '((font . "Iosevka-12")
+                              (width . 100)
+                              (height . 40)))
   (setq-default standard-indent 4
                 tab-width 4
                 indent-tabs-mode nil
@@ -100,7 +104,11 @@
  :custom
   (completion-styles '(orderless basic))
   (completion-category-overrides '((file (styles basic partial-completion))))
+  (completion-matching-styles '(orderless-regexp))
   )
+
+(use-package undo-tree
+  :init (global-undo-tree-mode))
 
 (use-package dired
   :commands (dired dired-jump)
