@@ -90,6 +90,7 @@
   (corfu-preview-current nil)
 
   (corfu-cycle t)
+  (corfu-popupinfo-delay 0.5)
   :bind (:map corfu-map
               ("RET" . nil)
               ("TAB" . nil)
@@ -98,6 +99,7 @@
               ("C-j" . corfu-insert))
   :init
   (global-corfu-mode)
+  (corfu-popupinfo-mode)
   )
 
 (use-package orderless
@@ -133,7 +135,7 @@
   (define-fringe-bitmap 'git-gutter-fr:deleted [128 192 224 240] nil nil 'bottom))
 
 (use-package eglot
-  :hook ((c++-mode nix-mode racket-mode python-mode) . eglot-ensure)
+  :hook ((c++-mode nix-mode python-mode) . eglot-ensure)
   )
 
 (use-package multiple-cursors
@@ -178,7 +180,11 @@
 
 (use-package racket-mode
   :mode "\\.rkt\\'"
-  :hook (racket-repl-mode . disable-line-numbers)
+  :hook ((direnv-after-update-environmentv-hook . (lambda ()
+            (when (derived-mode-p 'racket-mode)
+              (racket-xp-mode 1))))
+         (racket-repl-mode . disable-line-numbers))
+  :init (require 'racket-xp)
   )
 
 (use-package direnv
