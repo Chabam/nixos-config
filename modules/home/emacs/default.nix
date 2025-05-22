@@ -22,9 +22,12 @@ in
   };
 
   config = lib.mkIf cfg.enable {
-    home.packages = with pkgs; [(aspellWithDicts (dicts : with dicts; [
-      en en-computers en-science fr
-    ])) ];
+    home.packages = with pkgs; [
+      languagetool
+      (aspellWithDicts (dicts : with dicts; [
+        en en-computers en-science fr
+      ]))
+    ];
 
     programs.emacs = {
       enable = true;
@@ -35,6 +38,8 @@ in
           corfu
           direnv
           expand-region
+          langtool
+          langtool-popup
           git-gutter
           git-gutter-fringe
           magit

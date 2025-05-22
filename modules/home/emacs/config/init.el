@@ -42,6 +42,8 @@
   ;; Remove splash screen
   (inhibit-startup-screen t)
 
+  (text-mode-ispell-word-completion nil)
+
   (completion-styles '(basic substring partial-completion flex))
   (vc-follow-symlinks t)
   (read-extended-command-predicate #'command-completion-default-include-p)
@@ -160,6 +162,13 @@
 (use-package eglot
   :hook ((c++-mode nix-mode python-mode) . eglot-ensure)
   )
+
+(use-package langtool
+  :config
+  (setq langtool-default-language "fr")
+  (require 'langtool-popup)
+  :init
+  (setq langtool-bin "languagetool-commandline"))
 
 (use-package expand-region
   :bind ("C-=" . 'er/expand-region))

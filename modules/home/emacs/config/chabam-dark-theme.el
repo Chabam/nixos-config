@@ -11,6 +11,7 @@
       (chabam-light-pink      "#FF74B8")
       (chabam-pink            "#FF4297")
       (chabam-green           "#00C15A")
+      (chabam-dark-green-bg   "#00915A")
       (chabam-blue            "#00B4FF")
       (chabam-light-blue      "#66D1FF")
       (chabam-turquoise       "#00DFDB")
@@ -51,6 +52,7 @@
    `(highlight                          ((t (:background ,chabam-purple-bg))))
    `(region                             ((t (:background ,chabam-dark-grey))))
    `(match                              ((t (:background ,chabam-purple-bg))))
+
    `(mode-line                          ((t (:foreground ,chabam-foreground :background ,chabam-electric-blue))))
    `(mode-line-inactive                 ((t (:foreground ,chabam-light-grey :background ,chabam-dark-bg))))
    `(line-number                        ((t (:foreground ,chabam-light-grey :inherit default))))
@@ -68,6 +70,7 @@
    `(button                             ((t (:foreground ,chabam-blue :underline t))))
    `(warning                            ((t (:foreground ,adwaita-yellow))))
    `(error                              ((t (:foreground ,adwaita-red))))
+   `(popup-tip-face                     ((t (:foreground ,chabam-foreground :background ,chabam-dark-bg))))
    `(ansi-color-black                   ((t (:foreground ,adwaita-black))))
    `(ansi-color-red                     ((t (:foreground ,adwaita-red))))
    `(ansi-color-blue                    ((t (:foreground ,adwaita-blue))))
@@ -132,6 +135,8 @@
    `(corfu-default                      ((t (:foreground ,chabam-foreground :background ,chabam-dark-bg))))
    `(corfu-border                       ((t (:background ,chabam-dark-bg))))
    `(corfu-current                      ((t (:inherit vertico-current))))
+   `(langtool-errline                   ((t (:inherit trailing-whitespace))))
+   `(langtool-correction-face           ((t (:background ,chabam-dark-green-bg))))
  ))
 
 (provide-theme 'chabam-dark)
