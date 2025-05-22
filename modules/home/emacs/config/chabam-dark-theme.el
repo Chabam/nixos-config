@@ -120,6 +120,10 @@
    `(compilation-info                   ((t (:foreground ,chabam-turquoise))))
    `(xref-file-header                   ((t (:foreground ,chabam-turquoise))))
 
+   ;; Org mode
+   `(org-block                          ((t (:background ,chabam-dark-bg))))
+   `(org-block-begin-line               ((t (:background ,chabam-dark-bg :foreground ,chabam-light-grey))))
+
 
    ;; 3rd party styling
    `(vertico-current                    ((t (:background ,chabam-dark-grey))))

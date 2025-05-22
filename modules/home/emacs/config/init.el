@@ -47,7 +47,8 @@
   (completion-styles '(basic substring partial-completion flex))
   (vc-follow-symlinks t)
   (read-extended-command-predicate #'command-completion-default-include-p)
-  :hook (prog-mode . (lambda () (setq show-trailing-whitespace t)))
+  :hook ((prog-mode . (lambda () (setq show-trailing-whitespace t)))
+         ((org-mode text-mode) . auto-fill-mode))
   :config (require 'ansi-color)
   :init
 
@@ -83,7 +84,9 @@
                 display-line-numbers-type 'relative)
   (set-frame-font "Iosevka 12" nil t)
   (set-face-attribute 'fixed-pitch nil :family "Iosevka")
-  )
+
+  ;; Fix for `xdg-open`
+  (setq process-connection-type nil))
 
 (use-package compile
   :hook (compilation-mode . disable-line-numbers)
@@ -115,7 +118,12 @@
 (use-package flyspell
   :hook (org-mode . flyspell-mode))
 
-(use-package flyspell-correct
+(use-package org-mode
+  :mode "\\.org\\'"
+  :init
+  (require 'org-tempo))
+
+  (use-package flyspell-correct
   :after flyspell
   :bind (:map flyspell-mode-map ("C-;" . flyspell-correct-wrapper)))
 
@@ -151,6 +159,11 @@
 
 (use-package magit
   :commands (magit-status))
+(use-package multiple-cursors
+     :bind ("C-S-c C-S-c" . 'mc/edit-lines)
+           ("C-<" . 'mc/mark-previous-like-this)
+           ("C->" . 'mc/mark-next-like-this)
+           ("C-c C->" . 'mc/mark-all-like-this))
 
 (use-package git-gutter
   :hook (prog-mode . git-gutter-mode)

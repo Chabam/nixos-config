@@ -45,6 +45,7 @@ in
           git-gutter-fringe
           magit
           marginalia
+          multiple-cursors
           nix-mode
           no-littering
           orderless

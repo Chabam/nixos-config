@@ -5,10 +5,8 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(custom-safe-themes
-   '("c19603616f5dcec70b9a9ec69f9c540350a23eaa6977341c0e8ac814d0b73f9b"
-     "02abf004dda9655e0093119f06d108d520c2e6d1a8a4f139447f43555879f21c"
-     "db8bacdd7a281c80800e06db7bda439dac5e17531ae7f15825b83e83b743c75a"
-     "80b69c929f41404322429f69ac3d1a215358a829d0a3819784bd5f072258d5ad"
+   '("0a4bba41c5bbd04fd82e655b5b65584b814208803b3489043786384d85311bb3"
+     "cebcd8bf4e74c13abd0ba3eaeddd788756559e4b5a80926fe5b93c8186e68ce2"
      default)))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
