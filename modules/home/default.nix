@@ -93,10 +93,10 @@ in
   home = {
     shell.enableBashIntegration = true;
 
-    file = import ./autostart.nix {
-      apps = with pkgs; [
-      ];
-    };
+    # file = import ./autostart.nix {
+    #   apps = with pkgs; [
+    #   ];
+    # };
 
     packages = guiApps ++ cliApps;
 

@@ -22,6 +22,10 @@ in
   };
 
   config = lib.mkIf cfg.enable {
+    home.packages = with pkgs; [(aspellWithDicts (dicts : with dicts; [
+      en en-computers en-science fr
+    ])) ];
+
     programs.emacs = {
       enable = true;
       package = emacsPackage;
@@ -30,17 +34,19 @@ in
           auto-dark
           corfu
           direnv
-          evil
           expand-region
           git-gutter
           git-gutter-fringe
-          multiple-cursors
+          magit
+          marginalia
           nix-mode
+          no-littering
           orderless
           racket-mode
           smartparens
           treesit-auto
           treesit-grammars.with-all-grammars
+          undo-tree
           vertico
           visual-regexp
           vterm

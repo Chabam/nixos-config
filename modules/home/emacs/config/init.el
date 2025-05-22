@@ -1,9 +1,3 @@
-(require 'no-littering)
-(no-littering-theme-backups)
-(let ((dir (no-littering-expand-var-file-name "lock-files/")))
-  (make-directory dir t)
-  (setq lock-file-name-transforms `((".*" ,dir t))))
-
 (load-file "~/.emacs.d/chabam-light-theme.el")
 (load-file "~/.emacs.d/chabam-dark-theme.el")
 
@@ -15,6 +9,12 @@
   (vertico-count 10)
   :init
   (vertico-mode))
+
+(use-package marginalia
+  :bind (:map minibuffer-local-map
+         ("M-A" . marginalia-cycle))
+  :init
+  (marginalia-mode))
 
 ;; Persist history over Emacs restarts. Vertico sorts by history position.
 (use-package savehist
@@ -48,6 +48,15 @@
   :hook (prog-mode . (lambda () (setq show-trailing-whitespace t)))
   :config (require 'ansi-color)
   :init
+
+  ;; Putting files somewhere else
+  (require 'no-littering)
+  (no-littering-theme-backups)
+  (let ((dir (no-littering-expand-var-file-name "lock-files/")))
+    (make-directory dir t)
+    (setq lock-file-name-transforms `((".*" ,dir t))))
+  (setq custom-file (expand-file-name "custom.el" user-emacs-directory))
+
   ;; Smooth scroll
   (pixel-scroll-precision-mode)
   (pixel-scroll-mode)
@@ -99,8 +108,18 @@
               ("C-j" . corfu-insert))
   :init
   (global-corfu-mode)
-  (corfu-popupinfo-mode)
-  )
+  (corfu-popupinfo-mode))
+
+(use-package dabbrev
+  ;; Swap M-/ and C-M-/
+  :bind (("M-/" . dabbrev-completion)
+         ("C-M-/" . dabbrev-expand))
+  :config
+  (add-to-list 'dabbrev-ignored-buffer-regexps "\\` ")
+  (add-to-list 'dabbrev-ignored-buffer-modes 'authinfo-mode)
+  (add-to-list 'dabbrev-ignored-buffer-modes 'doc-view-mode)
+  (add-to-list 'dabbrev-ignored-buffer-modes 'pdf-view-mode)
+  (add-to-list 'dabbrev-ignored-buffer-modes 'tags-table-mode))
 
 (use-package orderless
  :custom
@@ -115,13 +134,17 @@
 (use-package dired
   :commands (dired dired-jump)
   :hook (dired-mode . (lambda () (dired-hide-details-mode 1)))
-  :init
-  (setq dired-listing-switches "-aBhlv  --group-directories-first"))
+  :custom
+  (dired-listing-switches "-aBhlv  --group-directories-first")
+  (dired-dwim-target t))
 
 (use-package treesit-auto
   :config
   (treesit-auto-add-to-auto-mode-alist 'all)
   (global-treesit-auto-mode))
+
+(use-package magit
+  :commands (magit-status))
 
 (use-package git-gutter
   :hook (prog-mode . git-gutter-mode)
@@ -137,12 +160,6 @@
 (use-package eglot
   :hook ((c++-mode nix-mode python-mode) . eglot-ensure)
   )
-
-(use-package multiple-cursors
-    :bind ("C-S-c C-S-c" . 'mc/edit-lines)
-          ("C-<" . 'mc/mark-previous-like-this)
-          ("C->" . 'mc/mark-next-like-this)
-          ("C-c C->" . 'mc/mark-all-like-this))
 
 (use-package expand-region
   :bind ("C-=" . 'er/expand-region))
@@ -184,7 +201,6 @@
                           (direnv-update-environment)
                           (racket-xp-mode)))
          (racket-repl-mode . disable-line-numbers))
-  :init (require 'racket-xp)
   )
 
 (use-package direnv
