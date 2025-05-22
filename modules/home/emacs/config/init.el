@@ -112,6 +112,13 @@
   (global-corfu-mode)
   (corfu-popupinfo-mode))
 
+(use-package flyspell
+  :hook (org-mode . flyspell-mode))
+
+(use-package flyspell-correct
+  :after flyspell
+  :bind (:map flyspell-mode-map ("C-;" . flyspell-correct-wrapper)))
+
 (use-package dabbrev
   ;; Swap M-/ and C-M-/
   :bind (("M-/" . dabbrev-completion)
@@ -129,9 +136,6 @@
   (completion-category-overrides '((file (styles basic partial-completion))))
   (completion-matching-styles '(orderless-regexp))
   )
-
-(use-package undo-tree
-  :init (global-undo-tree-mode))
 
 (use-package dired
   :commands (dired dired-jump)
@@ -172,6 +176,8 @@
 
 (use-package expand-region
   :bind ("C-=" . 'er/expand-region))
+
+(use-package vundo)
 
 (use-package smartparens
   :config

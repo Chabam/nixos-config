@@ -38,6 +38,7 @@ in
           corfu
           direnv
           expand-region
+          flyspell-correct
           langtool
           langtool-popup
           git-gutter
@@ -51,8 +52,8 @@ in
           smartparens
           treesit-auto
           treesit-grammars.with-all-grammars
-          undo-tree
           vertico
+          vundo
           visual-regexp
           vterm
         ]
