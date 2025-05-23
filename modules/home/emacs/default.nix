@@ -23,7 +23,6 @@ in
 
   config = lib.mkIf cfg.enable {
     home.packages = with pkgs; [
-      languagetool
       (aspellWithDicts (dicts : with dicts; [
         en en-computers en-science fr
       ]))
@@ -36,27 +35,22 @@ in
         epkgs: with epkgs; [
           auto-dark
           corfu
+          diff-hl
           direnv
+          embrace
           expand-region
-          flyspell-correct
-          langtool
-          langtool-popup
-          git-gutter
-          git-gutter-fringe
           magit
           marginalia
-          multiple-cursors
           nix-mode
           no-littering
           orderless
           racket-mode
-          smartparens
           treesit-auto
           treesit-grammars.with-all-grammars
           vertico
-          vundo
           visual-regexp
           vterm
+          vundo
         ]
       );
     };

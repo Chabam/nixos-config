@@ -83,10 +83,7 @@
                 indent-tabs-mode nil
                 display-line-numbers-type 'relative)
   (set-frame-font "Iosevka 12" nil t)
-  (set-face-attribute 'fixed-pitch nil :family "Iosevka")
-
-  ;; Fix for `xdg-open`
-  (setq process-connection-type nil))
+  (set-face-attribute 'fixed-pitch nil :family "Iosevka"))
 
 (use-package compile
   :hook (compilation-mode . disable-line-numbers)
@@ -115,17 +112,10 @@
   (global-corfu-mode)
   (corfu-popupinfo-mode))
 
-(use-package flyspell
-  :hook (org-mode . flyspell-mode))
-
 (use-package org-mode
   :mode "\\.org\\'"
   :init
   (require 'org-tempo))
-
-  (use-package flyspell-correct
-  :after flyspell
-  :bind (:map flyspell-mode-map ("C-;" . flyspell-correct-wrapper)))
 
 (use-package orderless
  :custom
@@ -148,58 +138,37 @@
 
 (use-package magit
   :commands (magit-status))
-(use-package multiple-cursors
-     :bind ("C-S-c C-S-c" . 'mc/edit-lines)
-           ("C-<" . 'mc/mark-previous-like-this)
-           ("C->" . 'mc/mark-next-like-this)
-           ("C-c C->" . 'mc/mark-all-like-this))
 
-(use-package git-gutter
-  :hook (prog-mode . git-gutter-mode)
+(use-package diff-hl
+  :hook (dired-mode . diff-hl-dired-mode)
   :config
-  (setq git-gutter:update-interval 0.02))
-
-(use-package git-gutter-fringe
-  :config
-  (define-fringe-bitmap 'git-gutter-fr:added [224] nil nil '(center repeated))
-  (define-fringe-bitmap 'git-gutter-fr:modified [224] nil nil '(center repeated))
-  (define-fringe-bitmap 'git-gutter-fr:deleted [128 192 224 240] nil nil 'bottom))
+  (global-diff-hl-mode))
 
 (use-package eglot
-  :hook ((c++-mode nix-mode python-mode) . eglot-ensure)
-  )
-
-(use-package langtool
+  :hook ((c++-mode nix-mode python-mode org-mode) . eglot-ensure)
   :config
-  (setq langtool-default-language "fr")
-  (require 'langtool-popup)
-  :init
-  (setq langtool-bin "languagetool-commandline"))
+  (add-to-list 'eglot-server-programs
+               '(org-mode . ("ltex-ls-plus" "--server-type" "TcpSocket" "--port" :autoport)))
+  (setq-default eglot-workspace-configuration
+                '((:ltex . (:language "auto"
+                            :completionEnabled t
+                            :disabledRules (:fr ["FRENCH_WHITESPACE"]))))))
 
 (use-package expand-region
   :bind ("C-=" . 'er/expand-region))
 
 (use-package vundo)
 
-(use-package smartparens
-  :config
-  (require 'smartparens-config)
-  (smartparens-global-mode 1)
-  (sp-pair "(" ")" :unless nil)
-  (sp-pair "[" "]" :unless nil)
-  (sp-pair "{" "}" :unless nil)
-  (sp-pair "\"" "\"" :unless nil)
-  (sp-pair "'" "'" :unless nil)
-  :bind ("C-c s r" . sp-rewrap-sexp)
-        ("C-c s e" . sp-change-enclosing)
-  :init
-  (setq sp-autoinsert-pair nil))
+(use-package embrace
+  :hook ((org-mode . embrace-org-mode-hook)
+         (tex-mode . embrace-tex-mode-hook))
+  :bind ("C-'" . embrace-commander)
+  )
 
 (use-package visual-regexp
   :bind
     ("C-c r" . 'vr/replace)
-    ("C-c q" . 'vr/query-replace)
-    ("C-c m" . 'vr/mc-mark))
+    ("C-c q" . 'vr/query-replace))
 
 (use-package vterm
     :hook (vterm-mode . (lambda () (display-line-numbers-mode 0))))
