@@ -1,9 +1,6 @@
 (load-file "~/.emacs.d/chabam-light-theme.el")
 (load-file "~/.emacs.d/chabam-dark-theme.el")
 
-(defun disable-line-numbers ()
-    (display-line-numbers-mode -1))
-
 (use-package vertico
   :custom
   (vertico-count 10)
@@ -47,7 +44,9 @@
   (completion-styles '(basic substring partial-completion flex))
   (vc-follow-symlinks t)
   (read-extended-command-predicate #'command-completion-default-include-p)
-  :hook ((prog-mode . (lambda () (setq show-trailing-whitespace t)))
+  :hook (((prog-mode text-mode) . (lambda () (setq show-trailing-whitespace t)
+                                    (column-number-mode)
+                                    (display-line-numbers-mode)))
          ((org-mode text-mode) . auto-fill-mode))
   :config (require 'ansi-color)
   :init
@@ -69,10 +68,6 @@
   (tool-bar-mode 0)
   (menu-bar-mode 0)
 
-  ;; Showing line numbers
-  (global-display-line-numbers-mode)
-  (global-visual-line-mode)
-  (column-number-mode)
   (windmove-default-keybindings)
   (setq indent-line-function 'insert-tab
         default-frame-alist '((font . "Iosevka-12")
@@ -86,9 +81,11 @@
   (set-face-attribute 'fixed-pitch nil :family "Iosevka"))
 
 (use-package compile
-  :hook (compilation-mode . disable-line-numbers)
   :init
   (add-hook 'compilation-filter-hook 'ansi-color-compilation-filter))
+
+(use-package flymake
+  :config (setq flymake-indicator-type 'margins))
 
 (use-package corfu
   :custom
@@ -149,11 +146,13 @@
 
 (use-package eglot
   :hook ((c++-mode nix-mode python-mode org-mode) . eglot-ensure)
+  :bind (("C-x C-a" . eglot-code-actions)
+         ("C-x C-r" . eglot-rename))
   :config
   (add-to-list 'eglot-server-programs
                '(org-mode . ("ltex-ls-plus" "--server-type" "TcpSocket" "--port" :autoport)))
   (setq-default eglot-workspace-configuration
-                '((:ltex . (:language "auto"
+                '((:ltex . (:language "fr"
                             :completionEnabled t
                             :disabledRules (:fr ["FRENCH_WHITESPACE"]))))))
 
@@ -164,9 +163,8 @@
 
 (use-package embrace
   :hook ((org-mode . embrace-org-mode-hook)
-         (tex-mode . embrace-tex-mode-hook))
-  :bind ("C-'" . embrace-commander)
-  )
+         (LaTeX-mode . embrace-LaTeX-mode-hook))
+  :bind ("C-x e" . embrace-commander))
 
 (use-package visual-regexp
   :bind
@@ -188,8 +186,7 @@
   :mode "\\.rkt\\'"
   :hook ((racket-mode . (lambda ()
                           (direnv-update-environment)
-                          (racket-xp-mode)))
-         (racket-repl-mode . disable-line-numbers))
+                          (racket-xp-mode))))
   )
 
 (use-package direnv
