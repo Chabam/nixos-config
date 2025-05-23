@@ -140,9 +140,12 @@
   :commands (magit-status))
 
 (use-package diff-hl
-  :hook (dired-mode . diff-hl-dired-mode)
+  :hook ((dired-mode . diff-hl-dired-mode)
+         (magit-post-refresh . diff-hl-magit-post-refresh))
   :config
-  (global-diff-hl-mode))
+  (global-diff-hl-mode)
+  (diff-hl-flydiff-mode)
+  )
 
 (use-package eglot
   :hook ((c++-mode nix-mode python-mode org-mode) . eglot-ensure)
