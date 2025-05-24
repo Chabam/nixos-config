@@ -32,7 +32,7 @@ in
       powerManagement = {
         enable = true;
       };
-      open = true;
+      open = false;
       package = config.boot.kernelPackages.nvidiaPackages.latest;
     };
 
