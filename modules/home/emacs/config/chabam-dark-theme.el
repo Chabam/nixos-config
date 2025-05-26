@@ -117,7 +117,7 @@
    `(flymake-error-echo                 ((t (:foreground ,adwaita-red))))
    `(flymake-warning-echo               ((t (:foreground ,adwaita-yellow))))
    `(flymake-note-echo                  ((t (:foreground ,chabam-blue))))
-   `(eglot-highlight-symbol-face        ((t (:inherit region))))
+   `(eglot-highlight-symbol-face        ((t (:inherit lazy-highlight))))
    `(xref-file-header                   ((t (:foreground ,chabam-turquoise))))
    `(compilation-info                   ((t (:foreground ,chabam-turquoise))))
    `(xref-file-header                   ((t (:foreground ,chabam-turquoise))))
@@ -129,19 +129,28 @@
 
    ;; 3rd party styling
    `(vertico-current                    ((t (:background ,chabam-dark-grey))))
+
    `(completions-common-part            ((t (:foreground ,chabam-dark-turquoise))))
+
    `(orderless-match-face-0             ((t (:inherit completions-common-part))))
    `(orderless-match-face-1             ((t (:foreground ,chabam-pink))))
    `(orderless-match-face-2             ((t (:foreground ,chabam-blue))))
    `(orderless-match-face-3             ((t (:foreground ,chabam-orange))))
+
    `(diff-hl-insert                     ((t (:background ,chabam-dark-green-bg :foreground ,chabam-green))))
    `(diff-hl-delete                     ((t (:background ,chabam-red :foreground ,adwaita-red))))
    `(diff-hl-change                     ((t (:background ,adwaita-blue :foreground ,adwaita-bright-blue))))
+
    `(corfu-bar                          ((t (:background ,chabam-grey))))
    `(corfu-default                      ((t (:foreground ,chabam-foreground :background ,chabam-dark-bg))))
    `(corfu-border                       ((t (:background ,chabam-dark-bg))))
    `(corfu-current                      ((t (:inherit vertico-current))))
+
    `(embrace-help-pair-face             ((t (:foreground ,chabam-pink))))
+
+   `(visual-replace-match             ((t (:inherit lazy-highlight))))
+   `(visual-replace-delete-match      ((t (:foreground ,chabam-light-grey :strike-through t))))
+   `(visual-replace-replacement       ((t (:inherit default))))
    ))
 
 (provide-theme 'chabam-dark)

@@ -118,8 +118,7 @@
  :custom
   (completion-styles '(orderless basic))
   (completion-category-overrides '((file (styles basic partial-completion))))
-  (completion-matching-styles '(orderless-regexp))
-  )
+  (completion-matching-styles '(orderless-regexp)))
 
 (use-package dired
   :commands (dired dired-jump)
@@ -139,10 +138,9 @@
 (use-package diff-hl
   :hook ((dired-mode . diff-hl-dired-mode)
          (magit-post-refresh . diff-hl-magit-post-refresh))
-  :config
+  :init
   (global-diff-hl-mode)
-  (diff-hl-flydiff-mode)
-  )
+  (diff-hl-flydiff-mode))
 
 (use-package eglot
   :hook ((c++-mode nix-mode python-mode org-mode) . eglot-ensure)
@@ -166,11 +164,6 @@
          (LaTeX-mode . embrace-LaTeX-mode-hook))
   :bind ("C-x e" . embrace-commander))
 
-(use-package visual-regexp
-  :bind
-    ("C-c r" . 'vr/replace)
-    ("C-c q" . 'vr/query-replace))
-
 (use-package vterm
     :hook (vterm-mode . (lambda () (display-line-numbers-mode 0))))
 
@@ -186,8 +179,7 @@
   :mode "\\.rkt\\'"
   :hook ((racket-mode . (lambda ()
                           (direnv-update-environment)
-                          (racket-xp-mode))))
-  )
+                          (racket-xp-mode)))))
 
 (use-package direnv
   :config

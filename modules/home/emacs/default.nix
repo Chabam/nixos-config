@@ -48,7 +48,6 @@ in
           treesit-auto
           treesit-grammars.with-all-grammars
           vertico
-          visual-regexp
           vterm
           vundo
         ]
