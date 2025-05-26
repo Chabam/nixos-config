@@ -99,6 +99,8 @@
 
   (corfu-cycle t)
   (corfu-popupinfo-delay 0.5)
+  (corfu-left-margin-width 0)
+  (corfu-right-margin-width 0)
   :bind (:map corfu-map
               ("RET" . nil)
               ("TAB" . nil)

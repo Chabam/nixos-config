@@ -123,7 +123,6 @@
    `(org-block                          ((t (:background ,chabam-dark-bg))))
    `(org-block-begin-line               ((t (:background ,chabam-dark-bg :foreground ,chabam-light-grey))))
 
-
    ;; 3rd party styling
    `(vertico-current                    ((t (:background ,chabam-light-grey))))
    `(completions-common-part            ((t (:foreground ,chabam-turquoise))))
@@ -137,15 +136,11 @@
    `(diff-hl-change                     ((t (:background ,adwaita-blue :foreground ,adwaita-bright-blue))))
 
    `(corfu-bar                          ((t (:background ,chabam-grey))))
-   `(corfu-default                      ((t (:foreground ,chabam-foreground :background ,chabam-dark-bg))))
-   `(corfu-border                       ((t (:background ,chabam-dark-bg))))
-   `(corfu-current                      ((t (:inherit vertico-current))))
+   `(corfu-default                      ((t (:foreground ,chabam-foreground :background ,chabam-light-grey))))
+   `(corfu-border                       ((t (:background ,chabam-light-grey))))
+   `(corfu-current                      ((t (:inherit vertico-current :background ,chabam-background))))
 
    `(embrace-help-pair-face             ((t (:foreground ,chabam-pink))))
-
-   `(visual-replace-match             ((t (:inherit lazy-highlight))))
-   `(visual-replace-delete-match      ((t (:foreground ,chabam-light-grey :strike-through t))))
-   `(visual-replace-replacement       ((t (:inherit default))))
    ))
 
 (provide-theme 'chabam-light)

@@ -147,10 +147,6 @@
    `(corfu-current                      ((t (:inherit vertico-current))))
 
    `(embrace-help-pair-face             ((t (:foreground ,chabam-pink))))
-
-   `(visual-replace-match             ((t (:inherit lazy-highlight))))
-   `(visual-replace-delete-match      ((t (:foreground ,chabam-light-grey :strike-through t))))
-   `(visual-replace-replacement       ((t (:inherit default))))
    ))
 
 (provide-theme 'chabam-dark)
