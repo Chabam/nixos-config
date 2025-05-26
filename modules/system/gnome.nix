@@ -10,7 +10,6 @@
     epiphany # web browser
     geary # email reader
     gnome-characters
-    gnome-console
     gnome-music
     gnome-photos
     gnome-terminal
@@ -23,9 +22,4 @@
   environment.systemPackages = with pkgs; [
     decibels
   ];
-
-  programs.nautilus-open-any-terminal = {
-    enable = true;
-    terminal = "ptyxis";
-  };
 }

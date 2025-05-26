@@ -17,6 +17,7 @@ let
     libreoffice
     obs-studio
     teams-for-linux
+    mpv
   ];
   cliApps = with pkgs; [
     direnv
@@ -45,7 +46,6 @@ in
   home.homeDirectory = "/home/${osConfig.main-user.userName}";
   home.stateVersion = "24.05";
 
-  ptyxis.enable = true;
   programs.git = {
     enable = true;
     userName = "Chabam";
