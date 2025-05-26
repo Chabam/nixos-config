@@ -150,10 +150,4 @@
       package = pkgs.adwaita-qt;
     };
   };
-
-  # Fix for slow startup
-  home.sessionVariables = lib.mkIf (!osConfig.nvidia.enable) {
-    GSK_RENDERER = "gl";
-    GDK_DEBUG = "gl-no-fractional";
-  };
 }
