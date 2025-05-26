@@ -19,6 +19,7 @@ with pkgs.vimPlugins;
           bg1 = "#ffffff",
         },
         carbonfox = {
+          bg1 = "#1d1d20",
           orange = "#ff6f00"
         }
       },

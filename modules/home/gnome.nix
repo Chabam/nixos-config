@@ -100,6 +100,13 @@
         stick = true;
       };
 
+      "org/gnome/Console" = {
+        audible-bell = false;
+        custom-font = "IosevkaTerm Nerd Font Mono 12";
+        ignore-scrollback = true;
+        theme = "auto";
+        use-system = false;
+      };
     };
   };
 
