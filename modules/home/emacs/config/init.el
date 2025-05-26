@@ -149,6 +149,7 @@
   :bind (("C-x C-a" . eglot-code-actions)
          ("C-x C-r" . eglot-rename))
   :config
+  (add-to-list 'eglot-ignored-server-capabilities :inlayHintProvider)
   (add-to-list 'eglot-server-programs
                '(org-mode . ("ltex-ls-plus" "--server-type" "TcpSocket" "--port" :autoport)))
   (setq-default eglot-workspace-configuration
@@ -164,7 +165,7 @@
 (use-package embrace
   :hook ((org-mode . embrace-org-mode-hook)
          (LaTeX-mode . embrace-LaTeX-mode-hook))
-  :bind ("C-x e" . embrace-commander))
+  :bind ("C-c s" . embrace-commander))
 
 (use-package vterm
     :hook (vterm-mode . (lambda () (display-line-numbers-mode 0))))
