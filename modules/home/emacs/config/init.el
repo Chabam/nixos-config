@@ -18,11 +18,29 @@
   :init
   (savehist-mode))
 
+(use-package better-jumper
+  :bind (("C-c C-n" . 'better-jumper-jump-forward)
+         ("C-c C-p" . 'better-jumper-jump-backward))
+  :config
+  (setq better-jumper-context 'window
+        better-jumper-new-window-behavior 'copy
+        better-jumper-add-jump-behavior 'replace
+        better-jumper-max-length 100)
+  ;; Functions that should add a mark
+  (dolist (cmd '(next-line previous-line
+                  forward-paragraph backward-paragraph
+                  beginning-of-defun end-of-defun
+                  forward-word backward-word
+                  scroll-up-command scroll-down-command
+                  recenter-top-bottom move-to-window-line-top-bottom
+                  goto-line))
+    (advice-add cmd :before (lambda (&rest _) (better-jumper-set-jump))))
+  :init (better-jumper-mode +1))
+
 ;; Emacs minibuffer configurations.
 (use-package emacs
   :bind (("C-." . duplicate-line)
-         ("M-o" . other-window)
-         ("C-S-j" . join-line))
+         ("M-o" . other-window))
   :custom
   (custom-file "~/.emacs.d/custom.el")
   ;; Support opening new minibuffers from inside existing minibuffers.

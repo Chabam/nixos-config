@@ -34,6 +34,7 @@ in
       extraPackages = (
         epkgs: with epkgs; [
           auto-dark
+          better-jumper
           corfu
           diff-hl
           direnv
