@@ -137,7 +137,7 @@
   (require 'org-tempo))
 
 (use-package orderless
- :custom
+  :custom
   (completion-styles '(orderless basic))
   (completion-category-overrides '((file (styles basic partial-completion))))
   (completion-matching-styles '(orderless-regexp)))
@@ -155,6 +155,28 @@
   (global-treesit-auto-mode)
   (setq-default treesit-font-lock-level 4))
 
+(use-package c-ts-mode
+  :preface
+  (defun chbm-indent-style()
+    "Override the built-in BSD indentation style with some additional rules"
+    `(
+      ((node-is ")") parent-bol 0)
+      ((node-is "}") parent-bol 0)
+      ((n-p-gp nil nil "namespace_definition") grand-parent 0)
+      ((node-is "access_specifier") parent-bol 2)
+      ((node-is "field_initializer_list") parent-bol 4)
+      ((node-is "field_initializer") (nth-sibling 1) 0)
+      ((parent-is "compound_statement") parent-bol c-ts-mode-indent-offset)
+      ((node-is "compound_statement") parent-bol 0)
+      ((parent-is "parameter_list") parent-bol 4)
+      ((parent-is "argument_list") parent-bol 4)
+
+      ,@(alist-get 'bsd (c-ts-mode--indent-styles 'cpp))))
+  :init
+  (setq treesit--indent-verbose t)
+  (setq-default c-ts-mode-indent-offset 4)
+  (setq-default c-ts-mode-indent-style #'chbm-indent-style))
+
 (use-package magit
   :commands (magit-status))
 
@@ -166,7 +188,7 @@
   (diff-hl-flydiff-mode))
 
 (use-package eglot
-  :hook ((c++-mode nix-mode python-mode org-mode cmake-mode) . eglot-ensure)
+  :hook ((c++-ts-mode nix-mode python-ts-mode org-mode cmake-ts-mode) . eglot-ensure)
   :bind (("C-x C-a" . eglot-code-actions)
          ("C-x C-r" . eglot-rename))
   :config
@@ -177,6 +199,14 @@
                 '((:ltex . (:language "fr"
                             :completionEnabled t
                             :disabledRules (:fr ["FRENCH_WHITESPACE"]))))))
+
+(use-package eglot-inactive-regions
+  :custom
+  (eglot-inactive-regions-style 'darken-foreground)
+  (eglot-inactive-regions-opacity 0.4)
+  :config
+  (eglot-inactive-regions-mode 1))
+
 
 (use-package expand-region
   :bind ("C-=" . 'er/expand-region))

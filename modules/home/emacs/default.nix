@@ -39,6 +39,7 @@ in
           cmake-mode
           diff-hl
           direnv
+          eglot-inactive-regions
           embrace
           expand-region
           magit
