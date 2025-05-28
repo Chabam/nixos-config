@@ -36,6 +36,7 @@ in
           auto-dark
           better-jumper
           corfu
+          cmake-mode
           diff-hl
           direnv
           embrace

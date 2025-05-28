@@ -164,7 +164,7 @@
   (diff-hl-flydiff-mode))
 
 (use-package eglot
-  :hook ((c++-mode nix-mode python-mode org-mode) . eglot-ensure)
+  :hook ((c++-mode nix-mode python-mode org-mode cmake-mode) . eglot-ensure)
   :bind (("C-x C-a" . eglot-code-actions)
          ("C-x C-r" . eglot-rename))
   :config
@@ -199,6 +199,8 @@
 
 (use-package racket-mode
   :mode "\\.rkt\\'"
+  :bind (:map racket-mode-map
+              ("C-c C-p" . nil))
   :hook ((racket-mode . (lambda ()
                           (direnv-update-environment)
                           (racket-xp-mode)))))
