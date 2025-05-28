@@ -5,7 +5,7 @@
       (chabam-foreground      "#FFFFFF")
       (chabam-background      "#161616")
       (chabam-dark-bg         "#000000")
-      (chabam-dark-grey       "#262626")
+      (chabam-dark-grey       "#2b2b2b")
       (chabam-grey            "#393939")
       (chabam-light-grey      "#525252")
       (chabam-light-pink      "#FF74B8")
@@ -88,7 +88,12 @@
 
    ;; Help styling
    `(help-key-binding                   ((t (:foreground ,chabam-dark-turquoise :background ,chabam-dark-bg, :bold t))))
-   `(trailing-whitespace                ((t (:background ,chabam-red))))
+   `(trailing-whitespace                ((t (:background ,chabam-red :foreground ,chabam-light-grey))))
+   `(whitespace-space                   ((t (:foreground ,chabam-dark-grey))))
+   `(whitespace-trailing                ((t (:inherit trailing-whitespace))))
+   `(whitespace-indentation             ((t (:inherit whitespace-space))))
+   `(whitespace-newline                 ((t (:inherit whitespace-space))))
+
    `(link                               ((t (:foreground ,chabam-light-blue :underline t))))
    `(visited-link                       ((t (:foreground ,chabam-purple :underline t))))
    `(eldoc-highlight-function-argument  ((t (:inherit isearch :bold t))))

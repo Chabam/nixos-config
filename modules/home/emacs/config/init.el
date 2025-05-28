@@ -91,6 +91,8 @@
         default-frame-alist '((font . "Iosevka-12")
                               (width . 100)
                               (height . 40)))
+  (setq whitespace-style '(face indentation tabs tab-mark spaces space-mark
+                                newline newline-mark trailing))
   (setq-default standard-indent 4
                 tab-width 4
                 indent-tabs-mode nil
