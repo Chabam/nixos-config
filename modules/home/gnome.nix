@@ -104,8 +104,9 @@
         audible-bell = false;
         custom-font = "IosevkaTerm Nerd Font Mono 12";
         ignore-scrollback = true;
+        ignore-scrollback-limit = true;
         theme = "auto";
-        use-system = false;
+        use-system-font = false;
       };
     };
   };
