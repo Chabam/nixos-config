@@ -150,7 +150,8 @@
 (use-package treesit-auto
   :config
   (treesit-auto-add-to-auto-mode-alist 'all)
-  (global-treesit-auto-mode))
+  (global-treesit-auto-mode)
+  (setq-default treesit-font-lock-level 4))
 
 (use-package magit
   :commands (magit-status))
