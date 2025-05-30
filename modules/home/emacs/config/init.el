@@ -76,6 +76,8 @@
     (make-directory dir t)
     (setq lock-file-name-transforms `((".*" ,dir t))))
   (setq custom-file (expand-file-name "custom.el" user-emacs-directory))
+  (unless (file-exists-p custom-file)
+    (write-region "" nil custom-file))
 
   ;; Smooth scroll
   (pixel-scroll-precision-mode)
@@ -138,6 +140,7 @@
 
 (use-package orderless
   :custom
+  (completion-ignore-case t)
   (completion-styles '(orderless basic))
   (completion-category-overrides '((file (styles basic partial-completion))))
   (completion-matching-styles '(orderless-regexp)))
@@ -156,12 +159,15 @@
   (setq-default treesit-font-lock-level 4))
 
 (use-package c-ts-mode
+  :bind ("C-c o" . ff-find-other-file)
   :preface
   (defun chbm-indent-style()
     "Override the built-in BSD indentation style with some additional rules"
     `(
       ((node-is ")") parent-bol 0)
+      ((node-is "(") parent-bol 0)
       ((node-is "}") parent-bol 0)
+      ((node-is "{") parent-bol 0)
       ((n-p-gp nil nil "namespace_definition") grand-parent 0)
       ((node-is "access_specifier") parent-bol 2)
       ((node-is "field_initializer_list") parent-bol 4)
@@ -173,7 +179,6 @@
 
       ,@(alist-get 'bsd (c-ts-mode--indent-styles 'cpp))))
   :init
-  (setq treesit--indent-verbose t)
   (setq-default c-ts-mode-indent-offset 4)
   (setq-default c-ts-mode-indent-style #'chbm-indent-style))
 

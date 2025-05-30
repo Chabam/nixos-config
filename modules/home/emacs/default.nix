@@ -14,7 +14,6 @@ let
   initEl = "${emacsConfigDir}/init.el";
   themeDark = "${emacsConfigDir}/chabam-dark-theme.el";
   themeLight = "${emacsConfigDir}/chabam-light-theme.el";
-  custom = "${emacsConfigDir}/custom.el";
 in
 {
   options = {
@@ -61,7 +60,6 @@ in
       ".emacs.d/init.el".source = config.lib.file.mkOutOfStoreSymlink initEl;
       ".emacs.d/chabam-dark-theme.el".source = config.lib.file.mkOutOfStoreSymlink themeDark;
       ".emacs.d/chabam-light-theme.el".source = config.lib.file.mkOutOfStoreSymlink themeLight;
-      ".emacs.d/custom.el".source = config.lib.file.mkOutOfStoreSymlink custom;
     };
   };
 }
