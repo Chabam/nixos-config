@@ -158,4 +158,9 @@
       package = pkgs.adwaita-qt;
     };
   };
+
+  # Fix for slow startup
+  home.sessionVariables = {
+    GSK_RENDERER = "ngl";
+  };
 }
