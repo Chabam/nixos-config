@@ -6,8 +6,7 @@
 }:
 let
   cfg = config.emacs;
-  emacsPackage = pkgs.emacs.override {
-    withGTK3 = true;
+  emacsPackage = pkgs.emacs-pgtk.override {
     withTreeSitter = true;
   };
   emacsConfigDir = "${config.home.homeDirectory}/Sources/nixos-config/modules/home/emacs/config/";
