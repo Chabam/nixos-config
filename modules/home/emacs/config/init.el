@@ -89,6 +89,7 @@
   (menu-bar-mode 0)
 
   (windmove-default-keybindings)
+  (winner-mode)
   (setq indent-line-function 'insert-tab
         default-frame-alist '((font . "Iosevka-12")
                               (width . 100)
@@ -245,3 +246,9 @@
 (use-package direnv
   :config
   (direnv-mode))
+
+(use-package auctex
+  :init
+  (setq TeX-auto-save t)
+  (setq TeX-parse-self t)
+  (setq-default Tex-master nil))

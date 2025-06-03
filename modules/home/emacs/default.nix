@@ -32,6 +32,7 @@ in
       package = emacsPackage;
       extraPackages = (
         epkgs: with epkgs; [
+          auctex
           auto-dark
           better-jumper
           corfu
