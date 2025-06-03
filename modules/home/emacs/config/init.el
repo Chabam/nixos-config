@@ -91,6 +91,7 @@
   (windmove-default-keybindings)
   (winner-mode)
   (setq indent-line-function 'insert-tab
+        tab-always-indent 'complete
         default-frame-alist '((font . "Iosevka-12")
                               (width . 100)
                               (height . 40)))
@@ -125,11 +126,8 @@
   (corfu-left-margin-width 0)
   (corfu-right-margin-width 0)
   :bind (:map corfu-map
-              ("RET" . nil)
-              ("TAB" . nil)
-              ([remap previous-line] . nil)
-              ([remap next-line] . nil)
-              ("C-j" . corfu-insert))
+              ("RET" . nil))
+
   :init
   (global-corfu-mode)
   (corfu-popupinfo-mode))
@@ -142,6 +140,8 @@
 (use-package orderless
   :custom
   (completion-ignore-case t)
+  (read-file-name-completion-ignore-case t)
+  (read-buffer-completion-ignore-case t)
   (completion-styles '(orderless basic))
   (completion-category-overrides '((file (styles basic partial-completion))))
   (completion-matching-styles '(orderless-regexp)))
