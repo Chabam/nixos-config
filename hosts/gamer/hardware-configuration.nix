@@ -13,6 +13,11 @@
   boot.kernelModules = [ "kvm-amd" ];
   boot.extraModulePackages = [ ];
 
+  hardware.opengl = {
+    enable = true;
+    extraPackages = with pkgs; [ mesa ];
+  };
+
   services.xserver.videoDrivers = [ "ampgpu" ];
   services.supergfxd.enable = true;
 

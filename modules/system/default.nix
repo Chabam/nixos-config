@@ -44,6 +44,7 @@
   };
 
   boot.kernelPackages = pkgs.linuxPackages_latest;
+  hardware.enableAllFirmware = true;
 
   programs = {
     nix-ld.enable = true;
