@@ -43,7 +43,7 @@
     };
   };
 
-  boot.kernelPackages = pkgs.linuxPackages_latest;
+  boot.kernelPackages = lib.mkIf (!config.nvidia.enable) pkgs.linuxPackages_latest;
   hardware.enableAllFirmware = true;
 
   programs = {
