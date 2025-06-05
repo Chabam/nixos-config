@@ -137,6 +137,16 @@
    `(org-block                          ((t (:background ,chabam-dark-bg))))
    `(org-block-begin-line               ((t (:background ,chabam-dark-bg :foreground ,chabam-light-grey))))
 
+   ;; LaTeX mode
+   `(font-latex-bold-face               ((t (:foreground ,chabam-dark-turquoise :bold t))))
+   `(font-latex-math-face               ((t (:foreground ,chabam-dark-turquoise))))
+   `(font-latex-sedate-face             ((t (:foreground ,chabam-purple))))
+   `(font-latex-italic-face             ((t (:foreground ,chabam-dark-turquoise :italic t))))
+   `(font-latex-underline-face          ((t (:foreground ,chabam-dark-turquoise :underline t))))
+   `(font-latex-string-face             ((t (:foreground ,chabam-green))))
+   `(font-latex-warning-face            ((t (:foreground ,chabam-orange))))
+   `(font-latex-verbatim-face           ((t (:foreground ,chabam-green))))
+   `(font-latex-sectioning-5-face       ((t (:foreground ,chabam-dark-turquoise :bold t))))
 
    ;; 3rd party styling
    `(vertico-current                    ((t (:background ,chabam-dark-grey))))

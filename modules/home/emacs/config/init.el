@@ -28,12 +28,12 @@
         better-jumper-max-length 100)
   ;; Functions that should add a mark
   (dolist (cmd '(next-line previous-line
-                  forward-paragraph backward-paragraph
-                  beginning-of-defun end-of-defun
-                  forward-word backward-word
-                  scroll-up-command scroll-down-command
-                  recenter-top-bottom move-to-window-line-top-bottom
-                  goto-line))
+                 forward-paragraph backward-paragraph
+                 beginning-of-defun end-of-defun
+                 forward-word backward-word
+                 scroll-up-command scroll-down-command
+                 recenter-top-bottom move-to-window-line-top-bottom
+                 goto-line))
     (advice-add cmd :before (lambda (&rest _) (better-jumper-set-jump))))
   :init (better-jumper-mode +1))
 
@@ -102,7 +102,9 @@
                 indent-tabs-mode nil
                 display-line-numbers-type 'relative)
   (set-frame-font "Iosevka 12" nil t)
-  (set-face-attribute 'fixed-pitch nil :family "Iosevka"))
+  (set-face-attribute 'fixed-pitch nil :family "Iosevka")
+  (set-face-attribute 'variable-pitch nil :family "Iosevka")
+  )
 
 (use-package compile
   :init
@@ -194,13 +196,13 @@
   (diff-hl-flydiff-mode))
 
 (use-package eglot
-  :hook ((c++-ts-mode nix-mode python-ts-mode org-mode cmake-ts-mode) . eglot-ensure)
+  :hook ((c++-ts-mode nix-mode python-ts-mode org-mode LaTeX-mode cmake-ts-mode) . eglot-ensure)
   :bind (("C-x C-a" . eglot-code-actions)
          ("C-x C-r" . eglot-rename))
   :config
   (add-to-list 'eglot-ignored-server-capabilities :inlayHintProvider)
   (add-to-list 'eglot-server-programs
-               '(org-mode . ("ltex-ls-plus" "--server-type" "TcpSocket" "--port" :autoport)))
+               '((org-mode LaTeX-mode) . ("ltex-ls-plus" "--server-type" "TcpSocket" "--port" :autoport)))
   (setq-default eglot-workspace-configuration
                 '((:ltex . (:language "fr"
                             :completionEnabled t
