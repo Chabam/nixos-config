@@ -56,6 +56,7 @@
    `(mode-line                          ((t (:foreground ,chabam-foreground :background ,chabam-electric-blue))))
    `(mode-line-inactive                 ((t (:foreground ,chabam-light-grey :background ,chabam-dark-bg))))
    `(line-number                        ((t (:foreground ,chabam-light-grey :inherit default))))
+   `(line-number-current-line           ((t (:foreground ,chabam-light-pink))))
    `(border                             ((t (:foreground ,chabam-dark-bg))))
    `(vertical-border                    ((t (:foreground ,chabam-dark-bg))))
    `(cursor                             ((t (:background ,chabam-pink))))

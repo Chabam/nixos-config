@@ -99,8 +99,7 @@
                                 newline newline-mark trailing))
   (setq-default standard-indent 4
                 tab-width 4
-                indent-tabs-mode nil
-                display-line-numbers-type 'relative)
+                indent-tabs-mode nil)
   (set-frame-font "Iosevka 12" nil t)
   (set-face-attribute 'fixed-pitch nil :family "Iosevka")
   (set-face-attribute 'variable-pitch nil :family "Iosevka")
