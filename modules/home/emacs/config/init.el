@@ -201,10 +201,14 @@
   :config
   (add-to-list 'eglot-ignored-server-capabilities :inlayHintProvider)
   (add-to-list 'eglot-server-programs
-               '((org-mode LaTeX-mode) . ("ltex-ls-plus" "--server-type" "TcpSocket" "--port" :autoport)))
+               '((org-mode (LaTeX-mode :language-id "latex")) . ("ltex-ls-plus" "--server-type" "TcpSocket" "--port" :autoport)))
   (setq-default eglot-workspace-configuration
                 '((:ltex . (:language "fr"
                             :completionEnabled t
+                            :latex (:environments (:lstlisting "ignore")
+                                    :commands (:\\lstset{} "ignore"
+                                               :\\lstdefinelanguage{}{} "ignore"
+                                               :\\lstinputlisting{} "ignore"))
                             :disabledRules (:fr ["FRENCH_WHITESPACE"]))))))
 
 (use-package eglot-inactive-regions
