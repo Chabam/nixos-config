@@ -1,4 +1,3 @@
-
 {
   qt6Packages,
   inputs,
@@ -16,11 +15,11 @@ qt6Packages.callPackage
       fetchFromGitLab,
       fetchurl,
       ffmpeg,
-      inputs,
       libxml2,
       luajit,
       lz4,
       minizip,
+      mygui,
       openal,
       openscenegraph,
       pkg-config,
@@ -105,7 +104,7 @@ qt6Packages.callPackage
         ];
       });
 
-      mygui' = inputs.mygui.legacyPackages.x86_64-linux.mygui.overrideDerivation (old: {
+      mygui' = mygui.overrideDerivation (old: {
         cmakeFlags = (old.cmakeFlags or [ ]) ++ [
           "-DMYGUI_DONT_USE_OBSOLETE=ON"
         ];

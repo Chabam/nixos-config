@@ -7,7 +7,9 @@
 }:
 let
   cfg = config.gaming;
-  openmw-unstable = pkgs.callPackage ./openmw-unstable.nix { };
+  openmw-unstable = pkgs.qt6Packages.callPackage ./openmw-unstable.nix {
+     inherit inputs;
+  };
 in
 {
   options = {
