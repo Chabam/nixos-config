@@ -7,6 +7,7 @@
 }:
 let
   cfg = config.gaming;
+  openmw-unstable = pkgs.callPackage ./openmw-unstable.nix { };
 in
 {
   options = {
@@ -31,10 +32,8 @@ in
         extraCompatPackages = [ pkgs.proton-ge-bin ];
       };
     };
-    environment.systemPackages = with inputs.openmw-nix.packages.${pkgs.system}; lib.mkIf cfg.morrowind [
-      delta-plugin
-      openmw-dev
-      pkgs.tes3cmd
+    environment.systemPackages = lib.mkIf cfg.morrowind [
+      openmw-unstable
     ];
   };
 }
