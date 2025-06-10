@@ -40,6 +40,24 @@ qt6Packages.callPackage
 
       GL = "GLVND";
 
+      mygui' = mygui.overrideDerivation (old: rec {
+        pname = "mygui";
+        version = "3.4.3";
+
+        src = fetchFromGitHub {
+          owner = "MyGUI";
+          repo = "mygui";
+          rev = "MyGUI${version}";
+          sha256 = "sha256-qif9trHgtWpYiDVXY3cjRsXypjjjgStX8tSWCnXhXlk=";
+        };
+
+        cmakeFlags = (old.cmakeFlags or [ ]) ++ [
+          "-DMYGUI_DONT_USE_OBSOLETE=ON"
+        ];
+
+        patches = [ ];
+      });
+
       collada-dom = stdenv.mkDerivation {
         pname = "collada-dom";
         version = "master";
@@ -101,12 +119,6 @@ qt6Packages.callPackage
           "-DOpenGL_GL_PREFERENCE=${GL}"
           "-DUSE_DOUBLE_PRECISION=ON"
           "-DBULLET2_MULTITHREADING=ON"
-        ];
-      });
-
-      mygui' = mygui.overrideDerivation (old: {
-        cmakeFlags = (old.cmakeFlags or [ ]) ++ [
-          "-DMYGUI_DONT_USE_OBSOLETE=ON"
         ];
       });
 
