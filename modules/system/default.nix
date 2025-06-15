@@ -57,13 +57,8 @@
     };
   };
 
-  boot.kernelPackages = lib.mkMerge [
-      (lib.mkIf config.nvidia.enable pkgs.linuxKernel.packages.linux_xanmod)
-      (lib.mkIf (!config.nvidia.enable) pkgs.linuxKernel.packages.linux_xanmod_latest)
-    ];
-
+  boot.kernelPackages = lib.mkIf (!config.nvidia.enable) pkgs.linuxPackages_latest;
   hardware.enableAllFirmware = true;
-  hardware.enableRedistributableFirmware = true;
 
   programs = {
     nix-ld.enable = true;
