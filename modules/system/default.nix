@@ -8,7 +8,6 @@
   imports = [
     ./flatpak.nix
     ./gaming.nix
-    ./gc.nix
     ./gnome.nix
     ./grub.nix
     ./main-user.nix
@@ -19,13 +18,28 @@
     ./virt-manager.nix
   ];
 
-  nix.settings = {
-    experimental-features = [
-      "nix-command"
-      "flakes"
-    ];
+  nix ={
+    gc = {
+      automatic = true;
+      dates = "weekly";
+      options = "--delete-older-than 14d";
+    };
+
+    channel.enable = false;
+
+    settings = {
+      experimental-features = [
+        "nix-command"
+        "flakes"
+      ];
+      auto-optimise-store = true;
+    };
+
+    extraOptions = ''
+    min-free = ${toString (100 * 1024 * 1024)}
+    max-free = ${toString (1024 * 1024 * 1024)}
+  '';
   };
-  nix.channel.enable = false;
 
   fonts = {
     packages = with pkgs; [
@@ -43,8 +57,13 @@
     };
   };
 
-  boot.kernelPackages = lib.mkIf (!config.nvidia.enable) pkgs.linuxPackages_latest;
+  boot.kernelPackages = lib.mkMerge [
+      (lib.mkIf config.nvidia.enable pkgs.linuxKernel.packages.linux_xanmod)
+      (lib.mkIf (!config.nvidia.enable) pkgs.linuxKernel.packages.linux_xanmod_latest)
+    ];
+
   hardware.enableAllFirmware = true;
+  hardware.enableRedistributableFirmware = true;
 
   programs = {
     nix-ld.enable = true;

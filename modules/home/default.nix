@@ -15,19 +15,21 @@ let
     gimp3
     gnome-frog
     libreoffice
+    mpv
     obs-studio
     teams-for-linux
-    mpv
   ];
   cliApps = with pkgs; [
     direnv
+    file
     lazygit
-    nnn
     p7zip-rar
     ripgrep
     tree
     unzip
+    wget
     wl-clipboard
+    zip
   ];
 in
 {
