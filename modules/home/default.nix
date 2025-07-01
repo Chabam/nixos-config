@@ -15,7 +15,6 @@ let
     gimp3
     gnome-frog
     libreoffice
-    mpv
     obs-studio
     teams-for-linux
   ];

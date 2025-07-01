@@ -6,8 +6,6 @@
 }:
 {
   home.packages = with pkgs; [
-    # Emoji typing
-    ibus-with-plugins
     gnome-software
     gnome-themes-extra
 
@@ -17,6 +15,11 @@
     gnomeExtensions.fullscreen-avoider
     gnomeExtensions.legacy-gtk3-theme-scheme-auto-switcher
     gnomeExtensions.pip-on-top
+
+    # Emoji typing
+    ibus-with-plugins
+
+    showtime
   ];
 
   dconf = {
