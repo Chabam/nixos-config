@@ -92,9 +92,12 @@
   (winner-mode)
   (setq indent-line-function 'insert-tab
         tab-always-indent 'complete
+        tab-bar-close-button-show nil
+        tab-bar-new-button-show nil
         default-frame-alist '((font . "Iosevka-12")
                               (width . 100)
-                              (height . 40)))
+                              (height . 40)
+                              (vertical-scroll-bars . nil)))
   (setq whitespace-style '(face indentation tabs tab-mark spaces space-mark
                                 newline newline-mark trailing))
   (setq-default standard-indent 4
@@ -103,6 +106,16 @@
   (set-frame-font "Iosevka 12" nil t)
   (set-face-attribute 'fixed-pitch nil :family "Iosevka")
   (set-face-attribute 'variable-pitch nil :family "Iosevka")
+
+  ;; Fix for fonts getting messed up in server mode when changing system theme
+  (defun server-auto-dark (frame)
+    (use-package auto-dark
+      :init (auto-dark-mode)
+      :custom
+      (auto-dark-themes '((chabam-dark) (chabam-light)))
+      (remove-hook 'after-make-frame-functions #'server-auto-dark)))
+
+  (add-hook 'after-make-frame-functions #'server-auto-dark)
   )
 
 (use-package compile
