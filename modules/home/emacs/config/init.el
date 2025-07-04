@@ -37,7 +37,13 @@
     (advice-add cmd :before (lambda (&rest _) (better-jumper-set-jump))))
   :init (better-jumper-mode +1))
 
-;; Emacs minibuffer configurations.
+(defun chbm-set-fonts ()
+  "Set fonts for frame and after theme"
+  (when (display-graphic-p)
+    (set-face-attribute 'default nil :family "Iosevka" :height 120)
+    (set-face-attribute 'fixed-pitch nil :family "Iosevka")
+    (set-face-attribute 'variable-pitch nil :family "Iosevka")))
+
 (use-package emacs
   :bind (("C-." . duplicate-line)
          ("M-o" . other-window))
@@ -103,19 +109,11 @@
   (setq-default standard-indent 4
                 tab-width 4
                 indent-tabs-mode nil)
-  (set-frame-font "Iosevka 12" nil t)
-  (set-face-attribute 'fixed-pitch nil :family "Iosevka")
-  (set-face-attribute 'variable-pitch nil :family "Iosevka")
-
-  ;; Fix for fonts getting messed up in server mode when changing system theme
-  (defun server-auto-dark (frame)
-    (use-package auto-dark
-      :init (auto-dark-mode)
-      :custom
-      (auto-dark-themes '((chabam-dark) (chabam-light)))
-      (remove-hook 'after-make-frame-functions #'server-auto-dark)))
-
-  (add-hook 'after-make-frame-functions #'server-auto-dark)
+  ;; Trying to properly set fonts
+  (chbm-set-fonts)
+  (advice-add 'load-theme :after #'chbm-set-fonts)
+  (add-hook 'after-make-frame-functions
+            (lambda (f) (with-selected-frame f (chbm-set-fonts))))
   )
 
 (use-package compile
@@ -242,11 +240,12 @@
          (LaTeX-mode . embrace-LaTeX-mode-hook))
   :bind ("C-c s" . embrace-commander))
 
-(use-package vterm
-    :hook (vterm-mode . (lambda () (display-line-numbers-mode 0))))
+(use-package vterm)
 
 (use-package auto-dark
   :init (auto-dark-mode)
+  :hook ((auto-dark-dark-mode . chbm-set-fonts)
+         (auto-dark-light-mode . chbm-set-fonts))
   :custom (auto-dark-themes '((chabam-dark) (chabam-light))))
 
 ;; Various modes
