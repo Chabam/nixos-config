@@ -21,7 +21,6 @@
   uni-remote.enable = true;
   gaming = {
     enable = true;
-    morrowind = true;
   };
 
   systemd.tmpfiles.rules = [
