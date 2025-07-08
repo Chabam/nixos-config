@@ -6,6 +6,7 @@
       (chabam-background      "#FFFFFF")
       (chabam-dark-bg         "#A0A0A0")
       (chabam-light-grey      "#E0E0E0")
+      (chabam-lighter-grey    "#EFEFEF")
       (chabam-grey            "#B6B6B6")
       (chabam-dark-grey       "#A2A2A2")
       (chabam-pink            "#FF74B8")
@@ -48,7 +49,7 @@
    ;; Generic styling
    `(default                            ((t (:foreground ,chabam-foreground :background ,chabam-background))))
    `(highlight                          ((t (:background ,chabam-purple-bg))))
-   `(region                             ((t (:background ,chabam-light-grey))))
+   `(region                             ((t (:background ,chabam-lighter-grey))))
    `(match                              ((t (:background ,chabam-purple-bg))))
    `(mode-line                          ((t (:foreground ,chabam-background :background ,chabam-electric-blue))))
    `(mode-line-inactive                 ((t (:foreground ,chabam-dark-bg :background ,chabam-light-grey))))
@@ -132,8 +133,8 @@
    `(xref-file-header                   ((t (:foreground ,chabam-turquoise))))
 
    ;; Org mode
-   `(org-block                          ((t (:background ,chabam-dark-bg))))
-   `(org-block-begin-line               ((t (:background ,chabam-dark-bg :foreground ,chabam-light-grey))))
+   `(org-block                          ((t (:background ,chabam-light-grey))))
+   `(org-block-begin-line               ((t (:background ,chabam-light-grey :foreground ,chabam-foreground))))
 
    ;; LaTeX mode
    `(font-latex-bold-face               ((t (:foreground ,chabam-dark-turquoise :bold t))))
