@@ -130,9 +130,8 @@
    `(flymake-warning-echo               ((t (:foreground ,adwaita-yellow))))
    `(flymake-note-echo                  ((t (:foreground ,chabam-blue))))
    `(eglot-highlight-symbol-face        ((t (:inherit lazy-highlight))))
-   `(xref-file-header                   ((t (:foreground ,chabam-turquoise))))
+   `(xref-file-header                   ((t (:foreground ,chabam-green :bold t :underline t))))
    `(compilation-info                   ((t (:foreground ,chabam-turquoise))))
-   `(xref-file-header                   ((t (:foreground ,chabam-turquoise))))
 
    ;; Org mode
    `(org-block                          ((t (:background ,chabam-dark-bg))))
