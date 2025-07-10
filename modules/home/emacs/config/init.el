@@ -100,6 +100,7 @@
         tab-always-indent 'complete
         tab-bar-close-button-show nil
         tab-bar-new-button-show nil
+        tab-bar-show 1
         default-frame-alist '((font . "Iosevka-12")
                               (width . 100)
                               (height . 40)

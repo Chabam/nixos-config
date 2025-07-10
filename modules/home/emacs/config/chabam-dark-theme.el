@@ -52,9 +52,11 @@
    `(highlight                          ((t (:background ,chabam-purple-bg))))
    `(region                             ((t (:background ,chabam-dark-grey))))
    `(match                              ((t (:background ,chabam-purple-bg))))
-
    `(mode-line                          ((t (:foreground ,chabam-foreground :background ,chabam-electric-blue))))
    `(mode-line-inactive                 ((t (:foreground ,chabam-light-grey :background ,chabam-dark-bg))))
+   `(tab-bar                            ((t (:background ,chabam-dark-bg))))
+   `(tab-bar-tab-inactive               ((t (:foreground ,chabam-light-grey :background ,chabam-dark-grey))))
+   `(tab-bar-tab                        ((t (:inherit default))))
    `(line-number                        ((t (:foreground ,chabam-light-grey :inherit default))))
    `(line-number-current-line           ((t (:foreground ,chabam-light-pink :inherit default))))
    `(border                             ((t (:foreground ,chabam-dark-bg))))
