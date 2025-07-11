@@ -14,6 +14,12 @@
       ll = "ls -l";
       lla = "ls -la";
     };
+    bashrcExtra = ''
+      if [[ "$TERM" == "dumb" ]]; then
+         HISTFILE="$HOME/.tramp-histfile"
+         return
+      fi
+    '';
     initExtra =
     # Bash
       ''
@@ -112,8 +118,6 @@
 
       # Disable Ctrl+S behavior
       stty -ixon
-
-      source ${pkgs.nnn}/share/quitcd/quitcd.bash_sh_zsh
     '';
   };
 

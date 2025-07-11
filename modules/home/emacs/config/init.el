@@ -270,3 +270,8 @@
   (setq TeX-auto-save t)
   (setq TeX-parse-self t)
   (setq-default Tex-master nil))
+
+(use-package tramp
+  :config
+  (setopt tramp-verbose 1)
+  (add-to-list 'tramp-remote-path 'tramp-own-remote-path))
