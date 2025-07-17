@@ -46,7 +46,11 @@
 
 (use-package emacs
   :bind (("C-." . duplicate-line)
-         ("M-o" . other-window))
+         ("M-o" . other-window)
+         ("S-M-<up>" . windmove-swap-states-up)
+         ("S-M-<down>" . windmove-swap-states-down)
+         ("S-M-<left>" . windmove-swap-states-left)
+         ("S-M-<right>" . windmove-swap-states-right))
   :custom
   (custom-file "~/.emacs.d/custom.el")
   ;; Support opening new minibuffers from inside existing minibuffers.
