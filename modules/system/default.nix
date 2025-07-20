@@ -6,7 +6,6 @@
 }:
 {
   imports = [
-    ./flatpak.nix
     ./gaming.nix
     ./gnome.nix
     ./grub.nix

@@ -6,7 +6,6 @@
 }:
 {
   home.packages = with pkgs; [
-    gnome-software
     gnome-themes-extra
 
     gnomeExtensions.appindicator
