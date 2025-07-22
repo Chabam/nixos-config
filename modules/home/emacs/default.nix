@@ -40,6 +40,7 @@ in
           cmake-mode
           diff-hl
           direnv
+          haskell-mode
           eglot-inactive-regions
           embrace
           expand-region

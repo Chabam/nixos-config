@@ -45,6 +45,7 @@ let
     ltex-ls-plus
     nixd
     pyright
+    haskell-language-server
     # For some reason the R lsp doesn't work without R
     # (rWrapper.override {
     #   packages = with rPackages; [ languageserver ];

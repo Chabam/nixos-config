@@ -19,8 +19,8 @@
   (savehist-mode))
 
 (use-package better-jumper
-  :bind (("C-c C-n" . 'better-jumper-jump-forward)
-         ("C-c C-p" . 'better-jumper-jump-backward))
+  :bind (("M-<right>" . 'better-jumper-jump-forward)
+         ("M-<left>" . 'better-jumper-jump-backward))
   :config
   (setq better-jumper-context 'window
         better-jumper-new-window-behavior 'copy
@@ -274,6 +274,9 @@
   (setq TeX-auto-save t)
   (setq TeX-parse-self t)
   (setq-default Tex-master nil))
+
+(use-package haskell-mode
+  :mode "\\.hs\\'")
 
 (use-package tramp
   :config
