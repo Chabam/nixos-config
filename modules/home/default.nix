@@ -17,6 +17,7 @@ let
     libreoffice
     obs-studio
     teams-for-linux
+    deluge-gtk
   ];
   cliApps = with pkgs; [
     direnv
